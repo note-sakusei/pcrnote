@@ -19,9 +19,6 @@ pcrmsg.MSG = {
     deepCopy: [
       'ディープコピーの対象が配列、オブジェクト以外です'
     ],
-    getUnitWildcardPosition: [
-      '不正な編成用ワイルドカードです(${1})'
-    ],
     fileDataToObjectData: [
       'JSONファイルの解析に失敗しました(${1})',
       'CSVファイルの解析に失敗しました(${1})'

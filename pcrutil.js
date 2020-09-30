@@ -122,17 +122,6 @@ pcrutil.extractHashtagList = function(text) {
   return hashtagList;
 };
 
-// 数値を表示用数値にマッピング(10以降はアルファベットにマッピング)
-pcrutil.convertToNumForDisplay = function(num) {
-  const WIDE_NUM_MAP = [
-    '０', '１', '２', '３', '４', '５', '６', '７', '８', '９',
-    'Ａ', 'Ｂ', 'Ｃ', 'Ｄ', 'Ｅ', 'Ｆ', 'Ｇ', 'Ｈ', 'Ｉ', 'Ｊ',
-    'Ｋ', 'Ｌ', 'Ｍ', 'Ｎ', 'Ｏ', 'Ｐ', 'Ｑ', 'Ｒ', 'Ｓ', 'Ｔ',
-    'Ｕ', 'Ｖ', 'Ｗ', 'Ｘ', 'Ｙ', 'Ｚ'
-  ];
-  return (num < WIDE_NUM_MAP.length) ? WIDE_NUM_MAP[num] : '　';
-};
-
 // 日時の解析、整形クラス
 pcrutil.DateFormat = function(fmt) {
   this.fmt = fmt;
@@ -354,33 +343,6 @@ pcrutil.makeFilePath = function(...args) {
     return accum;
   }, '');
   return filePath;
-};
-
-// 編成用ワイルドカードを作成
-pcrutil.makeUnitWildcard = function(pos) {
-  return '*[' + pos + ']';
-};
-// 編成用ワイルドカードか判断
-pcrutil.isUnitWildcard = function(wildcard) {
-  try {
-    pcrutil.getUnitWildcardPosition(wildcard);
-  } catch (e) {
-    return false;
-  }
-  return true;
-};
-// 編成用ワイルドカードの編成位置を取得
-pcrutil.getUnitWildcardPosition = function(wildcard) {
-  const FUNC_NAME = 'pcrutil.getUnitWildcardPosition';
-
-  if (!/^\*\[(\d+)\]$/.test(wildcard)) {
-    throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), wildcard);
-  }
-  const pos = Number(wildcard.match(/^\*\[(\d+)\]$/)[1]);
-  if (pos < 0 || pcrdef.PARTY_UNITS_MAX - 1 < pos) {
-    throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), wildcard);
-  }
-  return pos;
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

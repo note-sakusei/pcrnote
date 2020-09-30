@@ -18,6 +18,19 @@ pcrview.init = function() {
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+// 数値を表示用数値にマッピング(10以降はアルファベットにマッピング)
+pcrview.convertToNumForDisplay = function(num) {
+  const WIDE_NUM_MAP = [
+    '０', '１', '２', '３', '４', '５', '６', '７', '８', '９',
+    'Ａ', 'Ｂ', 'Ｃ', 'Ｄ', 'Ｅ', 'Ｆ', 'Ｇ', 'Ｈ', 'Ｉ', 'Ｊ',
+    'Ｋ', 'Ｌ', 'Ｍ', 'Ｎ', 'Ｏ', 'Ｐ', 'Ｑ', 'Ｒ', 'Ｓ', 'Ｔ',
+    'Ｕ', 'Ｖ', 'Ｗ', 'Ｘ', 'Ｙ', 'Ｚ'
+  ];
+  return (num < WIDE_NUM_MAP.length) ? WIDE_NUM_MAP[num] : '　';
+};
+
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 // サーバーと同期ボタンのラベルを設定
 pcrview.setLabelOfSyncDataWithServer = function() {
   const FUNC_NAME = 'pcrview.setLabelOfSyncDataWithServer';
@@ -104,7 +117,7 @@ pcrview.makePartyHtml = function(html, party) {
     let unitInfoHtml = undefined;
     if (unitID === '') {
       unitInfoHtml = '';
-    } else if (pcrutil.isUnitWildcard(unitID)) {
+    } else if (pcract.isUnitWildcard(unitID)) {
       unitInfoHtml = pcrview.makeUnitWildcardHtml();
     } else {
       const unitInfo = pcrnote.gUnitInfoTable.findByUnitID(unitID);
@@ -158,7 +171,7 @@ pcrview.makeRatingHtml = function(vsSet) {
 // 現在のスロット番号HTML作成
 pcrview.makeCurrSlotNumHtml = function() {
   const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
-  const dispNum = pcrutil.convertToNumForDisplay(currSlotNum + 1);
+  const dispNum = pcrview.convertToNumForDisplay(currSlotNum + 1);
   return '(' + dispNum + ')';
 };
 
@@ -188,7 +201,7 @@ pcrview.makeSwitchButtonLabelHtml = function(searchVsSet, index) {
     if (currSlotNum === 0) {
       html = pcrmsg.getN(FUNC_NAME, 0);
     } else {
-      const dispNum = pcrutil.convertToNumForDisplay(currSlotNum + 0);
+      const dispNum = pcrview.convertToNumForDisplay(currSlotNum + 0);
       html = pcrutil.buildMessage(pcrmsg.getN(FUNC_NAME, 1), dispNum);
     }
   // 数値を増やすボタンラベルの作成
@@ -196,7 +209,7 @@ pcrview.makeSwitchButtonLabelHtml = function(searchVsSet, index) {
     if (currSlotNum === pcrnote.gConfigData.numOfSearchPartySlots - 1) {
       html = pcrmsg.getN(FUNC_NAME, 0);
     } else {
-      const dispNum = pcrutil.convertToNumForDisplay(currSlotNum + 2);
+      const dispNum = pcrview.convertToNumForDisplay(currSlotNum + 2);
       html = pcrutil.buildMessage(pcrmsg.getN(FUNC_NAME, 1), dispNum);
     }
   } else {

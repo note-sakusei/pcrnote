@@ -385,22 +385,9 @@ pcrdb.UnitInfoTable.prototype.compareUnitPosition = function(
 
 // 編成をソート(隊列順にソート)
 pcrdb.UnitInfoTable.prototype.sortParty = function(party) {
-  // 編成用ワイルドカードを分離
-  const wildcardList = party.filter((elem) => pcrutil.isUnitWildcard(elem));
-  if (wildcardList.length !== 0) {
-    const tempList = party.filter((elem) => !pcrutil.isUnitWildcard(elem));
-    party.splice(0, party.length);
-    Array.prototype.push.apply(party, tempList);
-  }
-  // 編成をソート
   party.sort((lhsUnitID, rhsUnitID) => {
     return this.compareUnitPosition(lhsUnitID, rhsUnitID)
   });
-  // 編成用ワイルドカードを元の位置に復元
-  for (const wildcard of wildcardList) {
-    const pos = pcrutil.getUnitWildcardPosition(wildcard);
-    party.splice(pos, 0, wildcard);
-  }
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

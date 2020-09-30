@@ -102,9 +102,52 @@ pcract.getDefenseParty = function(vsSet) {
   }
 };
 
+// 編成用ワイルドカードを作成
+pcract.makeUnitWildcard = function(pos) {
+  return '*[' + pos + ']';
+};
+// 編成用ワイルドカードか判断
+pcract.isUnitWildcard = function(wildcard) {
+  try {
+    pcract.getUnitWildcardPosition(wildcard);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+// 編成用ワイルドカードの編成位置を取得
+pcract.getUnitWildcardPosition = function(wildcard) {
+  if (!/^\*\[(\d+)\]$/.test(wildcard)) {
+    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'wildcard'));
+  }
+  const pos = Number(wildcard.match(/^\*\[(\d+)\]$/)[1]);
+  if (pos < 0 || pcrdef.PARTY_UNITS_MAX - 1 < pos) {
+    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'wildcard'));
+  }
+  return pos;
+};
+
+// 編成をソート(隊列順にソート、ワイルドカードはソートしない)
+pcract.sortPartyWithoutWildcard = function(party) {
+  // 編成用ワイルドカードを分離
+  const wildcardList = party.filter((elem) => pcract.isUnitWildcard(elem));
+  if (wildcardList.length !== 0) {
+    const tempList = party.filter((elem) => !pcract.isUnitWildcard(elem));
+    party.splice(0, party.length);
+    Array.prototype.push.apply(party, tempList);
+  }
+  // 編成をソート
+  pcrnote.gUnitInfoTable.sortParty(party);
+  // 編成用ワイルドカードを元の位置に復元
+  for (const wildcard of wildcardList) {
+    const pos = pcract.getUnitWildcardPosition(wildcard);
+    party.splice(pos, 0, wildcard);
+  }
+};
+
 // 攻撃側編成、防衛側編成のユニット選択状態の切り替え
 pcract.toggleUnitSelection = function(targetParty, unitID) {
-  if (unitID === '' || pcrutil.isUnitWildcard(unitID)) return;
+  if (unitID === '' || pcract.isUnitWildcard(unitID)) return;
 
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
   const unitInfo = pcrnote.gUnitInfoTable.findByUnitID(unitID);
@@ -124,11 +167,11 @@ pcract.toggleUnitSelection = function(targetParty, unitID) {
     }
   }
 
-  pcrnote.gUnitInfoTable.sortParty(targetParty);
+  pcract.sortPartyWithoutWildcard(targetParty);
 };
 // 攻撃側編成、防衛側編成にユニットを追加
 pcract.addUnitSelection = function(targetParty, unitID) {
-  if (unitID === '' || pcrutil.isUnitWildcard(unitID)) return;
+  if (unitID === '' || pcract.isUnitWildcard(unitID)) return;
 
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
   const unitInfo = pcrnote.gUnitInfoTable.findByUnitID(unitID);
@@ -142,7 +185,7 @@ pcract.addUnitSelection = function(targetParty, unitID) {
     targetParty[emptyIndex] = unitID;
   }
 
-  pcrnote.gUnitInfoTable.sortParty(targetParty);
+  pcract.sortPartyWithoutWildcard(targetParty);
 };
 
 // 防衛側編成に編成用ワイルドカードを設定
@@ -150,15 +193,15 @@ pcract.toggleUnitWildcard = function(targetParty, pos) {
   const unitID = targetParty[pos];
   // 空欄の場合、編成用ワイルドカードを設定
   if (unitID === '') {
-    targetParty[pos] = pcrutil.makeUnitWildcard(pos);
+    targetParty[pos] = pcract.makeUnitWildcard(pos);
   // 編成用ワイルドカードが設定されている場合、除去
-  } else if (pcrutil.isUnitWildcard(unitID)) {
+  } else if (pcract.isUnitWildcard(unitID)) {
     targetParty[pos] = '';
   } else {
     return;
   }
 
-  pcrnote.gUnitInfoTable.sortParty(targetParty);
+  pcract.sortPartyWithoutWildcard(targetParty);
 };
 
 // 評価の増減
@@ -238,10 +281,10 @@ pcract.filterVsSetTable = function() {
 
   // ユニットで絞り込み関数作成
   const searchParty = pcract.getDefenseParty(pcrnote.gSearchVsSet);
-  const wildcardList = searchParty.filter((elem) => pcrutil.isUnitWildcard(elem));
+  const wildcardList = searchParty.filter((elem) => pcract.isUnitWildcard(elem));
   const searchList = searchParty.filter((elem) => elem !== '');
   const searchUnitList = searchParty.filter(
-    (elem) => elem !== '' && !pcrutil.isUnitWildcard(elem)
+    (elem) => elem !== '' && !pcract.isUnitWildcard(elem)
   );
   // 全ての検索条件を設定するか、検索開始ユニット数以上のユニットを設定した場合、検索開始
   if (
@@ -268,7 +311,7 @@ pcract.filterVsSetTable = function() {
         unitFilterFunc = (vsSet) => {
           const targetParty = vsSet.defenseParty.slice();
           for (const [index, unitID] of searchParty.entries()) {
-            if (unitID === '' || pcrutil.isUnitWildcard(unitID)) {
+            if (unitID === '' || pcract.isUnitWildcard(unitID)) {
               targetParty[index] = unitID;
             }
           }
