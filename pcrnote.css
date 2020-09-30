@@ -1,0 +1,977 @@
+﻿@charset "UTF-8";
+
+:root {
+  /* 汎用的な枠幅 */
+  --general-border-width: 1px;
+  /* 汎用的な枠線種 */
+  --general-border-style: solid;
+  /* 汎用的な枠線色 */
+  --general-border-color: #b0b0b0;
+  /* 汎用的な枠線 */
+  --general-border:
+    var(--general-border-width)
+    var(--general-border-style)
+    var(--general-border-color);
+
+  /* ユニット画像サイズ */
+  --unit-image-width: 40px;
+  --unit-image-height: 40px;
+  /* 攻撃側、防衛側編成のユニット画像の枠幅 */
+  --party-unit-border-width: 2px;
+  /* 攻撃側、防衛側編成のユニット画像のマージン */
+  --party-unit-margin-width: 1px;
+  --party-unit-margin-height: 0px;
+  /* 攻撃側、防衛側編成のタグ画像サイズ */
+  --party-tag-image-width: 12px;
+  --party-tag-image-height: 12px;
+  /* 攻撃側、防衛側編成のタグの幅 */
+  --party-tag-width: 16px;
+  /* 攻撃側、防衛側編成のパディング */
+  --party-padding-width: 3px;
+  --party-padding-height: 3px;
+  /* 攻撃側、防衛側編成の枠幅 */
+  --party-border-width: 2px;
+  /* 攻撃側、防衛側編成の高さ(画像 + 枠幅 + マージン幅) */
+  --party-unit-height: calc(
+    var(--unit-image-width) +
+    var(--party-unit-border-width) * 2 +
+    var(--party-unit-margin-height) * 2 +
+    var(--party-padding-height) * 2 +
+    var(--party-border-width) * 2
+  );
+  /* 対戦情報のパディング */
+  --vs-set-padding-width: 5px;
+  --vs-set-padding-height: 2px;
+  /* 検索結果一覧の対戦情報間の間隔 */
+  --vs-set-vertical-gap: 6px;
+  /* 評価部の幅 */
+  --rating-area-width: 52px;
+  /* 評価マークの画像サイズ */
+  --rating-mark-image-width: 13px;
+  --rating-mark-image-height: 13px;
+  /* 評価値の幅 */
+  --rating-value-width: 14px;
+  /* スロット番号部の幅 */
+  --curr-slot-num-area-width: 34px;
+  /* 作成(更新)ユーザーの幅 */
+  --vs-set-touch-user-width: 55px;
+  /* 作成日時の幅 */
+  --vs-set-touch-date-width: 100px;
+  /* ユニット一覧のユニット画像の枠幅 */
+  --unit-catalog-item-border-width: 2px;
+  /* ユニット一覧のユニット画像のマージン */
+  --unit-catalog-item-margin-width: 1px;
+  --unit-catalog-item-margin-height: 1px;
+  /* ユニット一覧の個々の幅(画像 + 枠幅 + マージン幅) */
+  --unit-catalog-item-width: calc(
+    var(--unit-image-width) +
+    var(--unit-catalog-item-border-width) * 2 +
+    var(--unit-catalog-item-margin-width) * 2
+  );
+  /* ユニット一覧の列数 */
+  --unit-catalog-item-cols: 15;
+  /* ユニット一覧のパディング */
+  --unit-catalog-padding-width: 1px;
+  --unit-catalog-padding-height: 1px;
+  /* ユニット一覧の幅(枠は除く) */
+  --unit-catalog-inner-width: calc(
+    var(--unit-catalog-item-width) * var(--unit-catalog-item-cols)
+  );
+  /* ユニット一覧の幅(枠を含む) */
+  --unit-catalog-outer-width: calc(
+    var(--unit-catalog-inner-width) +
+    var(--unit-catalog-padding-width) * 2 +
+    var(--general-border-width) * 2
+  );
+  /* 対戦情報用のボタンの幅、高さ(枠は除く) */
+  --vs-set-button-inner-width: 40px;
+  --vs-set-button-inner-height: 30px;
+  /* ユーザー設定のボタンの幅、高さ(枠は除く) */
+  --config-button-inner-width: 100px;
+  --config-button-inner-height: 35px;
+  /* メニューの幅(メニューコマンド3つ分が収まる幅) */
+  --menu-width: 310px;
+  /* メニューコマンドの幅、高さ(枠は除く) */
+  --menu-command-inner-width: 90px;
+  --menu-command-inner-height: 35px;
+  /* メニューコマンドのパディング(可変幅時、横方向のみ) */
+  --menu-command-side-padding-when-variable: 12px;
+  /* 検索結果制御コマンドの幅、高さ(枠は除く) */
+  --result-control-command-inner-width: 0px; /* 未使用 */
+  --result-control-command-inner-height: 35px;
+  /* 検索結果制御コマンドのパディング(可変幅時、横方向のみ) */
+  --result-control-command-side-padding-when-variable: 12px;
+  /* コメントの一行あたりの高さ */
+  --comment-height-per-line: 1.3em;
+  /* コメント入力部の高さ */
+  --comment-area-height: calc(var(--comment-height-per-line) * 3.0);
+
+  /* 汎用的な枠角の丸みの半径 */
+  --general-border-radius: 5px;
+  /* 攻撃側編成、防衛側編成の枠角の丸みの半径 */
+  --party-border-radius: 8px;
+  /* ユニットの枠角の丸みの半径 */
+  --party-unit-border-radius: 6px;
+
+  /* コンテンツの土台部のレイヤー色 */
+  --base-layer-color: rgba(255, 255, 255, 0.75);
+  /* ポップアップの土台部のレイヤー色 */
+  --popup-base-layer-color: rgba(0, 0, 0, 0.4);
+  /* ポップアップの背景色 */
+  --popup-window-layer-color: #f0f0f0;
+  /* 操作部(ユーザー設定、メニュー、検索結果制御)のレイヤー色 */
+  --controller-layer-color: rgba(0, 0, 0, 0.04);
+  /* 選択中のメニューボタンのレイヤー色 */
+  --selected-menu-layer-color: rgba(0, 0, 0, 0.06);
+  /* 非選択ユニット画像を覆うレイヤー色 */
+  --noselected-unit-layer-color: rgba(255, 255, 255, 0.4);
+  /* 編成用ワイルドカードのレイヤー色 */
+  --unit-wildcard-layer-color: rgba(0, 0, 0, 0.25);
+  /* 攻撃側、防衛側編成のユニット画像の枠線色(未選択時) */
+  --party-unit-border-color: #ddccdd;
+  /* ユニット一覧のユニット画像の枠線色(未選択時) */
+  --unit-catalog-item-border-color: #ddccdd;
+  /* 攻撃側編成の枠線色 */
+  --offense-party-border-color: #ffd8a0;
+  /* 攻撃側編成のタグ色 */
+  --offense-party-tag-color: #ffd8a0;
+  /* 攻撃側編成の背景色 */
+  --offense-party-background-color: #fcecec;
+  /* 防衛側編成の枠線色 */
+  --defense-party-border-color: #b0f0e8;
+  /* 防衛側編成のタグ色 */
+  --defense-party-tag-color: #b0f0e8;
+  /* 防衛側編成の背景色 */
+  --defense-party-background-color: #ecf4f4;
+  /* 攻撃側編成(検索用)の枠線色 */
+  --search-offense-party-border-color: #ffc0ff;
+  /* 攻撃側編成(検索用)のタグ色 */
+  --search-offense-party-tag-color: #ffc0ff;
+  /* 攻撃側編成(検索用)の背景色 */
+  --search-offense-party-background-color: #fff8ff;
+  /* 防衛側編成(検索用)の枠線色 */
+  --search-defense-party-border-color: #c0ffc0;
+  /* 防衛側編成(検索用)のタグ色 */
+  --search-defense-party-tag-color: #c0ffc0;
+  /* 防衛側編成(検索用)の背景色 */
+  --search-defense-party-background-color: #f8fff8;
+
+  /* 汎用的なフォント名 */
+  --general-font-family: "Helvetica Neue", "Arial",
+    "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif";
+
+  /* 汎用的な文字のフォント色 */
+  --general-font-color: #404040;
+  /* 汎用的な文字のフォント色(無効化時) */
+  --general-disabled-font-color: #909090;
+  /* 汎用的な入力フィールドの文字のフォント色 */
+  --general-input-field-font-color: #404040;
+  /* 汎用的なセレクトボックスの文字のフォント色 */
+  --general-select-box-font-color: #404040;
+  /* 汎用的なリンクのフォント色 */
+  --general-link-font-color: #6060ff;
+  /* 検索結果メッセージのフォント色 */
+  --result-message-font-color: #4060e0;
+  /* 検索結果エラーメッセージのフォント色 */
+  --result-error-message-font-color: #d05050;
+  /* ユニット名(画像が表示されない時の代替文字)のフォント色 */
+  --unit-name-font-color: #404040;
+  /* 評価値のフォント色 */
+  --rating-value-font-color: #808080;
+  /* 現在のスロット番号のフォント色 */
+  --curr-slot-num-font-color: #808080;
+  /* コメントのフォント色 */
+  --comment-font-color: #404040;
+  /* 作成(更新)ユーザー、作成(更新)日時のフォント色 */
+  --touch-font-color: #606060;
+
+  /* 汎用的な文字のフォントサイズ */
+  --general-font-size: 15px;
+  /* 汎用的な入力フィールドの文字のフォントサイズ */
+  --general-input-field-font-size: 14px;
+  /* 汎用的なセレクトボックスの文字のフォントサイズ */
+  --general-select-box-font-size: 13px;
+  /* ユニット名(画像が表示されない時の代替文字)のフォントサイズ */
+  --unit-name-font-size: 9px;
+  /* 評価値のフォントサイズ */
+  --rating-value-font-size: 11px;
+  /* 現在のスロット番号のフォントサイズ */
+  --curr-slot-num-font-size: 12px;
+  /* コメントのフォントサイズ */
+  --comment-font-size: 12px;
+  /* 作成(更新)ユーザー、作成(更新)日時のフォントサイズ */
+  --touch-info-font-size: 9px;
+  /* 対戦情報用のボタンの文字のフォントサイズ */
+  --vs-set-button-font-size: 10px;
+  /* 検索結果メッセージのフォントサイズ */
+  --result-message-font-size: 14px;
+}
+
+/* 全体設定 */
+body::before {
+  background-image: url(./img/bg_visualfanbook.jpg);
+  background-repeat: norepeat;
+  background-size: cover;
+  content: '';
+  height: 100vh;
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  z-index: -1;
+}
+body {
+  font-family: var(--general-font-family);
+  margin: 8px 0px; /* 上下、左右 */
+}
+input[type=text],
+input[type=password] {
+  background-color: transparent;
+  font-family: var(--general-font-family);
+}
+textarea {
+  background-color: transparent;
+  font-family: var(--general-font-family);
+}
+pre {
+  font-family: var(--general-font-family);
+}
+select {
+  background-color: transparent;
+  font-family: var(--general-font-family);
+}
+a {
+  color: var(--general-link-font-color);
+  cursor: default;
+  font-family: var(--general-font-family);
+  text-decoration: underline;
+}
+
+/* 汎用設定 */
+.is-hidden {
+  display: none;
+}
+.is-invisible {
+  opacity: 0.0;
+  position: absolute;
+}
+
+.margin-left-5px {
+  margin-left: 5px;
+}
+.margin-left-8px {
+  margin-left: 8px;
+}
+.margin-right-5px {
+  margin-right: 5px;
+}
+.margin-right-8px {
+  margin-right: 8px;
+}
+
+/* ポップアップ */
+.popup {
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+.popup-layer {
+  align-items: center;
+  background-blend-mode: darken;
+  background-color: var(--popup-base-layer-color);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+.popup-window,
+.popup-confirm-window {
+  align-items: center;
+  background-color: var(--popup-window-layer-color);
+  border-radius: var(--general-border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.popup-message {
+  align-items: center;
+  display: flex;
+  font-size: var(--general-font-size);
+  justify-content: center;
+  user-select: none;
+  padding: 50px 50px; /* 上下、左右 */
+}
+.popup-confirm-message {
+  align-items: center;
+  display: flex;
+  font-size: var(--general-font-size);
+  justify-content: center;
+  user-select: none;
+  padding: 30px 50px; /* 上下、左右 */
+}
+.popup-confirm-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 0px 0px 20px 0px; /* 上、右、下、左 */
+}
+.popup-confirm-button {
+  align-items: center;
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  cursor: pointer;
+  display: flex;
+  font-size: var(--general-font-size);
+  height: 40px;
+  justify-content: center;
+  margin: 0px 10px; /* 上下、左右 */
+  user-select: none;
+  width: 80px;
+}
+
+/* ページ */
+@media only screen and (min-width: 740px) {
+.page-config,
+.page-content {
+  background-blend-mode: lighten;
+  background-color: var(--base-layer-color);
+  border: var(--general-border);
+  display: none;
+  margin: 0px auto; /* 上下、左右 */
+  padding: 20px 10px; /* 上下、左右 */
+  width: var(--unit-catalog-outer-width);
+}
+}
+@media only screen and (max-width: 739px) {
+.page-config,
+.page-content {
+  background-blend-mode: lighten;
+  background-color: var(--base-layer-color);
+  display: none;
+  margin: 0px 0px; /* 上下、左右 */
+  padding: 20px 10px; /* 上下、左右 */
+}
+}
+
+/* コンテンツの各区画(配置調整) */
+.section-config {
+  display: block;
+  margin: 0px 0px 0px 10px; /* 上、右、下、左 */
+}
+.section-menu {
+  display: block;
+  margin: 0px 0px 0px 10px; /* 上、右、下、左 */
+}
+.section-new {
+  display: none;
+  margin: 10px 0px 0px 0px; /* 上、右、下、左 */
+}
+.section-search {
+  display: none;
+  margin: 10px 0px 0px 0px; /* 上、右、下、左 */
+}
+.section-unit-catalog {
+  display: none;
+  margin: 5px 0px 0px 0px; /* 上、右、下、左 */
+}
+.section-result-control {
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 10px 0px 0px 10px; /* 上、右、下、左 */
+}
+.section-result-message {
+  display: block;
+  margin: 10px 0px 0px 10px; /* 上、右、下、左 */
+}
+.section-result {
+  display: block;
+  margin: 5px 0px 0px 0px; /* 上、右、下、左 */
+}
+.section-common-template {
+  display: none;
+}
+
+/* ユーザー設定 */
+.config {
+  background-blend-mode: darken;
+  background-color: var(--controller-layer-color);
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  display: inline-flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.config-input-area {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-column-gap: 5px;
+  grid-row-gap: 8px;
+  /*
+    ユーザー名、データベース名は1列目にラベル、2、3列目に入力フィールド、4、5列目にチェックボックス
+    検索条件は1、2列目にラベル、3列目以降にセレクトボックス
+  */
+  grid-template-columns: 110px 40px minmax(40px, 100px) auto auto;
+}
+.config-issue-area {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 0px 0px; /* 上、右、下、左 */
+}
+.config-item {
+  color: var(--general-font-color);
+  display: flex;
+  font-size: var(--general-font-size);
+  user-select: none;
+  word-break: keep-all;
+}
+.config-item-1-1 {
+  grid-area: 1/1/2/2;
+}
+.config-item-1-2 {
+  grid-area: 1/2/2/4;
+}
+.config-item-1-3 {
+  grid-area: 1/4/2/5;
+}
+.config-item-1-4 {
+  grid-area: 1/5/2/6;
+}
+.config-item-2-1 {
+  grid-area: 2/1/3/2;
+}
+.config-item-2-2 {
+  grid-area: 2/2/3/4;
+}
+.config-item-2-3 {
+  grid-area: 2/4/3/5;
+}
+.config-item-2-4 {
+  grid-area: 2/5/3/6;
+}
+.config-item-3-1 {
+  grid-area: 3/1/4/3;
+}
+.config-item-3-2 {
+  grid-area: 3/3/4/6;
+}
+.config-item-4-1 {
+  grid-area: 4/1/5/3;
+}
+.config-item-4-2 {
+  grid-area: 4/3/5/6;
+}
+.config-item-5-1 {
+  grid-area: 5/1/6/3;
+}
+.config-item-5-2 {
+  grid-area: 5/3/6/6;
+}
+.config-item-6-1 {
+  grid-area: 6/1/7/6;
+}
+.config-item-7-1 {
+  grid-area: 7/1/8/6;
+}
+.config-button {
+  align-items: center;
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  color: var(--general-font-color);
+  display: flex;
+  font-size: var(--general-font-size);
+  height: var(--config-button-inner-height);
+  justify-content: center;
+  user-select: none;
+  word-break: keep-all;
+}
+.config-item input[type=text],
+.config-item input[type=password] {
+  color: var(--general-input-field-font-color);
+  font-size: var(--general-input-field-font-size);
+  width: 95%;
+}
+.config-item select {
+  color: var(--general-select-box-font-color);
+  font-size: var(--general-select-box-font-size);
+}
+.config-button.is-fixed-width {
+  width: var(--config-button-inner-width);
+}
+
+/* メニュー */
+.menu {
+  background-blend-mode: darken;
+  background-color: var(--controller-layer-color);
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  width: var(--menu-width);
+}
+.menu-command {
+  align-items: center;
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  color: var(--general-font-color);
+  display: flex;
+  font-size: var(--general-font-size);
+  height: var(--menu-command-inner-height);
+  justify-content: center;
+  margin: 4px;
+  user-select: none;
+  word-break: keep-all;
+}
+.menu-command-part-save {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 0px var(--menu-command-side-padding-when-variable); /* 上下、左右 */
+}
+.menu-command-part-file-type {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 0px var(--menu-command-side-padding-when-variable) 0px 0px; /* 上、右、下、左 */
+}
+.menu-command select {
+  color: var(--general-select-box-font-color);
+  font-size: var(--general-select-box-font-size);
+}
+.menu-command.is-fixed-width {
+  width: var(--menu-command-inner-width);
+}
+.menu-command.is-variable-width {
+  padding: 0px var(--menu-command-side-padding-when-variable); /* 上下、左右 */
+}
+.menu-command.is-selected {
+  background-blend-mode: darken;
+  background-color: var(--selected-menu-layer-color);
+}
+.menu-command.is-noselected {
+  background-color: transparent;
+}
+
+/* 対戦情報(外郭) */
+.result-vs-set-list {
+  border: none;
+  display: inline-flex;
+  flex-direction: column;
+}
+.new-vs-set,
+.search-vs-set,
+.result-vs-set {
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  display: flex;
+  padding: var(--vs-set-padding-height) var(--vs-set-padding-width);
+}
+.result-vs-set.is-first {
+  margin: 0px;
+}
+.result-vs-set.is-followers {
+  margin: var(--vs-set-vertical-gap) 0px 0px 0px; /* 上、右、下、左 */
+}
+
+/* 対戦情報(パネル) */
+.vs-set-base-panel {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 3px;
+  grid-template-columns: auto calc(
+    var(--vs-set-touch-user-width) + var(--vs-set-touch-date-width)
+  );
+}
+.vs-set-panel-a {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: 1/1/2/3;
+}
+.vs-set-panel-b {
+  display: flex;
+  grid-area: 2/1/4/2;
+}
+.vs-set-panel-c {
+  align-items: center;
+  display: flex;
+  grid-area: 2/2/3/3;
+  justify-content: flex-end;
+  margin: 2px 0px 0px 0px; /* 上、右、下、左 */
+}
+.vs-set-panel-d {
+  display: flex;
+  grid-area: 3/2/4/3;
+}
+
+/* 対戦情報(内部) */
+.vs-set-offense-party,
+.vs-set-defense-party {
+  align-items: center;
+  border-radius: var(--party-border-radius);
+  border-style: var(--general-border-style);
+  border-width: var(--party-border-width);
+  display: flex;
+  padding: var(--party-padding-height) var(--party-padding-width);
+}
+.new-vs-set .vs-set-offense-party.is-selected,
+.result-vs-set-list .vs-set-offense-party.is-selected {
+  background-color: var(--offense-party-background-color);
+  border-color: var(--offense-party-border-color);
+}
+.new-vs-set .vs-set-offense-party.is-noselected,
+.result-vs-set-list .vs-set-offense-party.is-noselected {
+  border-color: var(--offense-party-border-color);
+}
+.new-vs-set .vs-set-defense-party.is-selected,
+.result-vs-set-list .vs-set-defense-party.is-selected {
+  background-color: var(--defense-party-background-color);
+  border-color: var(--defense-party-border-color);
+}
+.new-vs-set .vs-set-defense-party.is-noselected,
+.result-vs-set-list .vs-set-defense-party.is-noselected {
+  border-color: var(--defense-party-border-color);
+}
+.search-vs-set .vs-set-offense-party.is-selected {
+  background-color: var(--search-offense-party-background-color);
+  border-color: var(--search-offense-party-border-color);
+}
+.search-vs-set .vs-set-offense-party.is-noselected {
+  border-color: var(--search-offense-party-border-color);
+}
+.search-vs-set .vs-set-defense-party.is-selected {
+  background-color: var(--search-defense-party-background-color);
+  border-color: var(--search-defense-party-border-color);
+}
+.search-vs-set .vs-set-defense-party.is-noselected {
+  border-color: var(--search-defense-party-border-color);
+}
+.offense-party-tag {
+  background-image: url(./img/offense_party_tag.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--party-tag-image-width) var(--party-tag-image-height);
+  height: calc(
+    var(--unit-image-width) +
+    var(--party-unit-border-width) * 2 +
+    var(--party-unit-margin-height) * 2
+  );
+  margin: var(--party-unit-margin-height) var(--party-unit-margin-width);
+  opacity: 0.9;
+  width: var(--party-tag-width);
+}
+.defense-party-tag {
+  background-image: url(./img/defense_party_tag.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: var(--party-tag-image-width) var(--party-tag-image-height);
+  height: calc(
+    var(--unit-image-width) +
+    var(--party-unit-border-width) * 2 +
+    var(--party-unit-margin-height) * 2
+  );
+  margin: var(--party-unit-margin-height) var(--party-unit-margin-width);
+  opacity: 0.9;
+  width: var(--party-tag-width);
+}
+.new-vs-set .vs-set-offense-party-tag.is-selected,
+.result-vs-set-list .vs-set-offense-party-tag.is-selected {
+  background-color: var(--offense-party-tag-color);
+}
+.new-vs-set .vs-set-defense-party-tag.is-selected,
+.result-vs-set-list .vs-set-defense-party-tag.is-selected {
+  background-color: var(--defense-party-tag-color);
+}
+.search-vs-set .vs-set-offense-party-tag.is-selected {
+  background-color: var(--search-offense-party-tag-color);
+}
+.search-vs-set .vs-set-defense-party-tag.is-selected {
+  background-color: var(--search-defense-party-tag-color);
+}
+.vs-set-offense-party-tag.is-noselected,
+.vs-set-defense-party-tag.is-noselected {
+  background-color: transparent;
+}
+.offense-party-unit,
+.defense-party-unit {
+  border-color: var(--party-unit-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--party-unit-border-width);
+  border-radius: var(--party-unit-border-radius);
+  display: flex;
+  height: var(--unit-image-height);
+  margin: var(--party-unit-margin-height) var(--party-unit-margin-width);
+  overflow: hidden;
+  position: relative;
+  width: var(--unit-image-width);
+}
+.unit-name {
+  color: var(--unit-name-font-color);
+  display: flex;
+  font-size: var(--unit-name-font-size);
+  position: absolute;
+}
+.unit-image {
+  background-size: contain;
+  display: flex;
+  height: var(--unit-image-height);
+  position: absolute;
+  width:var(--unit-image-width);
+}
+.unit-wildcard {
+  background-blend-mode: darken;
+  background-color: var(--unit-wildcard-layer-color);
+  height: var(--unit-image-height);
+  width:var(--unit-image-width);
+}
+.vs-set-rating {
+  align-items: center;
+  cursor: cell;
+  display: flex;
+  height: var(--party-unit-height);
+  justify-content: center;
+  position: relative;
+  width: var(--rating-area-width);
+}
+.rating-good-mark {
+  background-size: contain;
+  height: var(--rating-mark-image-height);
+  left: 9px; /* 画像位置の微調整 */
+  opacity: 0.7;
+  position: absolute;
+  top: 18px; /* 画像位置の微調整 */
+  width: var(--rating-mark-image-width);
+}
+.rating-good-mark.is-on {
+  background-image: url(./img/good_mark_on.png);
+}
+.rating-good-mark.is-off {
+  background-image: url(./img/good_mark_off.png);
+}
+.rating-bad-mark {
+  background-size: contain;
+  height: var(--rating-mark-image-height);
+  left: 30px; /* 画像位置の微調整 */
+  opacity: 0.7;
+  position: absolute;
+  top: 21px; /* 画像位置の微調整 */
+  width: var(--rating-mark-image-width);
+}
+.rating-bad-mark.is-on {
+  background-image: url(./img/bad_mark_on.png);
+}
+.rating-bad-mark.is-off {
+  background-image: url(./img/bad_mark_off.png);
+}
+.rating-good-value {
+  color: var(--rating-value-font-color);
+  display: flex;
+  font-size: var(--rating-value-font-size);
+  justify-content: center;
+  left: 9px; /* 数値位置の微調整 */
+  position: absolute;
+  top: 33px; /* 数値位置の微調整 */
+  user-select: none;
+  width: var(--rating-value-width);
+}
+.rating-bad-value {
+  color: var(--rating-value-font-color);
+  display: flex;
+  font-size: var(--rating-value-font-size);
+  justify-content: center;
+  left: 30px; /* 数値位置の微調整 */
+  position: absolute;
+  top: 33px; /* 数値位置の微調整 */
+  user-select: none;
+  width: var(--rating-value-width);
+}
+.vs-set-curr-slot-num {
+  align-items: center;
+  color: var(--curr-slot-num-font-color);
+  display: flex;
+  font-size: var(--curr-slot-num-font-size);
+  height: var(--party-unit-height);
+  justify-content: center;
+  user-select: none;
+  width: var(--curr-slot-num-area-width);
+}
+.vs-set-comment-area {
+  border: var(--general-border);
+  color: var(--comment-font-color);
+  font-size: var(--comment-font-size);
+  height: var(--comment-area-height);
+  line-height: var(--comment-height-per-line);
+  resize: vertical;
+  width: 100%;
+}
+.vs-set-comment-label {
+  color: var(--comment-font-color);
+  display: flex;
+  font-size: var(--comment-font-size);
+  line-height: var(--comment-height-per-line);
+  margin: 0px;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.vs-set-touch-user {
+  align-items: center;
+  color: var(--touch-font-color);
+  display: flex;
+  font-size: var(--touch-info-font-size);
+  justify-content: flex-start;
+  overflow: hidden;
+  width: var(--vs-set-touch-user-width);
+  word-break: keep-all;
+}
+.vs-set-touch-date {
+  align-items: center;
+  color: var(--touch-font-color);
+  display: flex;
+  font-size: var(--touch-info-font-size);
+  justify-content: flex-end;
+  width: var(--vs-set-touch-date-width);
+}
+
+/* 対戦情報用のボタン */
+.vs-set-empty-button {
+  border: none;
+  display: flex;
+  height: var(--vs-set-button-inner-height);
+  width: var(--vs-set-button-inner-width);
+}
+.vs-set-button {
+  align-items: center;
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  color: var(--general-font-color);
+  cursor: pointer;
+  display: flex;
+  font-size: var(--vs-set-button-font-size);
+  height: var(--vs-set-button-inner-height);
+  justify-content: center;
+  user-select: none;
+  width: var(--vs-set-button-inner-width);
+}
+.vs-set-button.is-disabled {
+  color: var(--general-disabled-font-color);
+}
+
+/* ユニット一覧 */
+@media only screen and (min-width: 740px) {
+.unit-catalog {
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding:
+    var(--unit-catalog-padding-height)
+    var(--unit-catalog-padding-width);
+  width: calc(--unit-catalog-inner-width);
+}
+}
+@media only screen and (max-width: 739px) {
+.unit-catalog {
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  padding:
+    var(--unit-catalog-padding-height)
+    var(--unit-catalog-padding-width);
+  width: 100%;
+}
+}
+.unit-catalog-item {
+  border-radius: var(--party-unit-border-radius);
+  display: flex;
+  height: var(--unit-image-height);
+  margin:
+    var(--unit-catalog-item-margin-height)
+    var(--unit-catalog-item-margin-width);
+  overflow: hidden;
+  position: relative;
+  width: var(--unit-image-width);
+}
+.unit-image.is-selected {
+  background-blend-mode: normal;
+}
+.unit-image.is-noselected {
+  background-blend-mode: lighten;
+  background-color: var(--noselected-unit-layer-color);
+}
+.unit-catalog.for-new-offense .unit-catalog-item.is-selected {
+  border-color: var(--offense-party-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--unit-catalog-item-border-width);
+}
+.unit-catalog.for-new-defense .unit-catalog-item.is-selected {
+  border-color: var(--defense-party-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--unit-catalog-item-border-width);
+}
+.unit-catalog.for-search-offense .unit-catalog-item.is-selected {
+  border-color: var(--search-offense-party-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--unit-catalog-item-border-width);
+}
+.unit-catalog.for-search-defense .unit-catalog-item.is-selected {
+  border-color: var(--search-defense-party-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--unit-catalog-item-border-width);
+}
+.unit-catalog .unit-catalog-item.is-noselected {
+  border-color: var(--unit-catalog-item-border-color);
+  border-style: var(--general-border-style);
+  border-width: var(--unit-catalog-item-border-width);
+}
+
+/* 検索結果制御 */
+.result-control {
+  display: flex;
+  flex-wrap: wrap;
+}
+.result-control-command {
+  align-items: center;
+  background-blend-mode: darken;
+  background-color: var(--controller-layer-color);
+  border: var(--general-border);
+  border-radius: var(--general-border-radius);
+  color: var(--general-font-color);
+  display: flex;
+  font-size: var(--general-font-size);
+  height: var(--result-control-command-inner-height);
+  user-select: none;
+  word-break: keep-all;
+}
+.result-control-command.is-fixed-width {
+  width: var(--result-control-command-inner-width);
+}
+.result-control-command.is-variable-width {
+  padding: 0px var(--result-control-command-side-padding-when-variable); /* 上下、左右 */
+}
+.result-control-command select {
+  color: var(--general-select-box-font-color);
+  font-size: var(--general-select-box-font-size);
+}
+
+/* 検索結果メッセージ */
+.result-message {
+  color: var(--result-message-font-color);
+  display: flex;
+  font-size: var(--result-message-font-size);
+}
+.result-message.is-error {
+  color: var(--result-error-message-font-color);
+}
+
+/* コメント入力部の復元用 */
+.comment-area-for-restoration {
+  font-size: var(--comment-font-size);
+  height: var(--comment-area-height);
+  line-height: var(--comment-height-per-line);
+}
