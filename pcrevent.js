@@ -328,6 +328,15 @@ pcrevent.newVsSet.copyVsSet.onClick = function() {
     ['offenseParty', 'defenseParty']
   );
 
+  // 編成用ワイルドカードは全て除去する
+  const defenseParty = pcrnote.gNewVsSet.defenseParty;
+  for (const [index, unitID] of defenseParty.entries()) {
+    if (pcract.isUnitWildcard(unitID)) {
+      defenseParty[index] = '';
+    }
+  }
+  pcrnote.gUnitInfoTable.sortParty(defenseParty);
+
   pcrview.refreshContentView();
 };
 

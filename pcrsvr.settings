@@ -34,7 +34,6 @@
     ],
     "values": [
       {"userName": "", "dbName": "pcrnote"},
-      {"userName": "", "dbName": "pcrnpc"},
       {"userName": "", "dbName": "pcrtest"},
       {"userName": "ノートの作成者", "dbName": "arena"},
       {"userName": "ノートの作成者", "dbName": "clanbattle"}

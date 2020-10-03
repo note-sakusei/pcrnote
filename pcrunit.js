@@ -34,6 +34,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['jun_summer', 'ジュン(サマー)', 'ジュン(サマー).jpg'],
   ['matsuri', 'マツリ', 'マツリ.jpg'],
   ['chloe', 'クロエ', 'クロエ.jpg'],
+  ['matsuri_halloween', 'マツリ(ハロウィン)', 'マツリ(ハロウィン).jpg'],
   ['eriko_valentine', 'エリコ(バレンタイン)', 'エリコ(バレンタイン).jpg'],
   ['ayane_christmas', 'アヤネ(クリスマス)', 'アヤネ(クリスマス).jpg'],
   ['ruka_summer', 'ルカ(サマー)', 'ルカ(サマー).jpg'],

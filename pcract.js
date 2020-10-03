@@ -106,7 +106,7 @@ pcract.getDefenseParty = function(vsSet) {
 pcract.makeUnitWildcard = function(pos) {
   return '*[' + pos + ']';
 };
-// 編成用ワイルドカードか判断
+// ユニットIDが編成用ワイルドカードか判断
 pcract.isUnitWildcard = function(wildcard) {
   try {
     pcract.getUnitWildcardPosition(wildcard);
@@ -146,7 +146,7 @@ pcract.sortPartyWithoutWildcard = function(party) {
 };
 
 // 攻撃側編成、防衛側編成のユニット選択状態の切り替え
-pcract.toggleUnitSelection = function(targetParty, unitID) {
+pcract.toggleUnitSelection = function(party, unitID) {
   if (unitID === '' || pcract.isUnitWildcard(unitID)) return;
 
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
@@ -156,21 +156,21 @@ pcract.toggleUnitSelection = function(targetParty, unitID) {
   }
 
   // 選択済みの場合、除外
-  if (targetParty.includes(unitID)) {
-    const releaseIndex = targetParty.indexOf(unitID);
-    targetParty[releaseIndex] = '';
+  if (party.includes(unitID)) {
+    const releaseIndex = party.indexOf(unitID);
+    party[releaseIndex] = '';
   // 未選択の場合、空きがあれば追加
   } else {
-    const emptyIndex = targetParty.indexOf('');
+    const emptyIndex = party.indexOf('');
     if (emptyIndex !== -1) {
-      targetParty[emptyIndex] = unitID;
+      party[emptyIndex] = unitID;
     }
   }
 
-  pcract.sortPartyWithoutWildcard(targetParty);
+  pcract.sortPartyWithoutWildcard(party);
 };
 // 攻撃側編成、防衛側編成にユニットを追加
-pcract.addUnitSelection = function(targetParty, unitID) {
+pcract.addUnitSelection = function(party, unitID) {
   if (unitID === '' || pcract.isUnitWildcard(unitID)) return;
 
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
@@ -180,28 +180,27 @@ pcract.addUnitSelection = function(targetParty, unitID) {
   }
 
   // 空きがあれば追加
-  const emptyIndex = targetParty.indexOf('');
+  const emptyIndex = party.indexOf('');
   if (emptyIndex !== -1) {
-    targetParty[emptyIndex] = unitID;
+    party[emptyIndex] = unitID;
   }
 
-  pcract.sortPartyWithoutWildcard(targetParty);
+  pcract.sortPartyWithoutWildcard(party);
 };
-
 // 防衛側編成に編成用ワイルドカードを設定
-pcract.toggleUnitWildcard = function(targetParty, pos) {
-  const unitID = targetParty[pos];
+pcract.toggleUnitWildcard = function(party, pos) {
+  const unitID = party[pos];
   // 空欄の場合、編成用ワイルドカードを設定
   if (unitID === '') {
-    targetParty[pos] = pcract.makeUnitWildcard(pos);
+    party[pos] = pcract.makeUnitWildcard(pos);
   // 編成用ワイルドカードが設定されている場合、除去
   } else if (pcract.isUnitWildcard(unitID)) {
-    targetParty[pos] = '';
+    party[pos] = '';
   } else {
     return;
   }
 
-  pcract.sortPartyWithoutWildcard(targetParty);
+  pcract.sortPartyWithoutWildcard(party);
 };
 
 // 評価の増減
