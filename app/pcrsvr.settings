@@ -8,11 +8,11 @@
     "value": "/home/pcruser/pcrnote/"
   },
   "dataDir": {
-    "description": "データディレクトリ",
+    "description": "データディレクトリ(どこに置いてもブラウザから直接アクセス不可)",
     "value": "/home/pcruser/pcrnote/data/"
   },
   "backupDir": {
-    "description": "データのバックアップディレクトリ",
+    "description": "データのバックアップディレクトリ(どこに置いてもブラウザから直接アクセス不可)",
     "value": "/home/pcruser/pcrnote/data/backup/"
   },
   "autoBackupData": {
@@ -25,7 +25,8 @@
   },
   "availableAuthorityList": {
     "descriptions": [
-      "利用可能権限一覧(空文字は誰でもorどれでも利用可)",
+      "利用可能権限一覧",
+      "空文字は誰でもorどれでも利用可",
       "ユーザー名、データベース名に利用出来る文字数には上限、下限あり",
       "ユーザー名に使用出来る文字種に制限はなし",
       "データベース名に使用出来る文字種は以下の通り",
