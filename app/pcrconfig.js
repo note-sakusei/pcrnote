@@ -39,7 +39,7 @@ pcrconfig.ConfigData = function(opt_rhs) {
   } else if (opt_rhs instanceof pcrconfig.ConfigData) {
     this.items = pcrutil.deepCopy(opt_rhs.items);
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_rhs'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_rhs');
   }
   Object.seal(this);
   Object.seal(this.items);

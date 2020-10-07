@@ -27,7 +27,7 @@ pcrctrl.ViewController = function(opt_rhs) {
   } else if (pcrutil.isObject(opt_rhs)) {
     this.states = opt_rhs;
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_rhs'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_rhs');
   }
   Object.seal(this);
   Object.seal(this.states);
@@ -138,7 +138,7 @@ pcrctrl.ViewController.prototype.switchNewTabOn = function(opt_index) {
   } else if (opt_index === 1) {
     this.switchNewTabDefenseOn();
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_index'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_index');
   }
 };
 pcrctrl.ViewController.prototype.switchNewTabOff = function() {
@@ -193,7 +193,7 @@ pcrctrl.ViewController.prototype.switchSearchTabOn = function(opt_index) {
   } else if (opt_index === 1) {
     this.switchSearchTabDefenseOn();
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_index'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_index');
   }
 };
 pcrctrl.ViewController.prototype.switchSearchTabOff = function() {

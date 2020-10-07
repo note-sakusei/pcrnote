@@ -213,7 +213,7 @@ pcrview.makeSwitchButtonLabelHtml = function(searchVsSet, index) {
       html = pcrutil.buildMessage(pcrmsg.getN(FUNC_NAME, 1), dispNum);
     }
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'index'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'index');
   }
   return html;
 };

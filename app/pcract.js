@@ -118,11 +118,11 @@ pcract.isUnitWildcard = function(wildcard) {
 // 編成用ワイルドカードの編成位置を取得
 pcract.getUnitWildcardPosition = function(wildcard) {
   if (!/^\*\[(\d+)\]$/.test(wildcard)) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'wildcard'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'wildcard');
   }
   const pos = Number(wildcard.match(/^\*\[(\d+)\]$/)[1]);
   if (pos < 0 || pcrdef.PARTY_UNITS_MAX - 1 < pos) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'wildcard'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'wildcard');
   }
   return pos;
 };
@@ -152,7 +152,7 @@ pcract.toggleUnitSelection = function(party, unitID) {
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
   const unitInfo = pcrnote.gUnitInfoTable.findByUnitID(unitID);
   if (unitInfo === undefined) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'unitID'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'unitID');
   }
 
   // 選択済みの場合、除外
@@ -176,7 +176,7 @@ pcract.addUnitSelection = function(party, unitID) {
   // ユニットIDがユニット情報テーブルに存在するか念のためチェック
   const unitInfo = pcrnote.gUnitInfoTable.findByUnitID(unitID);
   if (unitInfo === undefined) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'unitID'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'unitID');
   }
 
   // 空きがあれば追加

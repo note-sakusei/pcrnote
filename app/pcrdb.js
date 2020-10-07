@@ -27,7 +27,7 @@ pcrdb.Transaction = function(opt_telegram) {
   } else if (pcrutil.isObject(opt_telegram)) {
     this.telegram = opt_telegram;
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_telegram'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_telegram');
   }
   Object.seal(this);
   Object.seal(this.telegram);
@@ -175,7 +175,7 @@ pcrdb.Transaction.prototype.executeQuery = function(tableData, query, pkey) {
     this.delete(tableData, query, pkey);
     break;
   default:
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'query.type'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'query.type');
   }
 };
 
@@ -204,7 +204,7 @@ pcrdb.Transaction.prototype.commit = function(
 pcrdb.PrimaryKey = function(...pkeyList) {
   for (const pkey of pkeyList) {
     if (!pcrutil.isString(pkey) || pkey === '') {
-      throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'pkeyList'));
+      throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'pkeyList');
     }
   }
   this.items = {
@@ -395,13 +395,13 @@ pcrdb.UnitInfoTable.prototype.sortParty = function(party) {
 // 対戦情報テーブルクラス
 pcrdb.VsSetTable = function(unitInfoTable, opt_transaction) {
   if (!unitInfoTable instanceof pcrdb.UnitInfoTable) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'unitInfoTable'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'unitInfoTable');
   }
   if (
     opt_transaction !== undefined &&
     !opt_transaction instanceof pcrdb.Transaction
   ) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'opt_transaction'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt_transaction');
   }
 
   this.items = {
@@ -1150,7 +1150,7 @@ pcrdb.VsSetTable.prototype.filter = function(filterFuncList, resultLimit) {
   // 複数の絞り込みがあればアンド条件で絞り込みを実行
   for (const filterFunc of filterFuncList) {
     if (!pcrutil.isFunction(filterFunc)) {
-      throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'filterFuncList'));
+      throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'filterFuncList');
     }
     this.result.items.filtering = true;
     for (const [index, vsSet] of this.items.data.entries()) {
@@ -1240,7 +1240,7 @@ pcrdb.VsSetTable.Result.prototype.updateSync = function(query, pkey) {
 // 検索結果の指定位置のデータを複製して取得
 pcrdb.VsSetTable.Result.prototype.pickDuplicating = function(index) {
   if (this.items.limitedList[index] === undefined) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'index'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'index');
   }
   return pcrutil.deepCopy(this.items.limitedList[index]);
 };

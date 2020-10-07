@@ -254,16 +254,3 @@ pcrmsg.getN = function(msgID, num) {
   }
   return msgAry[num];
 };
-
-// メッセージIDと置換文字から該当のメッセージを構築して取得
-pcrmsg.build = function(msgID, ...args) {
-  if (args.length === 0) {
-    throw new Error('No argument is specified');
-  }
-  const baseMsg = pcrmsg.get(msgID);
-  const msg = baseMsg.replace(/\${([0-9]+?)}/g, (whole, numPart) => {
-    const index = Number(numPart) - 1;
-    return (args[index] !== undefined) ? args[index] : whole;
-  });
-  return msg;
-};

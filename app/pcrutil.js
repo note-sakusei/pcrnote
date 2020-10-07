@@ -66,7 +66,7 @@ pcrutil.asDate = function(val, fmt) {
 // 文字列の置換部分を引数に置き換えてメッセージを構築
 pcrutil.buildMessage = function(baseMsg, ...rest) {
   if (!pcrutil.isString(baseMsg)) {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'baseMsg'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'baseMsg');
   }
   const msg = baseMsg.replace(/\${([0-9]+?)}/g, (whole, numPart) => {
     const index = Number(numPart) - 1;
@@ -227,7 +227,7 @@ pcrutil.DateFormat.prototype.format = function(dt) {
 // 現在日時を付与したファイル名を作成
 pcrutil.makeFileNameWithDate = function(baseFileName, fileType) {
   if (baseFileName === undefined || baseFileName === '') {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'baseFileName'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'baseFileName');
   }
 
   let fileName = baseFileName;
@@ -259,7 +259,7 @@ pcrutil.makeFileNameWithDate = function(baseFileName, fileType) {
   } else if (fileType === pcrdef.FileType.CSV) {
     fileName += '.csv'
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'fileType'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'fileType');
   }
 
   return fileName;
@@ -383,7 +383,7 @@ pcrutil.fileDataToObjectData = function(fileData, fileType) {
       throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), e.message);
     }
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'fileType'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'fileType');
   }
 
   return objData;
@@ -399,7 +399,7 @@ pcrutil.objectDataToFileData = function(objData, fileType) {
     const flatObjData = pcrutil.objectDataToFlatObjectData(objData, '-');
     strData = pcrutil.flatObjectDataToCsvData(flatObjData);
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'fileType'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'fileType');
   }
 
   // JSON文字列またはCSV文字列をファイルデータに変換
@@ -436,7 +436,7 @@ pcrutil.fileDataToBlobData = function(fileData, fileType) {
       {'type': 'text/csv'}
     );
   } else {
-    throw pcrutil.makeError(pcrmsg.build('illegalArgument', 'fileType'));
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'fileType');
   }
 
   return blobData;
