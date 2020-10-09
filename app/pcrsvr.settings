@@ -1,18 +1,29 @@
 ﻿{
   "tcpPortNum": {
-    "description": "クライアントサーバーモード時の接続ポート番号",
+    "description": "接続ポート番号",
     "value": 59630
   },
   "wwwDir": {
-    "description": "ドキュメントルート(公開)ディレクトリ",
+    "descriptions": [
+      "ドキュメントルート(公開)ディレクトリ",
+      "パス設定例(末尾の/はあってもなくても可)",
+      "Linux: /home/pcruser/pcrnote/",
+      "Windows: C:/tool/pcrnote/ (C:\\tool\\pcrnote\\でも可)"
+    ],
     "value": "/home/pcruser/pcrnote/"
   },
   "dataDir": {
-    "description": "データディレクトリ(どこに置いてもブラウザから直接アクセス不可)",
+    "descriptions": [
+      "データディレクトリ",
+      "どこに置いてもブラウザから直接アクセス不可"
+    ],
     "value": "/home/pcruser/pcrnote/data/"
   },
   "backupDir": {
-    "description": "データのバックアップディレクトリ(どこに置いてもブラウザから直接アクセス不可)",
+    "descriptions": [
+      "データのバックアップディレクトリ",
+      "どこに置いてもブラウザから直接アクセス不可"
+    ],
     "value": "/home/pcruser/pcrnote/data/backup/"
   },
   "autoBackupData": {

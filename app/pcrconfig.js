@@ -30,7 +30,7 @@ pcrconfig.ConfigData = function(opt_rhs) {
       numOfSearchPartySlots: 6,
       // 検索結果上限数
       searchResultLimit: 50,
-      // クライアントサーバーモード
+      // サーバーモード
       clientServerMode: false,
       // クッキーに保存
       saveCookie: false

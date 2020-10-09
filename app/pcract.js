@@ -126,6 +126,15 @@ pcract.getUnitWildcardPosition = function(wildcard) {
   }
   return pos;
 };
+// 編成から編成用ワイルドカードを除去
+pcract.removeUnitWildcardFromParty = function(party) {
+  for (const [index, unitID] of party.entries()) {
+    if (pcract.isUnitWildcard(unitID)) {
+      party[index] = '';
+    }
+  }
+  pcrnote.gUnitInfoTable.sortParty(party);
+};
 
 // 編成をソート(隊列順にソート、ワイルドカードはソートしない)
 pcract.sortPartyWithoutWildcard = function(party) {

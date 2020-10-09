@@ -417,7 +417,7 @@ pcrdb.VsSetTable = function(unitInfoTable, opt_transaction) {
   };
   // ユニット情報テーブル
   this.unitInfoTable = unitInfoTable;
-  // トランザクション(クライアントサーバーモード用)
+  // トランザクション(サーバーモード用)
   if (opt_transaction === undefined) {
     this.transaction = new pcrdb.Transaction();
   } else {

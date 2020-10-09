@@ -85,7 +85,7 @@ pcrsvr.Setting.prototype = {
   load: undefined,
   // 設定ファイルのチェック
   check: undefined,
-  // クライアントサーバーモード時の接続ポート番号
+  // サーバーモード時の接続ポート番号
   get tcpPortNum() { return this.items.tcpPortNum.value; },
   // ドキュメントルート(公開)ディレクトリ
   get wwwDir() { return this.items.wwwDir.value; },

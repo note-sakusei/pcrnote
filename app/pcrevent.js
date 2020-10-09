@@ -31,6 +31,7 @@ pcrevent.searchVsSet = {
   defenseParty: {},
   offensePartyUnit: {},
   defensePartyUnit: {},
+  currSlotNum: {},
   commentArea: {},
   switchVsSet: {},
   clearVsSet: {}
@@ -327,15 +328,7 @@ pcrevent.newVsSet.copyVsSet.onClick = function() {
     pcrnote.gSearchVsSet.slotList[pcrnote.gSearchVsSet.currSlotNum],
     ['offenseParty', 'defenseParty']
   );
-
-  // 編成用ワイルドカードは全て除去する
-  const defenseParty = pcrnote.gNewVsSet.defenseParty;
-  for (const [index, unitID] of defenseParty.entries()) {
-    if (pcract.isUnitWildcard(unitID)) {
-      defenseParty[index] = '';
-    }
-  }
-  pcrnote.gUnitInfoTable.sortParty(defenseParty);
+  pcract.removeUnitWildcardFromParty(pcrnote.gNewVsSet.defenseParty);
 
   pcrview.refreshContentView();
 };
@@ -378,11 +371,26 @@ pcrevent.searchVsSet.defensePartyUnit.onClick = function() {
   //pcrview.refreshContentView(); 画面更新は親要素で行っている
 };
 
+// 編成用ワイルドカードの切り替え
 pcrevent.searchVsSet.defensePartyUnit.onDblclick = function() {
   const index = $('#searchVsSet [name=defensePartyUnit]').index(this);
   const defenseParty = pcract.getDefenseParty(pcrnote.gSearchVsSet);
   const pos = defenseParty.length - 1 - index;
   pcract.toggleUnitWildcard(defenseParty, pos);
+
+  pcract.filterVsSetTable();
+  pcrview.refreshContentView(); // ダブルクリック(タップ)時は画面更新が必要
+};
+
+// 攻撃側編成と防衛側編成の入れ替え
+pcrevent.searchVsSet.currSlotNum.onDblclick = function() {
+  const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
+  const currSlot = pcrnote.gSearchVsSet.slotList[currSlotNum];
+  const tempParty = currSlot.offenseParty.slice();
+  currSlot.offenseParty = currSlot.defenseParty.slice();
+  currSlot.defenseParty = tempParty;
+  pcract.removeUnitWildcardFromParty(currSlot.offenseParty);
+
   pcract.filterVsSetTable();
   pcrview.refreshContentView(); // ダブルクリック(タップ)時は画面更新が必要
 };
@@ -437,10 +445,9 @@ pcrevent.searchVsSet.switchVsSet.onClick = function() {
 // ユニット検索情報消去
 pcrevent.searchVsSet.clearVsSet.onClick = function() {
   const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
-  pcrnote.gSearchVsSet.slotList[currSlotNum].offenseParty =
-    pcract.makeEmptyParty();
-  pcrnote.gSearchVsSet.slotList[currSlotNum].defenseParty =
-    pcract.makeEmptyParty();
+  const currSlot = pcrnote.gSearchVsSet.slotList[currSlotNum];
+  currSlot.offenseParty = pcract.makeEmptyParty();
+  currSlot.defenseParty = pcract.makeEmptyParty();
 
   // コメント入力部の大きさも復元
   const height = $('#commentAreaForResotration').css('height');
@@ -620,6 +627,7 @@ pcrevent.addEventListener = function() {
   $('#searchVsSet').on('click', '[name=offensePartyUnit]', pcrevent.searchVsSet.offensePartyUnit.onClick);
   $('#searchVsSet').on('click', '[name=defensePartyUnit]', pcrevent.searchVsSet.defensePartyUnit.onClick);
   $('#searchVsSet').on('dblclick', '[name=defensePartyUnit]', pcrevent.searchVsSet.defensePartyUnit.onDblclick);
+  $('#searchVsSet').on('dblclick', '[name=currSlotNum]', pcrevent.searchVsSet.currSlotNum.onDblclick);
   $('#searchVsSet').on('change', '[name=commentArea]', pcrevent.searchVsSet.commentArea.onChange);
   $('#searchVsSet').on('click', '[name=switchVsSet]', pcrevent.searchVsSet.switchVsSet.onClick);
   $('#searchVsSet').on('click', '[name=clearVsSet]', pcrevent.searchVsSet.clearVsSet.onClick);
