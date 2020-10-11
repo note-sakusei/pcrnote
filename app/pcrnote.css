@@ -124,7 +124,7 @@
   /* 選択中のメニューボタンのレイヤー色 */
   --selected-menu-layer-color: rgba(0, 0, 0, 0.06);
   /* 非選択ユニット画像を覆うレイヤー色 */
-  --noselected-unit-layer-color: rgba(255, 255, 255, 0.4);
+  --noselected-unit-layer-color: rgba(255, 255, 255, 0.35);
   /* 編成用ワイルドカードのレイヤー色 */
   --unit-wildcard-layer-color: rgba(0, 0, 0, 0.25);
   /* 攻撃側、防衛側編成のユニット画像の枠線色(未選択時) */
@@ -132,29 +132,29 @@
   /* ユニット一覧のユニット画像の枠線色(未選択時) */
   --unit-catalog-item-border-color: #ddccdd;
   /* 攻撃側編成の枠線色 */
-  --offense-party-border-color: #ffd8a0;
+  --offense-party-border-color: #f8b8a0;
   /* 攻撃側編成のタグ色 */
-  --offense-party-tag-color: #ffd8a0;
+  --offense-party-tag-color: #f8b8a0;
   /* 攻撃側編成の背景色 */
-  --offense-party-background-color: #fcecec;
+  --offense-party-background-color: #fcf0ec;
   /* 防衛側編成の枠線色 */
-  --defense-party-border-color: #b0f0e8;
+  --defense-party-border-color: #a0f0f8;
   /* 防衛側編成のタグ色 */
-  --defense-party-tag-color: #b0f0e8;
+  --defense-party-tag-color: #a0f0f8;
   /* 防衛側編成の背景色 */
   --defense-party-background-color: #ecf4f4;
   /* 攻撃側編成(検索用)の枠線色 */
-  --search-offense-party-border-color: #ffc0ff;
+  --search-offense-party-border-color: #e4b0ec;
   /* 攻撃側編成(検索用)のタグ色 */
-  --search-offense-party-tag-color: #ffc0ff;
+  --search-offense-party-tag-color: #e4b0ec;
   /* 攻撃側編成(検索用)の背景色 */
-  --search-offense-party-background-color: #fff8ff;
+  --search-offense-party-background-color: #f0ecec;
   /* 防衛側編成(検索用)の枠線色 */
-  --search-defense-party-border-color: #c0ffc0;
+  --search-defense-party-border-color: #b0ffb0;
   /* 防衛側編成(検索用)のタグ色 */
-  --search-defense-party-tag-color: #c0ffc0;
+  --search-defense-party-tag-color: #a0ffa0;
   /* 防衛側編成(検索用)の背景色 */
-  --search-defense-party-background-color: #f8fff8;
+  --search-defense-party-background-color: #f0fffc;
 
   /* 汎用的なフォント名 */
   --general-font-family: "Helvetica Neue", "Arial",
