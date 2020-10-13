@@ -573,12 +573,12 @@ pcrview.showUnitCatalog = function() {
     pcrnote.gViewController.isSearchTabOffenseOn()
   ) {
     $unitCatalogItemList.each((index, itemDom) => {
-      unitInfoList[index].isPc ? $(itemDom).show() : $(itemDom).hide();
+      unitInfoList[index].isPC ? $(itemDom).show() : $(itemDom).hide();
     });
   // クラバト用表示
   } else {
     $unitCatalogItemList.each((index, itemDom) => {
-      unitInfoList[index].isPc ? $(itemDom).hide() : $(itemDom).show();
+      unitInfoList[index].isNPC ? $(itemDom).show() : $(itemDom).hide();
     });
   }
 };

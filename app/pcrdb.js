@@ -245,16 +245,16 @@ pcrdb.UnitInfoTable = function() {
     // ユニット名による索引
     indexByUnitName: {}
   };
-  this.addPc();
-  this.addNpc();
+  this.addPC();
+  this.addNPC();
   Object.seal(this);
   Object.seal(this.items);
 };
 pcrdb.UnitInfoTable.prototype = {
   // ユニット情報テーブルにプレイヤーユニットを追加
-  addPc: undefined,
+  addPC: undefined,
   // ユニット情報テーブルにNPCを追加
-  addNpc: undefined,
+  addNPC: undefined,
   // ユニット情報テーブルから全データを取得
   getAllData: undefined,
   // ユニット情報テーブルからユニットIDで検索し、ユニット情報を取得
@@ -273,19 +273,20 @@ pcrdb.UnitInfoTable.prototype = {
 Object.seal(pcrdb.UnitInfoTable.prototype);
 
 // ユニット情報テーブルにプレイヤーユニットを追加
-pcrdb.UnitInfoTable.prototype.addPc = function() {
-  const FUNC_NAME = 'pcrdb.UnitInfoTable.addPc';
+pcrdb.UnitInfoTable.prototype.addPC = function() {
+  const FUNC_NAME = 'pcrdb.UnitInfoTable.addPC';
 
-  const addUnitInfo = (unitID, unitName, imageName) => {
+  const addUnitInfo = (unitID, unitName, imageName, isActive = true) => {
     if (this.items.indexByUnitID[unitID] !== undefined) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0));
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), unitID);
     }
     const unitInfo = {
       unitPos: this.items.data.length,
       unitID: unitID,
       unitName: unitName,
       imageURL: './img/arena/' + imageName,
-      isPc: true
+      isPC: isActive,
+      isNPC: false
     };
     this.items.data.push(unitInfo);
     this.items.indexByUnitID[unitID] = unitInfo;
@@ -293,24 +294,25 @@ pcrdb.UnitInfoTable.prototype.addPc = function() {
   }
 
   for (const unitInfo of pcrunit.PC_UNIT_INFO_LIST) {
-    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2]);
+    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3]);
   }
 };
 
 // ユニット情報テーブルにNPCを追加
-pcrdb.UnitInfoTable.prototype.addNpc = function() {
-  const FUNC_NAME = 'pcrdb.UnitInfoTable.addNpc';
+pcrdb.UnitInfoTable.prototype.addNPC = function() {
+  const FUNC_NAME = 'pcrdb.UnitInfoTable.addNPC';
 
-  const addUnitInfo = (unitID, unitName, imageName) => {
+  const addUnitInfo = (unitID, unitName, imageName, isActive = true) => {
     if (this.items.indexByUnitID[unitID] !== undefined) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0));
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), unitID);
     }
     const unitInfo = {
       unitPos: this.items.data.length,
       unitID: unitID,
       unitName: unitName,
       imageURL: './img/clanbattle/' + imageName,
-      isPc: false
+      isPC: false,
+      isNPC: isActive
     };
     this.items.data.push(unitInfo);
     this.items.indexByUnitID[unitID] = unitInfo;
@@ -318,7 +320,7 @@ pcrdb.UnitInfoTable.prototype.addNpc = function() {
   }
 
   for (const unitInfo of pcrunit.NPC_UNIT_INFO_LIST) {
-    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2]);
+    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3]);
   }
 };
 

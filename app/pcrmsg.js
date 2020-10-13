@@ -50,11 +50,11 @@ pcrmsg.MSG = {
       ]
     },
     UnitInfoTable: {
-      addPc: [
-        '既に追加済みのユニットです'
+      addPC: [
+        '既に追加済みのユニットです(${1})'
       ],
-      addNpc: [
-        '既に追加済みのユニットです'
+      addNPC: [
+        '既に追加済みのユニットです(${1})'
       ],
       convertUnitIDToUnitName: [
         'ユニットIDからユニット名に変換出来ません(${1})'
