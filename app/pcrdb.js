@@ -245,16 +245,18 @@ pcrdb.UnitInfoTable = function() {
     // ユニット名による索引
     indexByUnitName: {}
   };
-  this.addPC();
-  this.addNPC();
+  this.addPCList();
+  this.addNPCList();
   Object.seal(this);
   Object.seal(this.items);
 };
 pcrdb.UnitInfoTable.prototype = {
-  // ユニット情報テーブルにプレイヤーユニットを追加
-  addPC: undefined,
-  // ユニット情報テーブルにNPCを追加
-  addNPC: undefined,
+  // ユニット情報テーブルにユニットを追加
+  addUnit: undefined,
+  // ユニット情報テーブルにプレイヤーユニット一覧を追加
+  addPCList: undefined,
+  // ユニット情報テーブルにNPC一覧を追加
+  addNPCList: undefined,
   // ユニット情報テーブルから全データを取得
   getAllData: undefined,
   // ユニット情報テーブルからユニットIDで検索し、ユニット情報を取得
@@ -272,55 +274,63 @@ pcrdb.UnitInfoTable.prototype = {
 };
 Object.seal(pcrdb.UnitInfoTable.prototype);
 
-// ユニット情報テーブルにプレイヤーユニットを追加
-pcrdb.UnitInfoTable.prototype.addPC = function() {
-  const FUNC_NAME = 'pcrdb.UnitInfoTable.addPC';
+// ユニット情報テーブルにユニットを追加
+pcrdb.UnitInfoTable.prototype.addUnit = function(
+  unitID, unitName, imageURL, isPC, isNPC
+) {
+  const FUNC_NAME = 'pcrdb.UnitInfoTable.addUnit';
 
-  const addUnitInfo = (unitID, unitName, imageName, isActive = true) => {
-    if (this.items.indexByUnitID[unitID] !== undefined) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), unitID);
-    }
-    const unitInfo = {
-      unitPos: this.items.data.length,
-      unitID: unitID,
-      unitName: unitName,
-      imageURL: './img/arena/' + imageName,
-      isPC: isActive,
-      isNPC: false
-    };
-    this.items.data.push(unitInfo);
-    this.items.indexByUnitID[unitID] = unitInfo;
-    this.items.indexByUnitName[unitName] = unitInfo;
+  if (this.items.indexByUnitID[unitID] !== undefined) {
+    throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), unitID);
   }
+  const unitInfo = {
+    unitPos: this.items.data.length,
+    unitID: unitID,
+    unitName: unitName,
+    imageURL: imageURL,
+    isPC: isPC,
+    isNPC: isNPC
+  };
+  this.items.data.push(unitInfo);
+  this.items.indexByUnitID[unitID] = unitInfo;
+  this.items.indexByUnitName[unitName] = unitInfo;
+};
+
+// ユニット情報テーブルにプレイヤーユニット一覧を追加
+pcrdb.UnitInfoTable.prototype.addPCList = function() {
+  const FUNC_NAME = 'pcrdb.UnitInfoTable.addPCList';
 
   for (const unitInfo of pcrunit.PC_UNIT_INFO_LIST) {
-    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3]);
+    if (
+      !pcrutil.isString(unitInfo[0]) ||
+      !pcrutil.isString(unitInfo[1]) ||
+      !pcrutil.isString(unitInfo[2]) ||
+      !pcrutil.isBoolean(unitInfo[3])
+    ) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
+    }
+
+    const imageURL = './img/arena/' + unitInfo[2];
+    this.addUnit(unitInfo[0], unitInfo[1], imageURL, unitInfo[3], false);
   }
 };
 
-// ユニット情報テーブルにNPCを追加
-pcrdb.UnitInfoTable.prototype.addNPC = function() {
-  const FUNC_NAME = 'pcrdb.UnitInfoTable.addNPC';
-
-  const addUnitInfo = (unitID, unitName, imageName, isActive = true) => {
-    if (this.items.indexByUnitID[unitID] !== undefined) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), unitID);
-    }
-    const unitInfo = {
-      unitPos: this.items.data.length,
-      unitID: unitID,
-      unitName: unitName,
-      imageURL: './img/clanbattle/' + imageName,
-      isPC: false,
-      isNPC: isActive
-    };
-    this.items.data.push(unitInfo);
-    this.items.indexByUnitID[unitID] = unitInfo;
-    this.items.indexByUnitName[unitName] = unitInfo;
-  }
+// ユニット情報テーブルにNPC一覧を追加
+pcrdb.UnitInfoTable.prototype.addNPCList = function() {
+  const FUNC_NAME = 'pcrdb.UnitInfoTable.addNPCList';
 
   for (const unitInfo of pcrunit.NPC_UNIT_INFO_LIST) {
-    addUnitInfo(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3]);
+    if (
+      !pcrutil.isString(unitInfo[0]) ||
+      !pcrutil.isString(unitInfo[1]) ||
+      !pcrutil.isString(unitInfo[2]) ||
+      !pcrutil.isBoolean(unitInfo[3])
+    ) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
+    }
+
+    const imageURL = './img/clanbattle/' + unitInfo[2];
+    this.addUnit(unitInfo[0], unitInfo[1], imageURL, false, unitInfo[3]);
   }
 };
 
