@@ -316,6 +316,9 @@ pcrutil.assignPartially = function(lhs, rhs, keyList) {
 
 // ファイルシステムオブジェクトの存在チェック
 pcrutil.fileSystemObjectExists = function(fsoPath, checkFunc) {
+  if (!pcrutil.isString(fsoPath)) {
+    return false;
+  }
   try {
     const stats = fs.statSync(fsoPath);
     return stats[checkFunc]();

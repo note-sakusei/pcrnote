@@ -3,6 +3,7 @@
 'use strict';
 
 const http = require('http');
+const https = require('https');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
@@ -87,12 +88,18 @@ pcrsvr.Setting.prototype = {
   check: undefined,
   // サーバーモード時の接続ポート番号
   get tcpPortNum() { return this.items.tcpPortNum.value; },
+  // SSLを使用するか
+  get useSSL() { return this.items.useSSL !== undefined ? this.items.useSSL.value : undefined; },
+  // 秘密鍵のパス
+  get sslKeyPath() { return this.items.sslKeyPath !== undefined ? this.items.sslKeyPath.value : undefined; },
+  // 証明書のパス
+  get sslCertPath() { return this.items.sslCertPath !== undefined ? this.items.sslCertPath.value : undefined; },
   // ドキュメントルート(公開)ディレクトリ
   get wwwDir() { return this.items.wwwDir.value; },
   // データディレクトリ
   get dataDir() { return this.items.dataDir.value; },
   // データのバックアップディレクトリ
-  get backupDir() { return this.items.backupDir.value; },
+  get backupDir() { return this.items.backupDir !== undefined ? this.items.backupDir.value : undefined; },
   // 更新毎にデータのバックアップを行うか
   get autoBackupData() { return this.items.autoBackupData.value; },
   // 受信データ最大サイズ
@@ -128,13 +135,16 @@ pcrsvr.Setting.prototype.check = function() {
   const FUNC_NAME = 'pcrsvr.Setting.check';
 
   const checkItemList = [
-    {keyStr: 'tcpPortNum', valueType: pcrdef.DataType.INTEGER},
-    {keyStr: 'wwwDir', valueType: pcrdef.DataType.STRING},
-    {keyStr: 'dataDir', valueType: pcrdef.DataType.STRING},
-    {keyStr: 'backupDir', valueType: pcrdef.DataType.STRING},
-    {keyStr: 'autoBackupData', valueType: pcrdef.DataType.BOOLEAN},
-    {keyStr: 'receivedDataSizeMax', valueType: pcrdef.DataType.INTEGER},
-    {keyStr: 'availableAuthorityList', valueType: pcrdef.DataType.ARRAY}
+    {keyStr: 'tcpPortNum', valueType: pcrdef.DataType.INTEGER, required: true},
+    {keyStr: 'useSSL', valueType: pcrdef.DataType.BOOLEAN, required: false},
+    {keyStr: 'sslKeyPath', valueType: pcrdef.DataType.STRING, required: false},
+    {keyStr: 'sslCertPath', valueType: pcrdef.DataType.STRING, required: false},
+    {keyStr: 'wwwDir', valueType: pcrdef.DataType.STRING, required: true},
+    {keyStr: 'dataDir', valueType: pcrdef.DataType.STRING, required: true},
+    {keyStr: 'backupDir', valueType: pcrdef.DataType.STRING, required: false},
+    {keyStr: 'autoBackupData', valueType: pcrdef.DataType.BOOLEAN, required: true},
+    {keyStr: 'receivedDataSizeMax', valueType: pcrdef.DataType.INTEGER, required: true},
+    {keyStr: 'availableAuthorityList', valueType: pcrdef.DataType.ARRAY, required: true}
   ];
 
   for (const checkItem of checkItemList) {
@@ -152,7 +162,13 @@ pcrsvr.Setting.prototype.check = function() {
         this.items[checkItem.keyStr] === undefined ||
         this.items[checkItem.keyStr][subKeyStr] === undefined
       ) {
-        throw pcrutil.makeError('');
+        // 必須項目であれば、未定義はエラー
+        if (checkItem.required) {
+          throw pcrutil.makeError('');
+        // 必須項目でなければ、未定義はチェックなし
+        } else {
+          continue;
+        }
       }
       switch (checkItem.valueType) {
       case pcrdef.DataType.ARRAY:
@@ -695,6 +711,28 @@ pcrsvr.gRequestHeader = undefined;
 pcrsvr.gSetting = new pcrsvr.Setting();
 
 // サーバー起動
-const server = http.createServer();
-server.on('request', (req, res) => pcrsvr.requestMain(req, res));
-server.listen(pcrsvr.gSetting.tcpPortNum);
+// SSL非使用
+if (!pcrsvr.gSetting.useSSL) {
+  const server = http.createServer();
+  server.on('request', (req, res) => pcrsvr.requestMain(req, res));
+  server.listen(pcrsvr.gSetting.tcpPortNum);
+// SSL使用
+} else {
+  const sslKeyPath = pcrsvr.gSetting.sslKeyPath !== undefined ?
+    pcrsvr.gSetting.sslKeyPath : 'undefined';
+  const sslCertPath = pcrsvr.gSetting.sslCertPath !== undefined ?
+    pcrsvr.gSetting.sslCertPath : 'undefined';
+  if (!pcrutil.fileExists(sslKeyPath)) {
+    throw pcrutil.makeError(pcrmsg.getN('pcrsvr.global', 0), sslKeyPath);
+  }
+  if (!pcrutil.fileExists(sslCertPath)) {
+    throw pcrutil.makeError(pcrmsg.getN('pcrsvr.global', 1), sslCertPath);
+  }
+  const options = {
+    key: fs.readFileSync(sslKeyPath),
+    cert: fs.readFileSync(sslCertPath)
+  };
+  const server = https.createServer(options);
+  server.on('request', (req, res) => pcrsvr.requestMain(req, res));
+  server.listen(pcrsvr.gSetting.tcpPortNum);
+}
