@@ -63,6 +63,34 @@ pcrutil.asDate = function(val, fmt) {
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+// オブジェクトのプロパティの値を取得
+// 配列から指定位置の値を取得
+// ネストされているプロパティも取得可
+// 取得出来ない場合、undefinedもしくは代替値を返却
+pcrutil.getProperty = function(obj, key, altVal) {
+  if (!pcrutil.isArray(obj) && !pcrutil.isObject(obj)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'obj');
+  }
+
+  let keyList = undefined;
+  if (pcrutil.isString(key)) {
+    keyList = key.split('.');
+  } else if (pcrutil.isInteger(key)) {
+    keyList = [key];
+  } else if (pcrutil.isArray(key)) {
+    keyList = key.slice();
+  } else {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'key');
+  }
+
+  let propVal = obj;
+  while (keyList.length !== 0) {
+    propVal = propVal[keyList.shift()];
+    if (propVal === undefined) break;
+  }
+  return propVal !== undefined ? propVal : altVal;
+};
+
 // 文字列の置換部分を引数に置き換えてメッセージを構築
 pcrutil.buildMessage = function(baseMsg, ...rest) {
   if (!pcrutil.isString(baseMsg)) {
@@ -70,7 +98,7 @@ pcrutil.buildMessage = function(baseMsg, ...rest) {
   }
   const msg = baseMsg.replace(/\${([0-9]+?)}/g, (whole, numPart) => {
     const index = Number(numPart) - 1;
-    return (rest[index] !== undefined) ? rest[index] : whole;
+    return rest[index] !== undefined ? rest[index] : whole;
   });
   return msg;
 };

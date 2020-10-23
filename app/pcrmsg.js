@@ -188,12 +188,26 @@ pcrmsg.MSG = {
 
   pcrsvr: {
     Setting: {
+      constructor: [
+        '[pcrsvr.settings]\n' +
+        'tcpPortNum: ${1}\n' +
+        'useSSL: ${2}\n' +
+        'sslKeyPath: ${3}\n' +
+        'sslCertPath: ${4}\n' +
+        'wwwDir: ${5}\n' +
+        'dataDir: ${6}\n' +
+        'backupDir: ${7}\n' +
+        'autoBackupData: ${8}\n' +
+        'receivedDataSizeMax: ${9}\n' +
+        'availableAuthorityList: ${10}'
+      ],
       load: [
         '設定ファイルが見つかりません(${1})',
         '設定ファイルの構造に異常があります(${1})'
       ],
       check: [
-        '設定ファイルの項目が未定義もしくは型が不正です(${1}.${2})'
+        '設定ファイルの必須項目が未定義です(${1})',
+        '設定ファイルの項目の型が不正です(${1})'
       ]
     },
     logging: [
@@ -233,7 +247,7 @@ pcrmsg.MSG = {
       '不正なURLです(${1})',
       'HTTPリクエストメソッド(GET|POST)が不明です'
     ],
-    global: [
+    launchServer: [
       'SSL通信用の秘密鍵が存在しません(${1})',
       'SSL通信用の証明書が存在しません(${1})'
     ]
@@ -250,7 +264,7 @@ pcrmsg.get = function(msgID) {
       throw new Error(`pcrmsg.MSG.${msgID} is undefined`);
     }
   }
-  return msg
+  return msg;
 };
 
 // メッセージIDと連番から該当のメッセージを取得

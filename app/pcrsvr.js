@@ -75,10 +75,29 @@ pcrsvr.USABLE_CHARS_AS_DB_NAME = /^[a-z0-9\_]*[a-z0-9]$/;
 
 // 設定ファイルクラス
 pcrsvr.Setting = function() {
+  const FUNC_NAME = 'pcrsvr.Setting.constructor';
+
   // 設定ファイルの読み込み
   this.items = pcrsvr.Setting.prototype.load();
   // 設定ファイルのチェック
   this.check();
+
+  // 読み込んだ設定ファイルの内容を出力
+  const settingText = pcrutil.buildMessage(
+    pcrmsg.getN(FUNC_NAME, 0),
+    this.tcpPortNum,
+    this.useSSL,
+    '' + this.sslKeyPath,
+    '' + this.sslCertPath,
+    this.wwwDir,
+    this.dataDir,
+    '' + this.backupDir,
+    this.autoBackupData,
+    this.receivedDataSizeMax,
+    JSON.stringify(this.availableAuthorityList)
+  );
+  console.log(settingText);
+
   Object.seal(this);
 };
 pcrsvr.Setting.prototype = {
@@ -86,22 +105,22 @@ pcrsvr.Setting.prototype = {
   load: undefined,
   // 設定ファイルのチェック
   check: undefined,
-  // サーバーモード時の接続ポート番号
+  // 接続ポート番号
   get tcpPortNum() { return this.items.tcpPortNum.value; },
   // SSLを使用するか
-  get useSSL() { return this.items.useSSL !== undefined ? this.items.useSSL.value : undefined; },
+  get useSSL() { return pcrutil.getProperty(this, 'items.useSSL.value', false); },
   // 秘密鍵のパス
-  get sslKeyPath() { return this.items.sslKeyPath !== undefined ? this.items.sslKeyPath.value : undefined; },
+  get sslKeyPath() { return pcrutil.getProperty(this, 'items.sslKeyPath.value'); },
   // 証明書のパス
-  get sslCertPath() { return this.items.sslCertPath !== undefined ? this.items.sslCertPath.value : undefined; },
+  get sslCertPath() { return pcrutil.getProperty(this, 'items.sslCertPath.value'); },
   // ドキュメントルート(公開)ディレクトリ
   get wwwDir() { return this.items.wwwDir.value; },
   // データディレクトリ
   get dataDir() { return this.items.dataDir.value; },
   // データのバックアップディレクトリ
-  get backupDir() { return this.items.backupDir !== undefined ? this.items.backupDir.value : undefined; },
+  get backupDir() { return pcrutil.getProperty(this, 'items.backupDir.value') },
   // 更新毎にデータのバックアップを行うか
-  get autoBackupData() { return this.items.autoBackupData.value; },
+  get autoBackupData() { return pcrutil.getProperty(this, 'items.autoBackupData.value', false); },
   // 受信データ最大サイズ
   get receivedDataSizeMax() { return this.items.receivedDataSizeMax.value; },
   // 利用可能権限一覧
@@ -142,52 +161,52 @@ pcrsvr.Setting.prototype.check = function() {
     {keyStr: 'wwwDir', valueType: pcrdef.DataType.STRING, required: true},
     {keyStr: 'dataDir', valueType: pcrdef.DataType.STRING, required: true},
     {keyStr: 'backupDir', valueType: pcrdef.DataType.STRING, required: false},
-    {keyStr: 'autoBackupData', valueType: pcrdef.DataType.BOOLEAN, required: true},
+    {keyStr: 'autoBackupData', valueType: pcrdef.DataType.BOOLEAN, required: false},
     {keyStr: 'receivedDataSizeMax', valueType: pcrdef.DataType.INTEGER, required: true},
     {keyStr: 'availableAuthorityList', valueType: pcrdef.DataType.ARRAY, required: true}
   ];
 
   for (const checkItem of checkItemList) {
-    let subKeyStr = undefined;
+    const propKeyList = [checkItem.keyStr];
     switch (checkItem.valueType) {
     case pcrdef.DataType.OBJECT:
     case pcrdef.DataType.ARRAY:
-      subKeyStr = 'values';
+      propKeyList.push('values');
       break;
     default:
-      subKeyStr = 'value';
+      propKeyList.push('value');
     }
-    try {
-      if (
-        this.items[checkItem.keyStr] === undefined ||
-        this.items[checkItem.keyStr][subKeyStr] === undefined
-      ) {
-        // 必須項目であれば、未定義はエラー
-        if (checkItem.required) {
-          throw pcrutil.makeError('');
-        // 必須項目でなければ、未定義はチェックなし
-        } else {
-          continue;
-        }
+
+    const propVal = pcrutil.getProperty(this.items, propKeyList);
+    if (propVal === undefined) {
+      // 必須項目であれば、未定義はエラー
+      if (checkItem.required) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), propKeyList.join('.'));
+      // 必須項目でなければ、未定義であればチェックなし
+      } else {
+        continue;
       }
+    }
+
+    try {
       switch (checkItem.valueType) {
       case pcrdef.DataType.ARRAY:
-        if (!pcrutil.isArray(this.items[checkItem.keyStr][subKeyStr])) {
+        if (!pcrutil.isArray(propVal)) {
           throw pcrutil.makeError('');
         }
         break;
       case pcrdef.DataType.STRING:
-        if (!pcrutil.isString(this.items[checkItem.keyStr].value)) {
+        if (!pcrutil.isString(propVal)) {
           throw pcrutil.makeError('');
         }
         break;
       case pcrdef.DataType.INTEGER:
-        if (!pcrutil.isInteger(this.items[checkItem.keyStr].value)) {
+        if (!pcrutil.isInteger(propVal)) {
           throw pcrutil.makeError('');
         }
         break;
       case pcrdef.DataType.BOOLEAN:
-        if (!pcrutil.isBoolean(this.items[checkItem.keyStr].value)) {
+        if (!pcrutil.isBoolean(propVal)) {
           throw pcrutil.makeError('');
         }
         break;
@@ -195,8 +214,7 @@ pcrsvr.Setting.prototype.check = function() {
         throw pcrutil.makeError('');
       }
     } catch (e) {
-      const baseErrMsg = pcrmsg.getN(FUNC_NAME, 0);
-      throw pcrutil.makeError(baseErrMsg, checkItem.keyStr, subKeyStr);
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), propKeyList.join('.'));
     }
   }
 }
@@ -699,6 +717,35 @@ pcrsvr.requestMain = function(req, res) {
   }
 };
 
+// サーバー起動
+pcrsvr.launchServer = function() {
+  const FUNC_NAME = 'pcrsvr.launchServer';
+
+  // SSL非使用
+  if (!pcrsvr.gSetting.useSSL) {
+    const server = http.createServer();
+    server.on('request', (req, res) => pcrsvr.requestMain(req, res));
+    server.listen(pcrsvr.gSetting.tcpPortNum);
+  // SSL使用
+  } else {
+    const sslKeyPath = pcrsvr.gSetting.sslKeyPath;
+    const sslCertPath = pcrsvr.gSetting.sslCertPath;
+    if (!pcrutil.fileExists(sslKeyPath)) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), '' + sslKeyPath);
+    }
+    if (!pcrutil.fileExists(sslCertPath)) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), '' + sslCertPath);
+    }
+    const options = {
+      key: fs.readFileSync(sslKeyPath),
+      cert: fs.readFileSync(sslCertPath)
+    };
+    const server = https.createServer(options);
+    server.on('request', (req, res) => pcrsvr.requestMain(req, res));
+    server.listen(pcrsvr.gSetting.tcpPortNum);
+  }
+};
+
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 // グローバル変数
@@ -711,28 +758,4 @@ pcrsvr.gRequestHeader = undefined;
 pcrsvr.gSetting = new pcrsvr.Setting();
 
 // サーバー起動
-// SSL非使用
-if (!pcrsvr.gSetting.useSSL) {
-  const server = http.createServer();
-  server.on('request', (req, res) => pcrsvr.requestMain(req, res));
-  server.listen(pcrsvr.gSetting.tcpPortNum);
-// SSL使用
-} else {
-  const sslKeyPath = pcrsvr.gSetting.sslKeyPath !== undefined ?
-    pcrsvr.gSetting.sslKeyPath : 'undefined';
-  const sslCertPath = pcrsvr.gSetting.sslCertPath !== undefined ?
-    pcrsvr.gSetting.sslCertPath : 'undefined';
-  if (!pcrutil.fileExists(sslKeyPath)) {
-    throw pcrutil.makeError(pcrmsg.getN('pcrsvr.global', 0), sslKeyPath);
-  }
-  if (!pcrutil.fileExists(sslCertPath)) {
-    throw pcrutil.makeError(pcrmsg.getN('pcrsvr.global', 1), sslCertPath);
-  }
-  const options = {
-    key: fs.readFileSync(sslKeyPath),
-    cert: fs.readFileSync(sslCertPath)
-  };
-  const server = https.createServer(options);
-  server.on('request', (req, res) => pcrsvr.requestMain(req, res));
-  server.listen(pcrsvr.gSetting.tcpPortNum);
-}
+pcrsvr.launchServer();
