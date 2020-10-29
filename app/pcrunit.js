@@ -161,6 +161,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['raiden', 'ライデン', 'ライデン.jpg', true],
   ['seadrake', 'シードレイク', 'シードレイク.jpg', true],
   ['wraithlord', 'レイスロード', 'レイスロード.jpg', true],
+  ['orkchief', 'オークチーフ', 'オークチーフ.jpg', true],
   // 4番目
   ['cyclops', 'サイクロプス', 'サイクロプス.jpg', true],
   ['madbear', 'マッドベア', 'マッドベア.jpg', true],
@@ -171,6 +172,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['trylocker', 'トライロッカー', 'トライロッカー.jpg', true],
   ['titanoturtle', 'ティタノタートル', 'ティタノタートル.jpg', true],
   ['darkgargoyle', 'ダークガーゴイル', 'ダークガーゴイル.jpg', true],
+  ['obsidianwyvern', 'オブシダンワイバーン', 'オブシダンワイバーン.jpg', true],
   // 5番目
   ['argeti', 'アルゲティ', 'アルゲティ.jpg', true],
   ['aquarios', 'アクアリオス', 'アクアリオス.jpg', true],
@@ -181,5 +183,6 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['karkinos', 'カルキノス', 'カルキノス.jpg', true],
   ['orleon', 'オルレオン', 'オルレオン.jpg', true],
   ['medusa', 'メデューサ', 'メデューサ.jpg', true],
-  ['glutton', 'グラットン', 'グラットン.jpg', true]
+  ['glutton', 'グラットン', 'グラットン.jpg', true],
+  ['scorpion', 'レサトパルト', 'レサトパルト.jpg', true]
 ];
