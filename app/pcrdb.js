@@ -310,8 +310,7 @@ pcrdb.UnitInfoTable.prototype.addPCList = function() {
       throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
     }
 
-    const imageURL = './img/arena/' + unitInfo[2];
-    this.addUnit(unitInfo[0], unitInfo[1], imageURL, unitInfo[3], false);
+    this.addUnit(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3], false);
   }
 };
 
@@ -329,8 +328,7 @@ pcrdb.UnitInfoTable.prototype.addNPCList = function() {
       throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
     }
 
-    const imageURL = './img/clanbattle/' + unitInfo[2];
-    this.addUnit(unitInfo[0], unitInfo[1], imageURL, false, unitInfo[3]);
+    this.addUnit(unitInfo[0], unitInfo[1], unitInfo[2], false, unitInfo[3]);
   }
 };
 
