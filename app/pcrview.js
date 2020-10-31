@@ -177,7 +177,8 @@ pcrview.makeCurrSlotNumHtml = function() {
 
 // 作成ユーザーHTML作成
 pcrview.makeTouchUserHtml = function(vsSet) {
-  return vsSet.createUser.replace(/\s/g, '');
+  // 改行されないよう、途中のスペースをアンダースコアに変換
+  return vsSet.createUser.replace(/\s/g, '_');
 };
 
 // 作成日時HTML作成

@@ -81,6 +81,7 @@ pcrsvr.Setting = function() {
   this.items = pcrsvr.Setting.prototype.load();
   // 設定ファイルのチェック
   this.check();
+  this.checkDetail();
 
   // 読み込んだ設定ファイルの内容を出力
   const settingText = pcrutil.buildMessage(
@@ -105,6 +106,8 @@ pcrsvr.Setting.prototype = {
   load: undefined,
   // 設定ファイルのチェック
   check: undefined,
+  // 設定ファイルの詳細チェック
+  checkDetail: undefined,
   // 接続ポート番号
   get tcpPortNum() { return this.items.tcpPortNum.value; },
   // SSLを使用するか
@@ -217,7 +220,32 @@ pcrsvr.Setting.prototype.check = function() {
       throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), propKeyList.join('.'));
     }
   }
-}
+};
+
+// 設定ファイルの詳細チェック
+pcrsvr.Setting.prototype.checkDetail = function() {
+  const FUNC_NAME = 'pcrsvr.Setting.checkDetail';
+
+  if (this.useSSL) {
+    if (!pcrutil.fileExists(this.sslKeyPath)) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), '' + this.sslKeyPath);
+    }
+    if (!pcrutil.fileExists(this.sslCertPath)) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), '' + this.sslCertPath);
+    }
+  }
+  if (!pcrutil.directoryExists(this.wwwDir)) {
+    throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 2), this.wwwDir);
+  }
+  if (!pcrutil.directoryExists(this.dataDir)) {
+    throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 3), this.dataDir);
+  }
+  if (this.autoBackupData) {
+    if (!pcrutil.directoryExists(this.backupDir)) {
+      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 4), '' + this.backupDir);
+    }
+  }
+};
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -388,16 +416,6 @@ pcrsvr.writeCGI = function(recvObjData) {
   const fileName = recvObjData.dbName + '.json';
   const filePath = pcrutil.makeFilePath(pcrsvr.gSetting.dataDir, fileName);
 
-  // ディレクトリの存在チェック
-  if (!pcrutil.directoryExists(pcrsvr.gSetting.dataDir)) {
-    throw pcrsvr.makeHttpError(404, pcrmsg.getN(FUNC_NAME, 0));
-  }
-  if (pcrsvr.gSetting.autoBackupData) {
-    if (!pcrutil.directoryExists(pcrsvr.gSetting.backupDir)) {
-      throw pcrsvr.makeHttpError(404, pcrmsg.getN(FUNC_NAME, 1));
-    }
-  }
-
   // 受信データからトランザクションを復元し、空の対戦情報テーブルを作成
   const vsSetTable = (() => {
     const unitInfoTable = new pcrdb.UnitInfoTable();
@@ -419,12 +437,12 @@ pcrsvr.writeCGI = function(recvObjData) {
 
   // クエリが成功した際のログ出力関数
   const queryLoggingOnSuccess = (query) => {
-    const baseMsg = pcrmsg.getN(FUNC_NAME, 2);
+    const baseMsg = pcrmsg.getN(FUNC_NAME, 0);
     pcrsvr.logging(pcrutil.buildMessage(baseMsg, JSON.stringify(query)));
   };
   // クエリが失敗した際のログ出力関数
   const queryLoggingOnFailure = (query) => {
-    const baseMsg = pcrmsg.getN(FUNC_NAME, 3);
+    const baseMsg = pcrmsg.getN(FUNC_NAME, 1);
     pcrsvr.logging(pcrutil.buildMessage(baseMsg, JSON.stringify(query)));
   };
   // コミット
@@ -451,7 +469,7 @@ pcrsvr.writeCGI = function(recvObjData) {
 
   // 書き出し
   fs.writeFileSync(filePath, fileData);
-  pcrsvr.logging(pcrmsg.getN(FUNC_NAME, 4));
+  pcrsvr.logging(pcrmsg.getN(FUNC_NAME, 2));
 
   // スクリプト処理成功時の戻り値
   // JSON文字列のバイトデータを返却する必要があるため、適当な値を作成し返却
@@ -719,8 +737,6 @@ pcrsvr.requestMain = function(req, res) {
 
 // サーバー起動
 pcrsvr.launchServer = function() {
-  const FUNC_NAME = 'pcrsvr.launchServer';
-
   // SSL非使用
   if (!pcrsvr.gSetting.useSSL) {
     const server = http.createServer();
@@ -728,17 +744,9 @@ pcrsvr.launchServer = function() {
     server.listen(pcrsvr.gSetting.tcpPortNum);
   // SSL使用
   } else {
-    const sslKeyPath = pcrsvr.gSetting.sslKeyPath;
-    const sslCertPath = pcrsvr.gSetting.sslCertPath;
-    if (!pcrutil.fileExists(sslKeyPath)) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), '' + sslKeyPath);
-    }
-    if (!pcrutil.fileExists(sslCertPath)) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), '' + sslCertPath);
-    }
     const options = {
-      key: fs.readFileSync(sslKeyPath),
-      cert: fs.readFileSync(sslCertPath)
+      key: fs.readFileSync(pcrsvr.gSetting.sslKeyPath),
+      cert: fs.readFileSync(pcrsvr.gSetting.sslCertPath)
     };
     const server = https.createServer(options);
     server.on('request', (req, res) => pcrsvr.requestMain(req, res));
