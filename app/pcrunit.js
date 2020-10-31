@@ -85,6 +85,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['ayumi_wonder', 'アユミ(ワンダー)', './img/arena/アユミ(ワンダー).jpg', true],
   ['ayumi', 'アユミ', './img/arena/アユミ.jpg', true],
   ['grea', 'グレア', './img/arena/グレア.jpg', true],
+  ['monika_magical', 'モニカ(マジカル)', './img/arena/モニカ(マジカル).jpg', true],
   ['akari_angel', 'アカリ(エンジェル)', './img/arena/アカリ(エンジェル).jpg', true],
   ['yori_angel', 'ヨリ(エンジェル)', './img/arena/ヨリ(エンジェル).jpg', true],
   ['kokkoro_summer', 'コッコロ(サマー)', './img/arena/コッコロ(サマー).jpg', true],
