@@ -3,6 +3,18 @@
     "description": "接続ポート番号",
     "value": 59630
   },
+  "useSSL": {
+    "description": "SSLを使用するか",
+    "value": false
+  },
+  "sslKeyPath": {
+    "description": "SSL通信用の秘密鍵のパス",
+    "value": "/home/pcruser/ssl/private.key"
+  },
+  "sslCertPath": {
+    "description": "SSL通信用の証明書のパス",
+    "value": "/home/pcruser/ssl/server.crt"
+  },
   "wwwDir": {
     "descriptions": [
       "ドキュメントルート(公開)ディレクトリ",

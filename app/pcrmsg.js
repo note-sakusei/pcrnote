@@ -19,6 +19,9 @@ pcrmsg.MSG = {
     deepCopy: [
       'ディープコピーの対象が配列、オブジェクト以外です'
     ],
+    csvDataToMatrixData: [
+      'CSVファイルに不正なダブルクオテーションが存在します(行${1} : ${2})'
+    ],
     fileDataToObjectData: [
       'JSONファイルの解析に失敗しました(${1})',
       'CSVファイルの解析に失敗しました(${1})'

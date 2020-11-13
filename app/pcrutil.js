@@ -389,6 +389,7 @@ pcrutil.stripBOM = function(fileData) {
 };
 
 // ファイルデータ(バイトデータ、UTF-8、UTF-8N)をオブジェクトデータに変換
+// 文字列データからも変換可
 pcrutil.fileDataToObjectData = function(fileData, fileType) {
   const FUNC_NAME = 'pcrutil.fileDataToObjectData';
 
@@ -473,6 +474,117 @@ pcrutil.fileDataToBlobData = function(fileData, fileType) {
   return blobData;
 };
 
+// CSVデータ(ファイルデータ or 文字列データ)を2次元配列に変換
+pcrutil.csvDataToMatrixData = function(csvFileData) {
+  const FUNC_NAME = 'pcrutil.csvDataToMatrixData';
+
+  // CSVデータ1行をセル配列に変換
+  const csvRecordToCellList = function(csvRec, index) {
+    const rawCellList = csvRec.split(',');
+
+    // セル毎に分割
+    const cellList = [];
+    {
+      let stack = [];
+      for (const rawCell of rawCellList) {
+        stack.push(rawCell);
+        const cell = stack.join(',');
+        if ((cell.match(/"/g) || []).length % 2 === 0) {
+          cellList.push(cell);
+          stack = [];
+        }
+      }
+      if (stack.length !== 0) {
+        cellList.push(stack.join(','));
+      }
+    }
+
+    // セル内に不正な「"」が混じっていないかチェック
+    for (let cell of cellList) {
+      const parsedCell = cell.match(/^"([\s\S]*)"$/);
+      if (parsedCell !== null) {
+        cell = parsedCell[1];
+        cell = cell.replace(/""/g, '@@');
+      }
+      if (cell.indexOf('"') !== -1) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), index + 1, csvRec);
+      }
+    }
+
+    // エスケープ用の「"」を除去
+    for (let [index, cell] of cellList.entries()) {
+      const parsedCell = cell.match(/^"([\s\S]*)"$/);
+      // 「"」で囲っている場合、除去
+      if (parsedCell !== null) {
+        cell = parsedCell[1];
+        // 内部に含まれる「""」を「"」に変換
+        cell = cell.replace(/""/g, '"');
+      }
+      cellList[index] = cell;
+    }
+
+    return cellList;
+  };
+
+  // ファイルデータの場合、文字列データに変換
+  let csvStrData = undefined;
+  if (pcrutil.isString(csvFileData)) {
+    csvStrData = csvFileData;
+  } else {
+    csvStrData = new TextDecoder('utf-8').decode(csvFileData);
+  }
+
+  const lineStrList = csvStrData.split('\n');
+
+  const csvRecList = [];
+  {
+    let stack = [];
+    for (const lineStr of lineStrList) {
+      stack.push(lineStr);
+      const csvRec = stack.join('\n');
+      if ((csvRec.match(/"/g) || []).length % 2 === 0) {
+        csvRecList.push(csvRec);
+        stack = [];
+      }
+    }
+    // 最後の「"」が閉じられていない場合、無理矢理追加(セル単位のチェック時に引っかかる)
+    if (stack.length !== 0) {
+      csvRecList.push(stack.join('\n'));
+    }
+  }
+
+  const matrixData = [];
+  for (const [index, csvRec] of csvRecList.entries()) {
+    const cellList = csvRecordToCellList(csvRec, index);
+    matrixData.push(cellList);
+  }
+
+  return matrixData;
+};
+
+// 2次元配列をCSVデータ(文字列データ)に変換
+pcrutil.matrixDataToCsvData = function(matrixData) {
+  const csvMatrix = [];
+  for (const rec of matrixData) {
+    const csvRec = rec.map((cell) => {
+      if (pcrutil.isString(cell)) {
+        // 「"」を「""」にエスケープ
+        cell = cell.replace(/"/g, '""');
+        // CSVの制御文字が含まれている場合、「""」で囲い
+        if (/[,"\r\n]/.test(cell)) {
+          cell = '"' + cell + '"';
+        }
+      }
+      return cell;
+    });
+    csvMatrix.push(csvRec);
+  }
+
+  const csvStrData = csvMatrix.map((csvRec) => csvRec.join(',')).join('\n');
+
+  return csvStrData;
+}
+
 // 平坦なオブジェクトデータの構造
 // const flatObjData = [
 //   {
@@ -496,31 +608,54 @@ pcrutil.fileDataToBlobData = function(fileData, fileType) {
 //   ....
 // ]
 
-// CSVデータ(ファイルデータ、バイトデータ)から平坦なオブジェクトデータに変換
+// CSVデータ(ファイルデータ or 文字列データ)から平坦なオブジェクトデータに変換
 // CSVデータから取得した各要素は全て文字列扱い(判別方法がないため)
 pcrutil.csvDataToFlatObjectData = function(csvFileData) {
   const FUNC_NAME = 'pcrutil.csvDataToFlatObjectData';
 
   // CSVデータを2次元配列に変換
   // ファイルデータ→文字列データ→2次元配列と2段階分処理
-  const csvMatrix = $.csv.toArrays(csvFileData);
-  if (csvMatrix.length < 2) {
+  const matrixData = pcrutil.csvDataToMatrixData(csvFileData);
+  if (matrixData.length < 2) {
     throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0));
   }
 
   // CSVデータの1行目はオブジェクトの鍵部
-  const objKeys = csvMatrix.shift();
+  const objKeys = matrixData.shift();
   // CSVデータの2行目以降はオブジェクトの値部
   const objData = [];
-  for (const csvRec of csvMatrix) {
-    const objRec = csvRec.reduce((accum, elem, index) => {
-      accum[objKeys[index]] = elem;
+  for (const rec of matrixData) {
+    const objRec = rec.reduce((accum, cell, index) => {
+      accum[objKeys[index]] = cell;
       return accum;
     }, {});
     objData.push(objRec);
   }
 
   return objData;
+};
+
+// 平坦なオブジェクトデータからCSVデータ(文字列データ)に変換
+pcrutil.flatObjectDataToCsvData = function(objData) {
+  if (objData.length < 1) return [];
+
+  const matrixData = [];
+
+  // オブジェクトの鍵部
+  const objKeys = Object.keys(objData[0]);
+  matrixData.push(objKeys);
+
+  // オブジェクトの値部
+  for (const objRec of objData) {
+    // 鍵部と同じ順番の配列で取得
+    const objVals = objKeys.map((key) => objRec[key]);
+    matrixData.push(objVals);
+  }
+
+  // 2次元配列をCSVデータ(文字列データ)に変換
+  const csvStrData = pcrutil.matrixDataToCsvData(matrixData);
+
+  return csvStrData;
 };
 
 // 平坦なオブジェクトデータから階層化されたオブジェクトデータに変換
@@ -614,53 +749,6 @@ pcrutil.objectDataToFlatObjectData = function(objData, sep) {
   }, []);
 
   return flatObjData;
-};
-
-// 平坦なオブジェクトデータからCSVデータ(文字列データ)に変換
-pcrutil.flatObjectDataToCsvData = function(objData) {
-  if (objData.length < 1) return [];
-
-  const csvMatrix = [];
-
-  // オブジェクトの鍵部
-  const objKeys = Object.keys(objData[0]);
-  {
-    const csvRec = objKeys.map((elem) => {
-      // 「"」を「""」にエスケープ
-      if (pcrutil.isString(elem)) {
-        elem = elem.replace(/"/g, '""');
-      }
-      // 特殊文字が含まれているため、「""」で囲い
-      if (/[,"\r\n]/.test(elem)) {
-        elem = '"' + elem + '"';
-      }
-      return elem;
-    });
-    csvMatrix.push(csvRec);
-  }
-
-  // オブジェクトの値部
-  for (const objRec of objData) {
-    // 鍵部と同じ順番の配列で取得
-    const objVals = objKeys.map((key) => objRec[key]);
-    const csvRec = objVals.map((elem) => {
-      // 「"」を「""」にエスケープ
-      if (pcrutil.isString(elem)) {
-        elem = elem.replace(/"/g, '""');
-      }
-      // 特殊文字が含まれているため、「""」で囲い
-      if (/[,"\r\n]/.test(elem)) {
-        elem = '"' + elem + '"';
-      }
-      return elem;
-    });
-    csvMatrix.push(csvRec);
-  }
-
-  // 2次元配列をCSVデータ(文字列データ)に変換
-  const csvData = csvMatrix.map((csvRec) => csvRec.join(',')).join('\n');
-
-  return csvData;
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
