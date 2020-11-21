@@ -68,6 +68,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['shizuru_valentine', 'シズル(バレンタイン)', './img/arena/シズル(バレンタイン).jpg', true],
   ['mahiru_ranger', 'マヒル(レンジャー)', './img/arena/マヒル(レンジャー).jpg', true],
   ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
+  ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
   ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
   ['monika', 'モニカ', './img/arena/モニカ.jpg', true],
   ['ninon', 'ニノン', './img/arena/ニノン.jpg', true],
