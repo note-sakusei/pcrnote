@@ -153,29 +153,30 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['goblingreat', 'ゴブリングレート', './img/clanbattle/ゴブリングレート.jpg', true],
   ['wyvern', 'ワイバーン', './img/clanbattle/ワイバーン.jpg', true],
   // 2番目
+  ['landsloth', 'ランドスロース', './img/clanbattle/ランドスロース.jpg', true],
   ['rairai', 'ライライ', './img/clanbattle/ライライ.jpg', true],
   ['wildgriffin', 'ワイルドグリフォン', './img/clanbattle/ワイルドグリフォン.jpg', true],
-  ['landsloth', 'ランドスロース', './img/clanbattle/ランドスロース.jpg', true],
   // 3番目
   ['jackalthief', 'ジャッカルシーフ', './img/clanbattle/ジャッカルシーフ.jpg', true],
   ['madamprism', 'マダムプリズム', './img/clanbattle/マダムプリズム.jpg', true],
   ['megaraphan', 'メガラパーン', './img/clanbattle/メガラパーン.jpg', true],
   ['mushufsh', 'ムシュフシュ', './img/clanbattle/ムシュフシュ.jpg', true],
+  ['orkchief', 'オークチーフ', './img/clanbattle/オークチーフ.jpg', true],
   ['raiden', 'ライデン', './img/clanbattle/ライデン.jpg', true],
   ['seadrake', 'シードレイク', './img/clanbattle/シードレイク.jpg', true],
+  ['skyvalkyrie', 'スカイワルキューレ', './img/clanbattle/スカイワルキューレ.jpg', true],
   ['wraithlord', 'レイスロード', './img/clanbattle/レイスロード.jpg', true],
-  ['orkchief', 'オークチーフ', './img/clanbattle/オークチーフ.jpg', true],
   // 4番目
   ['cyclops', 'サイクロプス', './img/clanbattle/サイクロプス.jpg', true],
+  ['darkgargoyle', 'ダークガーゴイル', './img/clanbattle/ダークガーゴイル.jpg', true],
   ['madbear', 'マッドベア', './img/clanbattle/マッドベア.jpg', true],
   ['mastersenri', 'マスターセンリ', './img/clanbattle/マスターセンリ.jpg', true],
   ['mova', 'ムーバ', './img/clanbattle/ムーバ.jpg', true],
   ['neputerion', 'ネプテリオン', './img/clanbattle/ネプテリオン.jpg', true],
-  ['spirithorn', 'スピリットホーン', './img/clanbattle/スピリットホーン.jpg', true],
-  ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
-  ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
-  ['darkgargoyle', 'ダークガーゴイル', './img/clanbattle/ダークガーゴイル.jpg', true],
   ['obsidianwyvern', 'オブシダンワイバーン', './img/clanbattle/オブシダンワイバーン.jpg', true],
+  ['spirithorn', 'スピリットホーン', './img/clanbattle/スピリットホーン.jpg', true],
+  ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
+  ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
   // 5番目
   ['argeti', 'アルゲティ', './img/clanbattle/アルゲティ.jpg', true],
   ['aquarios', 'アクアリオス', './img/clanbattle/アクアリオス.jpg', true],
@@ -187,5 +188,6 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['orleon', 'オルレオン', './img/clanbattle/オルレオン.jpg', true],
   ['medusa', 'メデューサ', './img/clanbattle/メデューサ.jpg', true],
   ['glutton', 'グラットン', './img/clanbattle/グラットン.jpg', true],
-  ['scorpion', 'レサトパルト', './img/clanbattle/レサトパルト.jpg', true]
+  ['scorpion', 'レサトパルト', './img/clanbattle/レサトパルト.jpg', true],
+  ['sagittarius', 'サジタリウス', './img/clanbattle/サジタリウス.jpg', true]
 ];
