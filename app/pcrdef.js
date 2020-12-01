@@ -18,14 +18,14 @@ pcrdef.HASHTAG_LENGTH = {MIN: 2, MAX: 16};
 // 評価の最小値、最大値
 pcrdef.RATING_VALUE = {MIN: 0, MAX: 99};
 // 日時の書式(データ用)
-pcrdef.DATE_FORMAT = 'yyyy-mm-dd hh:mi:ss';
+pcrdef.DATE_FORMAT = 'yyyy-MM-dd hh:mm:ss';
 // 日時の書式(表示用)
 pcrdef.DATE_FORMAT_FOR_DISPLAY = pcrdef.DATE_FORMAT;
 // 日時の書式(ロギング用)
 pcrdef.DATE_FORMAT_FOR_LOGGING = pcrdef.DATE_FORMAT;
 // 日時の書式(ファイル名用)
 // 区切り文字はハイフン、なし以外に変更不可
-pcrdef.DATE_FORMAT_FOR_FILE_NAME = 'yyyy-mm-dd-hh-mi-ss';
+pcrdef.DATE_FORMAT_FOR_FILE_NAME = 'yyyy-MM-dd-hh-mm-ss';
 // クッキーの定義
 pcrdef.COOKIE_OPTIONS = {
   expires: 10, // max-ageによる設定は無視される

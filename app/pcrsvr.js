@@ -479,7 +479,7 @@ pcrsvr.writeCGI = function(recvObjData) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 // クライアントに成功結果を返す
-pcrsvr.responseOk = function(res, mimeType, resultData) {
+pcrsvr.responseOK = function(res, mimeType, resultData) {
   // レスポンスデータのエンコード種別
   // HTML、スクリプト、JSON等のテキストデータは圧縮
   // 画像データは無圧縮
@@ -520,7 +520,7 @@ pcrsvr.responseOk = function(res, mimeType, resultData) {
   // データ圧縮後のデータの返信(無圧縮時も兼用)
   const doResponse = (err, result) => {
     if (err) {
-      pcrsvr.responseOnError(res, err);
+      pcrsvr.responseError(res, err);
       return;
     }
     const responseHeader = {
@@ -547,8 +547,8 @@ pcrsvr.responseOk = function(res, mimeType, resultData) {
 };
 
 // クライアントにエラー結果を返す
-pcrsvr.responseOnError = function(res, err) {
-  const FUNC_NAME = 'pcrsvr.responseOnError';
+pcrsvr.responseError = function(res, err) {
+  const FUNC_NAME = 'pcrsvr.responseError';
 
   if (err === undefined || err === null) {
     err = pcrutil.makeError(pcrmsg.get('fatalError'));
@@ -599,9 +599,9 @@ pcrsvr.responseScript = function(res, urlPathName, recvObjData) {
     const resultData = pcrsvr[cgiFuncName](recvObjData);
 
     const mimeType = pcrsvr.MIME_TYPE_MAP['.json'];
-    pcrsvr.responseOk(res, mimeType, resultData);
+    pcrsvr.responseOK(res, mimeType, resultData);
   } catch (e) {
-    pcrsvr.responseOnError(res, e);
+    pcrsvr.responseError(res, e);
   }
 };
 
@@ -625,7 +625,7 @@ pcrsvr.responseResource = function(res, urlPathName) {
       throw pcrsvr.makeHttpError(404, urlPathName)
     }
   } catch (e) {
-    pcrsvr.responseOnError(res, e);
+    pcrsvr.responseError(res, e);
     return;
   }
 
@@ -633,9 +633,9 @@ pcrsvr.responseResource = function(res, urlPathName) {
   fs.readFile(filePath, (err, resultData) => {
     try {
       if (err) throw err;
-      pcrsvr.responseOk(res, mimeType, resultData);
+      pcrsvr.responseOK(res, mimeType, resultData);
     } catch (e) {
-      pcrsvr.responseOnError(res, e);
+      pcrsvr.responseError(res, e);
     }
   });
 };
@@ -672,7 +672,7 @@ pcrsvr.requestPost = function(req, res, parsedURL) {
       pcrsvr.logging(pcrmsg.getN(FUNC_NAME, 0));
       recvData = '';
       const err = pcrsvr.makeHttpError(413, pcrmsg.getN(FUNC_NAME, 1));
-      pcrsvr.responseOnError(res, err);
+      pcrsvr.responseError(res, err);
       req.destroy();
     }
   });
@@ -687,7 +687,7 @@ pcrsvr.requestPost = function(req, res, parsedURL) {
       recvObjData = JSON.parse(recvData);
     } catch (e) {
       const err = pcrsvr.makeHttpError(400, pcrmsg.getN(FUNC_NAME, 2), e.message);
-      pcrsvr.responseOnError(res, err);
+      pcrsvr.responseError(res, err);
       return;
     }
 
@@ -706,7 +706,7 @@ pcrsvr.requestMain = function(req, res) {
     pcrsvr.gRequestHeader = new pcrsvr.RequestHeader(req);
   } catch (e) {
     const err = pcrsvr.makeHttpError(400, pcrmsg.getN(FUNC_NAME, 0), e.message);
-    pcrsvr.responseOnError(res, err);
+    pcrsvr.responseError(res, err);
     return;
   }
 
@@ -716,7 +716,7 @@ pcrsvr.requestMain = function(req, res) {
     parsedURL = url.parse(req.url, true);
   } catch (e) {
     const err = pcrsvr.makeHttpError(400, pcrmsg.getN(FUNC_NAME, 1), e.message);
-    pcrsvr.responseOnError(res, err);
+    pcrsvr.responseError(res, err);
     return;
   }
 
@@ -729,7 +729,7 @@ pcrsvr.requestMain = function(req, res) {
     break;
   default:
     const err = pcrsvr.makeHttpError(400, pcrmsg.getN(FUNC_NAME, 2));
-    pcrsvr.responseOnError(res, err);
+    pcrsvr.responseError(res, err);
   }
 };
 

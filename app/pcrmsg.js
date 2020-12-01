@@ -238,7 +238,7 @@ pcrmsg.MSG = {
       'クエリ ${1} ERROR',
       '書き出し OK'
     ],
-    responseOnError: [
+    responseError: [
       'httpResponse: ${1}'
     ],
     responseScript: [

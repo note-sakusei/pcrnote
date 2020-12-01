@@ -737,14 +737,14 @@ pcrdb.VsSetTable.prototype.toInternalData = function(externalData, fileType) {
   for (const vsSet of internalData) {
     if (vsSet.createDate !== '') {
       const createDate = formatter.parse(vsSet.createDate);
-      if (createDate === undefined) {
+      if (!pcrutil.isDate(createDate)) {
         throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), vsSet.createDate);
       }
       vsSet.createDate = formatter.format(createDate);
     }
     if (vsSet.updateDate !== '') {
       const updateDate = formatter.parse(vsSet.updateDate);
-      if (updateDate === undefined) {
+      if (!pcrutil.isDate(updateDate)) {
         throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), vsSet.updateDate);
       }
       vsSet.updateDate = formatter.format(updateDate);
@@ -1209,7 +1209,7 @@ pcrdb.VsSetTable.Result = function() {
     // 検索結果一覧(検索上限で切り捨て後)
     limitedList: [],
     // 検索結果一覧の最終変更日時
-    lastModified: new pcrutil.DateFormat('yyyymmddhhmissxxx').format(new Date())
+    lastModified: new pcrutil.DateFormat('yyyyMMddhhmmssSSS').format(new Date())
   };
   Object.seal(this);
   Object.seal(this.items);
