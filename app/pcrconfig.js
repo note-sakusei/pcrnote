@@ -30,6 +30,8 @@ pcrconfig.ConfigData = function(opt_rhs) {
       numOfSearchPartySlots: 6,
       // 検索結果上限数
       searchResultLimit: 50,
+      // 現在時刻を表示
+      displayCurrentTime: false,
       // サーバーモード
       clientServerMode: false,
       // クッキーに保存
@@ -54,6 +56,7 @@ pcrconfig.ConfigData.prototype = {
   get searchStartUnitsMin() { return this.items.searchStartUnitsMin; },
   get numOfSearchPartySlots() { return this.items.numOfSearchPartySlots; },
   get searchResultLimit() { return this.items.searchResultLimit; },
+  get displayCurrentTime() { return this.items.displayCurrentTime; },
   get clientServerMode() { return this.items.clientServerMode; },
   get saveCookie() { return this.items.saveCookie; }
 };
@@ -82,6 +85,7 @@ pcrconfig.configViewToConfigData = function(configData) {
     searchStartUnitsMin: $('#searchStartUnitsMin').find(':selected').val(),
     numOfSearchPartySlots: $('#numOfSearchPartySlots').find(':selected').val(),
     searchResultLimit: $('#searchResultLimit').find(':selected').val(),
+    displayCurrentTime: $('#displayCurrentTime').prop('checked'),
     clientServerMode: $('#clientServerMode').prop('checked'),
     saveCookie: $('#saveCookie').prop('checked')
   };
@@ -97,6 +101,7 @@ pcrconfig.configDataToConfigView = function(configData) {
   $('#searchStartUnitsMin').val(configData.searchStartUnitsMin);
   $('#numOfSearchPartySlots').val(configData.numOfSearchPartySlots);
   $('#searchResultLimit').val(configData.searchResultLimit);
+  $('#displayCurrentTime').prop('checked', configData.displayCurrentTime);
   $('#clientServerMode').prop('checked', configData.clientServerMode);
   $('#saveCookie').prop('checked', configData.saveCookie);
 };
@@ -180,6 +185,7 @@ pcrconfig.refreshConfigView = function() {
 pcrconfig.goToContent = {};
 pcrconfig.hideUserName = {};
 pcrconfig.hideDBName = {};
+pcrconfig.displayCurrentTime = {};
 
 // コンテンツページへ遷移
 pcrconfig.goToContent.onClick = function() {
@@ -218,10 +224,16 @@ pcrconfig.hideDBName.onClick = function() {
   pcrconfig.switchDisplayOfDBNameInputField();
 };
 
+// 現在時刻を表示するか切り替え
+pcrconfig.displayCurrentTime.onClick = function() {
+  pcrview.showResident();
+};
+
 // イベントリスナー登録
 pcrconfig.addEventListener = function() {
   $('#goToContent').on('click', pcrconfig.goToContent.onClick);
   $(window).on('keydown', pcrconfig.goToContent.onKeydown);
   $('#hideUserName').on('click', pcrconfig.hideUserName.onClick);
   $('#hideDBName').on('click', pcrconfig.hideDBName.onClick);
+  $('#displayCurrentTime').on('click', pcrconfig.displayCurrentTime.onClick);
 };

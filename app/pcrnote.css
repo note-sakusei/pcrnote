@@ -113,9 +113,11 @@
   /* ユニットの枠角の丸みの半径 */
   --party-unit-border-radius: 6px;
 
-  /* コンテンツの土台部のレイヤー色 */
+  /* 常駐領域の土台のレイヤー色 */
+  --resident-layer-color: rgba(255, 255, 255, 0.15);
+  /* コンテンツの土台のレイヤー色 */
   --base-layer-color: rgba(255, 255, 255, 0.75);
-  /* ポップアップの土台部のレイヤー色 */
+  /* ポップアップの土台のレイヤー色 */
   --popup-base-layer-color: rgba(0, 0, 0, 0.4);
   /* ポップアップの背景色 */
   --popup-window-layer-color: #f0f0f0;
@@ -331,6 +333,10 @@ a {
 
 /* ページ */
 @media only screen and (min-width: 740px) {
+.page-resident {
+  margin: 0px auto; /* 上下、左右 */
+  width: calc(var(--unit-catalog-outer-width) + 10px * 2);
+}
 .page-config,
 .page-content {
   background-blend-mode: lighten;
@@ -343,6 +349,9 @@ a {
 }
 }
 @media only screen and (max-width: 739px) {
+.page-resident {
+  margin: 0px 0px; /* 上下、左右 */
+}
 .page-config,
 .page-content {
   background-blend-mode: lighten;
@@ -354,6 +363,10 @@ a {
 }
 
 /* コンテンツの各区画(配置調整) */
+.section-resident {
+  display: none;
+  margin: 0px 0px 8px 0px; /* 上、右、下、左 */
+}
 .section-config {
   display: block;
   margin: 0px 0px 0px 10px; /* 上、右、下、左 */
@@ -375,9 +388,7 @@ a {
   margin: 5px 0px 0px 0px; /* 上、右、下、左 */
 }
 .section-result-control {
-  align-items: center;
-  display: inline-flex;
-  justify-content: space-between;
+  display: inline-block;
   margin: 10px 0px 0px 10px; /* 上、右、下、左 */
 }
 .section-result-message {
@@ -390,6 +401,20 @@ a {
 }
 .section-common-template {
   display: none;
+}
+
+/* 常駐領域 */
+.resident {
+  background-blend-mode: lighten;
+  background-color: var(--resident-layer-color);
+  display: inline-flex;
+}
+.current-time {
+  color: var(--general-font-color);
+  display: flex;
+  font-size: var(--general-font-size);
+  padding: 2px 10px; /* 上下、左右 */
+  user-select: none;
 }
 
 /* ユーザー設定 */
@@ -473,6 +498,9 @@ a {
 }
 .config-item-7-1 {
   grid-area: 7/1/8/6;
+}
+.config-item-8-1 {
+  grid-area: 8/1/9/6;
 }
 .config-button {
   align-items: center;

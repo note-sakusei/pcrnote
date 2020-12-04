@@ -14,6 +14,7 @@ pcrview.init = function() {
   pcrview.setViewStyleLabel();
   pcrview.buildHashtagSelectBox();
   pcrview.buildUnitCatalogHtml();
+  pcrview.showResident();
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -506,6 +507,38 @@ pcrview.colorResultMessage = function() {
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+// 常駐領域の表示を切り替え
+pcrview.refreshCurrentTimeID_ = undefined;
+pcrview.showResident = function() {
+  if (!pcrnote.gViewController.isPageConfig()) {
+    throw pcrutil.makeError(pcrmsg.get('fatalError'));
+  }
+
+  // 現在時刻を更新
+  const refreshCurrentTime = () => {
+    const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT);
+    const nowStr = formatter.format(new Date());
+    $('#currentTime').html(nowStr.slice(0, -2));
+  };
+
+  // 現在時刻の表示を切り替え
+  const displayCurrentTime = $('#displayCurrentTime').prop('checked');
+  if (displayCurrentTime) {
+    if (pcrview.refreshCurrentTimeID_ !== undefined) {
+      throw pcrutil.makeError(pcrmsg.get('fatalError'));
+    }
+    $('#sectionResident').show();
+    // 現在時刻の繰り返し更新開始
+    pcrview.refreshCurrentTimeID_ =
+      setInterval(refreshCurrentTime, pcrdef.REFRESH_CURRENT_TIME_FREQUENCY);
+  } else {
+    $('#sectionResident').hide();
+    // 現在時刻の繰り返し更新停止
+    clearInterval(pcrview.refreshCurrentTimeID_);
+    pcrview.refreshCurrentTimeID_ = undefined;
+  }
+};
 
 // ページの表示を切り替え
 pcrview.showPage = function() {

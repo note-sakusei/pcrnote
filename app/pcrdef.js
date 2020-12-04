@@ -17,15 +17,22 @@ pcrdef.DB_NAME_LENGTH = {MIN: 2, MAX: 32};
 pcrdef.HASHTAG_LENGTH = {MIN: 2, MAX: 16};
 // 評価の最小値、最大値
 pcrdef.RATING_VALUE = {MIN: 0, MAX: 99};
-// 日時の書式(データ用)
-pcrdef.DATE_FORMAT = 'yyyy-MM-dd hh:mm:ss';
-// 日時の書式(表示用)
-pcrdef.DATE_FORMAT_FOR_DISPLAY = pcrdef.DATE_FORMAT;
+// 日時の書式(内部データ、ファイルデータ用)
+pcrdef.DATE_FORMAT_FOR_DATA = 'yyyy-MM-dd hh:mm:ss';
+// 日時の書式(表示データ用)
+pcrdef.DATE_FORMAT_FOR_DISPLAY = pcrdef.DATE_FORMAT_FOR_DATA;
 // 日時の書式(ロギング用)
-pcrdef.DATE_FORMAT_FOR_LOGGING = pcrdef.DATE_FORMAT;
+pcrdef.DATE_FORMAT_FOR_LOGGING = pcrdef.DATE_FORMAT_FOR_DATA;
+// 日時の書式(日時比較用)
+pcrdef.DATE_FORMAT_FOR_DIFF = 'yyyyMMddhhmmssSSS';
+// 日時の書式(常駐領域の現在時刻用)
+// ミリ秒の下2桁を文字列カットで切り落としているため、ミリ秒は一番後ろになるように
+pcrdef.DATE_FORMAT_FOR_RESIDENT = 'EEE, dd MMM yyyy hh:mm:ss.SSS';
 // 日時の書式(ファイル名用)
 // 区切り文字はハイフン、なし以外に変更不可
 pcrdef.DATE_FORMAT_FOR_FILE_NAME = 'yyyy-MM-dd-hh-mm-ss';
+// 現在時刻の更新頻度(ミリ秒)
+pcrdef.REFRESH_CURRENT_TIME_FREQUENCY = 100;
 // クッキーの定義
 pcrdef.COOKIE_OPTIONS = {
   expires: 10, // max-ageによる設定は無視される

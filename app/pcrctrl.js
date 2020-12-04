@@ -252,7 +252,7 @@ pcrctrl.ContentViewRefreshObserver = function() {
     // エラーメッセージ
     errorMessage: '',
     // 検索結果一覧の最終変更日時
-    lastModifiedResult: '',
+    lastModified: '',
     // 新規対戦情報
     newVsSet: {},
     // ユニット検索情報

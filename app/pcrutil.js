@@ -49,7 +49,7 @@ pcrutil.isFunction = function(val) { return typeof val === 'function'; };
 // 日時かどうか判断
 pcrutil.isDate = function(val) {
   try {
-    new pcrutil.DateFormat(pcrdef.DATE_FORMAT).format(val);
+    new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_DATA).format(val);
   } catch (e) {
     return false;
   }
@@ -179,15 +179,18 @@ pcrutil.DateFormat.prototype.parse = function(dtStr) {
   }
 
   // 各日時部を整数値に変換(範囲チェックも行う)
-  const convertDigits = (dtSt, fmtPartDef) => {
-    const num = Number(dtSt[fmtPartDef.format]);
+  const convertDigits = (dtSt, dtConvDef) => {
+    const num = Number(dtSt[dtConvDef.format]);
     if (!pcrutil.isInteger(num)) {
       return false;
     }
-    if (num < fmtPartDef.min || fmtPartDef.max < num) {
+    if (dtConvDef.min !== undefined && num < dtConvDef.min) {
       return false;
     }
-    dtSt[fmtPartDef.format] = num;
+    if (dtConvDef.max !== undefined && dtConvDef.max < num) {
+      return false;
+    }
+    dtSt[dtConvDef.format] = num;
     return true;
   };
 
@@ -202,9 +205,9 @@ pcrutil.DateFormat.prototype.parse = function(dtStr) {
     return monthNum !== undefined;
   };
 
-  // 各日時解析用定義
-  const fmtPartDefList = [
-    {format: 'yyyy', pattern: /^\d{4}/, convert: convertDigits, min: 1970, max: 9999},
+  // 日時変換用定義
+  const dtConvDefList = [
+    {format: 'yyyy', pattern: /^\d{4}/, convert: convertDigits, min: 1970},
     {format: 'MMM', pattern: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i, convert: convertMonth},
     {format: 'MM', pattern: /^\d{1,2}/, convert: convertDigits, min: 1, max: 12},
     {format: 'dd', pattern: /^\d{1,2}/, convert: convertDigits, min: 1, max: 31},
@@ -212,7 +215,7 @@ pcrutil.DateFormat.prototype.parse = function(dtStr) {
     {format: 'hh', pattern: /^\d{1,2}/, convert: convertDigits, min: 0, max: 23},
     {format: 'mm', pattern: /^\d{1,2}/, convert: convertDigits, min: 0, max: 59},
     {format: 'ss', pattern: /^\d{1,2}/, convert: convertDigits, min: 0, max: 59},
-    {format: 'SSS', pattern: /^\d{1,3}/, convert: convertDigits, min: 0, max: 999},
+    {format: 'SSS', pattern: /^\d{1,3}/, convert: convertDigits},
     {format: 'z', pattern: /^((GMT)?[+-]\d{2}:\d{2}|GMT)/}
   ];
 
@@ -245,39 +248,38 @@ pcrutil.DateFormat.prototype.parse = function(dtStr) {
   const parsedDtSt = {};
   // 日時文字列または日時書式、どちらかの解析が完了したら正常終了
   while (restOfDtStr.length !== 0 && restOfFmt.length !== 0) {
-    // 次に解析する日時書式がどれか調べ、日時解析用定義を取得
-    const fmtPartDef = fmtPartDefList.find((elem) => {
-      const headFmt = restOfFmt.slice(0, elem.format.length);
-      return headFmt === elem.format
+    // 次に解析する部分の日時変換用定義を取得
+    const dtConvDef = dtConvDefList.find((elem) => {
+      return restOfFmt.startsWith(elem.format);
     });
 
     // 解析対象書式でない場合、1文字進める
     // 解析対象外書式の部分は不一致でも無視
-    if (fmtPartDef === undefined) {
+    if (dtConvDef === undefined) {
       restOfDtStr = restOfDtStr.slice(1);
       restOfFmt = restOfFmt.slice(1);
       continue;
     }
 
     // 日時文字列から日時書式に合致する部分を取得
-    const matchResult = restOfDtStr.match(fmtPartDef.pattern);
+    const matchResult = restOfDtStr.match(dtConvDef.pattern);
     if (matchResult === null) {
       return undefined;
     }
 
     // 解析結果を格納
-    parsedDtSt[fmtPartDef.format] = matchResult[0];
+    parsedDtSt[dtConvDef.format] = matchResult[0];
 
     // 変換が必要であれば、変換して再格納
-    if (fmtPartDef.convert !== undefined) {
-      if (!fmtPartDef.convert(parsedDtSt, fmtPartDef)) {
+    if (dtConvDef.convert !== undefined) {
+      if (!dtConvDef.convert(parsedDtSt, dtConvDef)) {
         return undefined;
       }
     }
 
     // 次の解析へ
     restOfDtStr = restOfDtStr.slice(matchResult[0].length);
-    restOfFmt = restOfFmt.slice(fmtPartDef.format.length);
+    restOfFmt = restOfFmt.slice(dtConvDef.format.length);
   }
 
   // 年月日が取得できなかった場合、エラー
@@ -335,49 +337,43 @@ pcrutil.DateFormat.prototype.formatImpl = function(dt, isLocale) {
     return dayList[dayNum];
   }
 
-  // 現地時刻
-  if (isLocale) {
-    const yyyy = String(dt.getFullYear()).padStart(4, '0');
-    const MMM = convertMonth(dt.getMonth());
-    const MM = String(dt.getMonth() + 1).padStart(2, '0');
-    const dd = String(dt.getDate()).padStart(2, '0');
-    const EEE = convertDOW(dt.getDay());
-    const hh = String(dt.getHours()).padStart(2, '0');
-    const mm = String(dt.getMinutes()).padStart(2, '0');
-    const ss = String(dt.getSeconds()).padStart(2, '0');
-    const SSS = String(dt.getMilliseconds()).padStart(3, '0');
-    return this.customFormat
-      .replace('yyyy', yyyy)
-      .replace('MMM', MMM)
-      .replace('MM', MM)
-      .replace('dd', dd)
-      .replace('EEE', EEE)
-      .replace('hh', hh)
-      .replace('mm', mm)
-      .replace('ss', ss)
-      .replace('SSS', SSS);
-  // 世界標準時
-  } else {
-    const yyyy = String(dt.getUTCFullYear()).padStart(4, '0');
-    const MMM = convertMonth(dt.getUTCMonth());
-    const MM = String(dt.getUTCMonth() + 1).padStart(2, '0');
-    const dd = String(dt.getUTCDate()).padStart(2, '0');
-    const EEE = convertDOW(dt.getUTCDay());
-    const hh = String(dt.getUTCHours()).padStart(2, '0');
-    const mm = String(dt.getUTCMinutes()).padStart(2, '0');
-    const ss = String(dt.getUTCSeconds()).padStart(2, '0');
-    const SSS = String(dt.getUTCMilliseconds()).padStart(3, '0');
-    return this.customFormat
-      .replace('yyyy', yyyy)
-      .replace('MMM', MMM)
-      .replace('MM', MM)
-      .replace('dd', dd)
-      .replace('EEE', EEE)
-      .replace('hh', hh)
-      .replace('mm', mm)
-      .replace('ss', ss)
-      .replace('SSS', SSS);
+  // 日時変換用定義
+  const UTC = isLocale ? '' : 'UTC';
+  const dtConvDefList = [
+    {format: 'yyyy', replace: String(dt[`get${UTC}FullYear`]()).padStart(4, '0')},
+    {format: 'yy', replace: String(dt[`get${UTC}FullYear`]()).padStart(4, '0').slice(2)},
+    {format: 'MMM', replace: convertMonth(dt[`get${UTC}Month`]())},
+    {format: 'MM', replace: String(dt[`get${UTC}Month`]() + 1).padStart(2, '0')},
+    {format: 'dd', replace: String(dt[`get${UTC}Date`]()).padStart(2, '0')},
+    {format: 'EEE', replace: convertDOW(dt[`get${UTC}Day`]())},
+    {format: 'hh', replace: String(dt[`get${UTC}Hours`]()).padStart(2, '0')},
+    {format: 'mm', replace: String(dt[`get${UTC}Minutes`]()).padStart(2, '0')},
+    {format: 'ss', replace: String(dt[`get${UTC}Seconds`]()).padStart(2, '0')},
+    {format: 'SSS', replace: String(dt[`get${UTC}Milliseconds`]()).padStart(3, '0')}
+  ];
+
+  // 書式部を日時に変換
+  let dtStr = '';
+  let restOfFmt = this.customFormat;
+  while (restOfFmt.length !== 0) {
+    // 次に変換する部分の日時変換用定義を取得
+    const dtConvDef = dtConvDefList.find((elem) => {
+      return restOfFmt.startsWith(elem.format);
+    });
+
+    // 解析対象書式でない場合、1文字そのまま複製
+    if (dtConvDef === undefined) {
+      dtStr += restOfFmt.charAt(0);
+      restOfFmt = restOfFmt.slice(1);
+      continue;
+    }
+
+    // 解析対象書式の場合、該当の日時に変換
+    dtStr += dtConvDef.replace;
+    restOfFmt = restOfFmt.slice(dtConvDef.replace.length);
   }
+
+  return dtStr;
 };
 pcrutil.DateFormat.prototype.format = function(dt) {
   return this.formatImpl(dt, true);

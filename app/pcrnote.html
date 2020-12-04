@@ -49,6 +49,16 @@
   </div>
 </div>
 
+<!-- 常駐領域 -->
+<div class="page-resident">
+  <div id="sectionResident" class="section-resident">
+    <div class="resident">
+      <!-- 現在時刻 -->
+      <div id="currentTime" class="current-time"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ユーザー設定ページ -->
 <div id="pageConfig" class="page-config">
   <div class="section-config">
@@ -56,7 +66,7 @@
       <div class="config-input-area">
         <!-- タブ移動時のフォーカスの調整用 -->
         <input id="dummyConfigItem1" type="button" tabindex="1" class="is-invisible">
-        <input id="dummyConfigItem2" type="button" tabindex="13" class="is-invisible">
+        <input id="dummyConfigItem2" type="button" tabindex="99" class="is-invisible">
         <!-- 1行目 -->
         <div class="config-item config-item-1-1" title="データを登録する際に使用するユーザー名(空でも可)">
           ユーザー名
@@ -116,12 +126,17 @@
         </div>
         <!-- 6行目 -->
         <div class="config-item config-item-6-1">
-          <input id="clientServerMode" type="checkbox" tabindex="11">
-          <label for="clientServerMode" title="使用するにはNode.jsによるサーバーの構築が必要">サーバーに接続</label>
+          <input id="displayCurrentTime" type="checkbox" tabindex="11">
+          <label for="displayCurrentTime" >現在時刻を表示</label>
         </div>
         <!-- 7行目 -->
         <div class="config-item config-item-7-1">
-          <input id="saveCookie" type="checkbox" tabindex="12">
+          <input id="clientServerMode" type="checkbox" tabindex="12">
+          <label for="clientServerMode" title="使用するにはNode.jsによるサーバーの構築が必要">サーバーに接続</label>
+        </div>
+        <!-- 8行目 -->
+        <div class="config-item config-item-8-1">
+          <input id="saveCookie" type="checkbox" tabindex="13">
           <label for="saveCookie" title="ローカルファイルから起動する場合は無効">クッキーに保存</label>
         </div>
       </div>

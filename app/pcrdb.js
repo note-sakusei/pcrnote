@@ -81,7 +81,7 @@ pcrdb.Transaction.prototype.reset = function() {
 // ローカル側に対する更新時はクエリを直接渡す
 // サーバー側に対する更新時はクエリを格納したトランザクションをサーバーに渡して処理を委譲
 pcrdb.Transaction.prototype.makeQuery = function(queryType, vsSet) {
-  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT);
+  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_DATA);
   return {
     type: queryType,
     value: pcrutil.deepCopy(vsSet),
@@ -652,7 +652,7 @@ pcrdb.VsSetTable.prototype.checkVsSetContent = function(
   }
   // 作成日時
   if (vsSet.createDate !== '') {
-    if (!pcrutil.asDate(vsSet.createDate, pcrdef.DATE_FORMAT)) {
+    if (!pcrutil.asDate(vsSet.createDate, pcrdef.DATE_FORMAT_FOR_DATA)) {
       throw pcrutil.makeError(baseErrMsg, index, 'createDate', vsSetStr);
     }
   }
@@ -667,7 +667,7 @@ pcrdb.VsSetTable.prototype.checkVsSetContent = function(
   }
   // 更新日時
   if (vsSet.updateDate !== '') {
-    if (!pcrutil.asDate(vsSet.updateDate, pcrdef.DATE_FORMAT)) {
+    if (!pcrutil.asDate(vsSet.updateDate, pcrdef.DATE_FORMAT_FOR_DATA)) {
       throw pcrutil.makeError(baseErrMsg, index, 'updateDate', vsSetStr);
     }
   }
@@ -733,7 +733,7 @@ pcrdb.VsSetTable.prototype.toInternalData = function(externalData, fileType) {
   }
 
   // 日時を正規化
-  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT);
+  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_DATA);
   for (const vsSet of internalData) {
     if (vsSet.createDate !== '') {
       const createDate = formatter.parse(vsSet.createDate);
@@ -1200,6 +1200,7 @@ pcrdb.VsSetTable.prototype.getResult = function() {
 
 // 対戦情報テーブルの検索結果クラス
 pcrdb.VsSetTable.Result = function() {
+  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_DIFF);
   this.items = {
     // 検索(絞り込み)が行われたか
     // 検索結果0件と検索を行っていない場合の0件を区別するため
@@ -1209,7 +1210,7 @@ pcrdb.VsSetTable.Result = function() {
     // 検索結果一覧(検索上限で切り捨て後)
     limitedList: [],
     // 検索結果一覧の最終変更日時
-    lastModified: new pcrutil.DateFormat('yyyyMMddhhmmssSSS').format(new Date())
+    lastModified: formatter.format(new Date())
   };
   Object.seal(this);
   Object.seal(this.items);
