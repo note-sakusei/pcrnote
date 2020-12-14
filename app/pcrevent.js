@@ -7,6 +7,11 @@ var pcrevent = pcrevent || {};
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+pcrevent.resident = {
+  currentTime: {},
+  pickedTime: {},
+  elapsedTime: {}
+};
 pcrevent.goToConfig = {};
 pcrevent.importDataFromFile = {};
 pcrevent.exportDataToFile = {};
@@ -54,6 +59,17 @@ pcrevent.orderBy = {};
 // 初期化
 pcrevent.init = function() {
   pcrevent.addEventListener();
+};
+
+// 経過時刻の表示
+pcrevent.resident.currentTime.onDblclick = function() {
+  $('#elapsedTime').toggleClass('is-hidden', false);
+  const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_PICKED_TIME);
+  $('#pickedTime').html(formatter.format(new Date()));
+};
+// 経過時刻の非表示
+pcrevent.resident.elapsedTime.onDblclick = function() {
+  $('#elapsedTime').toggleClass('is-hidden', true);
 };
 
 // ユーザー設定ページへ遷移
@@ -603,6 +619,9 @@ pcrevent.orderBy.onChange = function() {
 
 // イベントリスナー登録
 pcrevent.addEventListener = function() {
+  $('#currentTime').on('dblclick', pcrevent.resident.currentTime.onDblclick);
+  $('#pickedTime').on('dblclick', pcrevent.resident.pickedTime.onDblclick);
+  $('#elapsedTime').on('dblclick', pcrevent.resident.elapsedTime.onDblclick);
   $('#goToConfig').on('click', pcrevent.goToConfig.onClick);
   $(window).on('keydown', pcrevent.goToConfig.onKeydown);
   $('#importDataFromFile').on('change', pcrevent.importDataFromFile.onChange);

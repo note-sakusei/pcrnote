@@ -513,6 +513,22 @@ pcrutil.hasBOM = function(fileData) {
   const fileHead = new Uint8Array(fileData.slice(0, 3));
   return JSON.stringify(fileHead) === JSON.stringify(pcrdef.BOM);
 };
+// ファイルデータにBOMを付加
+pcrutil.addBOM = function(fileData) {
+  let fileDataWithBOM = undefined;
+  {
+    const bomLen = pcrdef.BOM.length;
+    const dataLen = fileData.length;
+    fileDataWithBOM = new Uint8Array(bomLen + dataLen);
+    for (let i = 0; i < bomLen; ++i) {
+      fileDataWithBOM[i] = pcrdef.BOM[i];
+    }
+    for (let i = 0; i < dataLen; ++i) {
+      fileDataWithBOM[i + bomLen] = fileData[i];
+    }
+  }
+  return fileDataWithBOM;
+};
 // ファイルデータからBOMを除去
 pcrutil.stripBOM = function(fileData) {
   return fileData.slice(pcrdef.BOM.length);
@@ -565,23 +581,11 @@ pcrutil.objectDataToFileData = function(objData, fileType) {
   }
 
   // JSON文字列またはCSV文字列をファイルデータに変換
-  const fileData = new TextEncoder('utf-8').encode(strData);
-
+  let fileData = new TextEncoder('utf-8').encode(strData);
   // BOMを付加
-  let fileDataWithBOM = undefined;
-  {
-    const bomLen = pcrdef.BOM.length;
-    const dataLen = fileData.length;
-    fileDataWithBOM = new Uint8Array(bomLen + dataLen);
-    for (let i = 0; i < bomLen; ++i) {
-      fileDataWithBOM[i] = pcrdef.BOM[i];
-    }
-    for (let i = 0; i < dataLen; ++i) {
-      fileDataWithBOM[i + bomLen] = fileData[i];
-    }
-  }
+  fileData = pcrutil.addBOM(fileData);
 
-  return fileDataWithBOM;
+  return fileData;
 };
 
 // ファイルデータをBlobデータに変換

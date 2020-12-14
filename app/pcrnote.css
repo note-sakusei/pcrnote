@@ -405,13 +405,12 @@ a {
 
 /* 常駐領域 */
 .resident {
-  background-blend-mode: lighten;
-  background-color: var(--resident-layer-color);
   display: inline-flex;
 }
-.current-time {
+.current-time, .picked-time, .elapsed-time {
+  background-blend-mode: lighten;
+  background-color: var(--resident-layer-color);
   color: var(--general-font-color);
-  display: flex;
   font-size: var(--general-font-size);
   padding: 2px 10px; /* 上下、左右 */
   user-select: none;

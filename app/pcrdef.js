@@ -25,9 +25,10 @@ pcrdef.DATE_FORMAT_FOR_DISPLAY = pcrdef.DATE_FORMAT_FOR_DATA;
 pcrdef.DATE_FORMAT_FOR_LOGGING = pcrdef.DATE_FORMAT_FOR_DATA;
 // 日時の書式(日時比較用)
 pcrdef.DATE_FORMAT_FOR_DIFF = 'yyyyMMddhhmmssSSS';
-// 日時の書式(常駐領域の現在時刻用)
-// ミリ秒の下2桁を文字列カットで切り落としているため、ミリ秒は一番後ろになるように
-pcrdef.DATE_FORMAT_FOR_RESIDENT = 'EEE, dd MMM yyyy hh:mm:ss.SSS';
+// 日時の書式(常駐領域の現在時刻、計測開始時刻、経過時間用)
+pcrdef.DATE_FORMAT_FOR_RESIDENT_CURRENT_TIME = 'EEE, dd MMM yyyy hh:mm:ss';
+pcrdef.DATE_FORMAT_FOR_RESIDENT_PICKED_TIME = pcrdef.DATE_FORMAT_FOR_DATA;
+pcrdef.DATE_FORMAT_FOR_RESIDENT_ELAPSED_TIME = 'hh:mm:ss';
 // 日時の書式(ファイル名用)
 // 区切り文字はハイフン、なし以外に変更不可
 pcrdef.DATE_FORMAT_FOR_FILE_NAME = 'yyyy-MM-dd-hh-mm-ss';

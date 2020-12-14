@@ -517,9 +517,24 @@ pcrview.showResident = function() {
 
   // 現在時刻を更新
   const refreshCurrentTime = () => {
-    const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT);
+    const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_CURRENT_TIME);
     const nowStr = formatter.format(new Date());
-    $('#currentTime').html(nowStr.slice(0, -2));
+    $('#currentTime').html(nowStr);
+
+    // ついでに経過時間も更新
+    refreshElapsedTime();
+  };
+  // 経過時間を更新
+  const refreshElapsedTime = () => {
+    if ($('#elapsedTime').hasClass('is-hidden')) return;
+    const formatter1 = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_PICKED_TIME);
+    const formatter2 = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_ELAPSED_TIME);
+    // 計測開始時刻を取得
+    const pickedTime = formatter1.parse($('#pickedTime').html());
+    // 計測開始時刻から現在時刻までの差分を取得
+    const deltaTime = new Date(new Date().getTime() - pickedTime.getTime());
+    const elapsedTimeStr = formatter2.formatUTC(deltaTime);
+    $('#elapsedTime').html(elapsedTimeStr);
   };
 
   // 現在時刻の表示を切り替え
