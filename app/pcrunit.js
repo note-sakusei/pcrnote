@@ -164,6 +164,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['madamprism', 'マダムプリズム', './img/clanbattle/マダムプリズム.jpg', true],
   ['megaraphan', 'メガラパーン', './img/clanbattle/メガラパーン.jpg', true],
   ['mushufsh', 'ムシュフシュ', './img/clanbattle/ムシュフシュ.jpg', true],
+  ['needlecreeper', 'ニードルクリーパー', './img/clanbattle/ニードルクリーパー.jpg', true],
   ['orkchief', 'オークチーフ', './img/clanbattle/オークチーフ.jpg', true],
   ['raiden', 'ライデン', './img/clanbattle/ライデン.jpg', true],
   ['seadrake', 'シードレイク', './img/clanbattle/シードレイク.jpg', true],
@@ -181,7 +182,6 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
   ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
   // 5番目
-  ['argeti', 'アルゲティ', './img/clanbattle/アルゲティ.jpg', true],
   ['aquarios', 'アクアリオス', './img/clanbattle/アクアリオス.jpg', true],
   ['torpedon', 'トルペドン', './img/clanbattle/トルペドン.jpg', true],
   ['mesarthim', 'メサルティム', './img/clanbattle/メサルティム.jpg', true],
@@ -192,5 +192,6 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['medusa', 'メデューサ', './img/clanbattle/メデューサ.jpg', true],
   ['glutton', 'グラットン', './img/clanbattle/グラットン.jpg', true],
   ['scorpion', 'レサトパルト', './img/clanbattle/レサトパルト.jpg', true],
-  ['sagittarius', 'サジタリウス', './img/clanbattle/サジタリウス.jpg', true]
+  ['sagittarius', 'サジタリウス', './img/clanbattle/サジタリウス.jpg', true],
+  ['argeti', 'アルゲティ', './img/clanbattle/アルゲティ.jpg', true]
 ];
