@@ -57,6 +57,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['pecorine_summer', 'ペコリーヌ(サマー)', './img/arena/ペコリーヌ(サマー).jpg', true],
   ['kurumi', 'クルミ', './img/arena/クルミ.jpg', true],
   ['djeeta', 'ジータ', './img/arena/ジータ.jpg', true],
+  ['pecorine_newyear', 'ペコリーヌ(ニューイヤー)', './img/arena/ペコリーヌ(ニューイヤー).jpg', true],
   ['rei', 'レイ', './img/arena/レイ.jpg', true],
   ['ilya_christmas', 'イリヤ(クリスマス)', './img/arena/イリヤ(クリスマス).jpg', true],
   ['anna_summer', 'アンナ(サマー)', './img/arena/アンナ(サマー).jpg', true],
