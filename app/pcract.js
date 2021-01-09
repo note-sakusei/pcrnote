@@ -363,31 +363,31 @@ pcract.filterVsSetTable = function() {
 pcract.saveInputStateToCookie = function() {
   // 表示制御
   const viewCtrlCookieData = JSON.stringify(pcrnote.gViewController.states);
-  $.cookie('viewCtrl', viewCtrlCookieData, pcrdef.COOKIE_OPTIONS);
+  pcrutil.setCookie('viewCtrl', viewCtrlCookieData, pcrdef.COOKIE_OPTIONS);
   // 新規対戦情報
   const newVsSetCookieData = JSON.stringify(pcrnote.gNewVsSet);
-  $.cookie('newVsSet', newVsSetCookieData, pcrdef.COOKIE_OPTIONS);
+  pcrutil.setCookie('newVsSet', newVsSetCookieData, pcrdef.COOKIE_OPTIONS);
   // ユニット検索情報
   const searchVsSetCookieData = JSON.stringify(pcrnote.gSearchVsSet);
-  $.cookie('searchVsSet', searchVsSetCookieData, pcrdef.COOKIE_OPTIONS);
+  pcrutil.setCookie('searchVsSet', searchVsSetCookieData, pcrdef.COOKIE_OPTIONS);
 };
 // 現在の入力状態をクッキーから復元
 pcract.restoreInputStateFromCookie = function() {
   try {
     // 表示制御
-    const viewCtrlCookieData = $.cookie('viewCtrl');
+    const viewCtrlCookieData = pcrutil.getCookie('viewCtrl');
     if (viewCtrlCookieData !== undefined) {
       const viewCtrlState = JSON.parse(viewCtrlCookieData);
       pcrnote.gViewController = new pcrctrl.ViewController(viewCtrlState);
       pcrnote.gViewController.switchPageConfig();
     }
     // 新規対戦情報
-    const newVsSetCookieData = $.cookie('newVsSet');
+    const newVsSetCookieData = pcrutil.getCookie('newVsSet');
     if (newVsSetCookieData !== undefined) {
       pcrnote.gNewVsSet = JSON.parse(newVsSetCookieData);
     }
     // ユニット検索情報
-    const searchVsSetCookieData = $.cookie('searchVsSet');
+    const searchVsSetCookieData = pcrutil.getCookie('searchVsSet');
     if (searchVsSetCookieData !== undefined) {
       pcrnote.gSearchVsSet = JSON.parse(searchVsSetCookieData);
       // 現在のスロット数に合わせて調整
@@ -399,7 +399,7 @@ pcract.restoreInputStateFromCookie = function() {
 };
 // 現在の入力状態をクッキーから削除
 pcract.deleteInputStateFromCookie = function() {
-  $.removeCookie('viewCtrl', pcrdef.COOKIE_OPTIONS);
-  $.removeCookie('newVsSet', pcrdef.COOKIE_OPTIONS);
-  $.removeCookie('searchVsSet', pcrdef.COOKIE_OPTIONS);
+  pcrutil.removeCookie('viewCtrl', pcrdef.COOKIE_OPTIONS);
+  pcrutil.removeCookie('newVsSet', pcrdef.COOKIE_OPTIONS);
+  pcrutil.removeCookie('searchVsSet', pcrdef.COOKIE_OPTIONS);
 };

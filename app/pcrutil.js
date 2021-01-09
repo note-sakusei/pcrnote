@@ -887,6 +887,126 @@ pcrutil.objectDataToFlatObjectData = function(objData, sep) {
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+// クッキーにデータを設定
+pcrutil.setCookie = function(key, val, opt) {
+  if (!pcrutil.isString(key) || key === '') {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'key');
+  }
+  const reservedKeys = [
+    'domain', 'path', 'expires', 'max-age', 'secure', 'httponly', 'samesite'
+  ];
+  if (reservedKeys.indexOf(key.toLowerCase()) !== -1) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'key');
+  }
+  if (!pcrutil.isString(val)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'val');
+  }
+  if (!pcrutil.isObject(opt)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt');
+  }
+  if (opt.domain !== undefined && !pcrutil.isString(opt.domain)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.domain');
+  }
+  if (opt.path !== undefined && !pcrutil.isString(opt.path)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.path');
+  }
+  if (opt.expires !== undefined) {
+    if (!pcrutil.isInteger(opt.expires) && !pcrutil.isDate(opt.expires)) {
+      throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.expires');
+    }
+  }
+  if (opt['max-age'] !== undefined && !pcrutil.isInteger(opt['max-age'])) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.max-age');
+  }
+  if (opt.secure !== undefined && !pcrutil.isBoolean(opt.secure)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.secure');
+  }
+  if (opt.sameSite !== undefined && !pcrutil.isString(opt.sameSite)) {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'opt.sameSite');
+  }
+
+  // クッキーの各要素を作成
+  const cookieParts = {
+    keyVal: '',
+    domain: '',
+    path: '',
+    expires: '',
+    secure: '',
+    sameSite: ''
+  };
+  const encodedKey = encodeURIComponent(key);
+  const encodedVal = encodeURIComponent(val);
+  cookieParts.keyVal = encodedKey + '=' + encodedVal;
+  if (opt.domain !== undefined) {
+    cookieParts.domain = '; Domain=' + opt.domain;
+  }
+  if (opt.path !== undefined) {
+    cookieParts.path = '; Path=' + opt.path;
+  }
+  if (opt.expires !== undefined) {
+    let dt = undefined;
+    if (pcrutil.isInteger(opt.expires)) {
+      dt = new Date();
+      dt.setDate(dt.getDate() + opt.expires);
+    } else {
+      dt = opt.expires;
+    }
+    cookieParts.expires = '; Expires=' + dt.toUTCString();
+  }
+  if (opt['max-age'] !== undefined) {
+    cookieParts.expires = '; Max-Age=' + opt['max-age'];
+  }
+  if (opt.secure !== undefined) {
+    if (opt.secure) {
+      cookieParts.secure = '; Secure';
+    }
+  }
+  if (opt.sameSite !== undefined) {
+    cookieParts.sameSite = '; SameSite=' + opt.sameSite;
+  }
+
+  // クッキー文字列を構築し格納
+  const cookieStr =
+    cookieParts.keyVal +
+    cookieParts.domain +
+    cookieParts.path +
+    cookieParts.expires +
+    cookieParts.secure +
+    cookieParts.sameSite;
+  document.cookie = cookieStr;
+};
+
+// クッキーからデータを取得
+pcrutil.getCookie = function(key) {
+  if (!pcrutil.isString(key) || key === '') {
+    throw pcrutil.makeError(pcrmsg.get('illegalArgument'), 'key');
+  }
+  const encodedKey = encodeURIComponent(key);
+
+  // クッキー文字列を解析
+  const cookieParts = document.cookie.split(';').map((part) => part.trim());
+  const cookieMap = cookieParts.reduce((accum, parts) => {
+    const keyVal = parts.split('=');
+    if (keyVal.length === 2) {
+      accum[keyVal[0]] = keyVal[1];
+    }
+    return accum;
+  }, {});
+
+  const decodedVal = (cookieMap[encodedKey] !== undefined) ?
+    decodeURIComponent(cookieMap[encodedKey]) : undefined;
+  return decodedVal;
+};
+
+// クッキーからデータを削除
+pcrutil.removeCookie = function(key) {
+  const oldDt = new Date(Date.UTC(1970, 0, 1));
+  const opt = {expires: oldDt, secure: false, sameSite: 'Strict'};
+  pcrutil.setCookie(key, '', opt);
+};
+
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 // ポップアップの開閉
 pcrutil.popupConfirmEvent_ = undefined;
 pcrutil.popup = function(msg, opt_processOnConsent, opt_processOnRejected) {

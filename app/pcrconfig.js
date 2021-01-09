@@ -122,7 +122,9 @@ pcrconfig.eraseVolatileConfigItems = function(orgConfigData) {
 pcrconfig.saveConfigDataToCookie = function(orgConfigData) {
   if (orgConfigData.saveCookie) {
     const configData = pcrconfig.eraseVolatileConfigItems(orgConfigData);
-    $.cookie('config', JSON.stringify(configData.items), pcrdef.COOKIE_OPTIONS);
+    pcrutil.setCookie(
+      'config', JSON.stringify(configData.items), pcrdef.COOKIE_OPTIONS
+    );
   } else {
     pcrconfig.removeConfigDataFromCookie();
   }
@@ -131,7 +133,7 @@ pcrconfig.saveConfigDataToCookie = function(orgConfigData) {
 pcrconfig.restoreConfigDataFromCookie = function() {
   const configData = new pcrconfig.ConfigData();
   try {
-    const cookieData = $.cookie('config');
+    const cookieData = pcrutil.getCookie('config');
     if (cookieData !== undefined) {
       configData.items = JSON.parse(cookieData);
     }
@@ -142,7 +144,7 @@ pcrconfig.restoreConfigDataFromCookie = function() {
 };
 // クッキーからユーザー設定データを削除
 pcrconfig.removeConfigDataFromCookie = function() {
-  $.removeCookie('config', pcrdef.COOKIE_OPTIONS);
+  pcrutil.removeCookie('config', pcrdef.COOKIE_OPTIONS);
 };
 
 // ユーザー設定画面のユーザー名入力フィールド内容の表示非表示を切り替え

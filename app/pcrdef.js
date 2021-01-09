@@ -36,9 +36,9 @@ pcrdef.DATE_FORMAT_FOR_FILE_NAME = 'yyyy-MM-dd-hh-mm-ss';
 pcrdef.REFRESH_CURRENT_TIME_FREQUENCY = 100;
 // クッキーの定義
 pcrdef.COOKIE_OPTIONS = {
-  expires: 10, // max-ageによる設定は無視される
+  expires: 10, // 10日間
   secure: false, // falseにしておかないとSSL/TLS未使用時にクッキーに格納出来ない
-  sameSite: 'Strict' // 現在設定しても使用されないため、secureがfalseだと警告が出るブラウザ有
+  sameSite: 'Strict' // secureがfalseの場合、Lax or Strictにする必要有
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -48,8 +48,6 @@ pcrsvr.MIME_TYPE_MAP = {
 pcrsvr.AVAILABLE_RESOURCE_LIST = [
   //'/lib/jquery-3.5.1.js',
   //'/lib/jquery-3.5.1.min.js',
-  //'/lib/jquery.cookie.js',
-  //'/lib/jquery.cookie.min.js',
   '/pcrnote.html',
   '/pcrnote.css',
   '/pcrdef.js',
