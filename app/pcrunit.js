@@ -101,6 +101,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['rin', 'リン', './img/arena/リン.jpg', true],
   ['kokkoro_princess', 'コッコロ(プリンセス)', './img/arena/コッコロ(プリンセス).jpg', true],
   ['labyrista', 'ラビリスタ', './img/arena/ラビリスタ.jpg', true],
+  ['neneka_newyear', 'ネネカ(ニューイヤー)', './img/arena/ネネカ(ニューイヤー).jpg', true],
   ['mitsuki', 'ミツキ', './img/arena/ミツキ.jpg', true],
   ['hatsune_summer', 'ハツネ(サマー)', './img/arena/ハツネ(サマー).jpg', true],
   ['akari', 'アカリ', './img/arena/アカリ.jpg', true],
