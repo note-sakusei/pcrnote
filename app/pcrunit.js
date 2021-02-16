@@ -68,6 +68,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
   ['shinobu', 'シノブ', './img/arena/シノブ.jpg', true],
   ['mimi_halloween', 'ミミ(ハロウィン)', './img/arena/ミミ(ハロウィン).jpg', true],
+  ['shefi', 'シェフィ', './img/arena/シェフィ.jpg', true],
   ['uzuki_deremas', 'ウヅキ(デレマス)', './img/arena/ウヅキ(デレマス).jpg', true],
   ['rei_halloween', 'レイ(ハロウィン)', './img/arena/レイ(ハロウィン).jpg', true],
   ['shizuru_valentine', 'シズル(バレンタイン)', './img/arena/シズル(バレンタイン).jpg', true],
