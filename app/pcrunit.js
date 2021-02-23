@@ -133,6 +133,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ['kasumi_magical', 'カスミ(マジカル)', './img/arena/カスミ(マジカル).jpg', true],
   ['rino_wonder', 'リノ(ワンダー)', './img/arena/リノ(ワンダー).jpg', true],
   ['misato', 'ミサト', './img/arena/ミサト.jpg', true],
+  ['kasumi_summer', 'カスミ(サマー)', './img/arena/カスミ(サマー).jpg', true],
   ['nanaka', 'ナナカ', './img/arena/ナナカ.jpg', true],
   ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
   ['kyaru', 'キャル', './img/arena/キャル.jpg', true],
@@ -188,6 +189,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ['spirithorn', 'スピリットホーン', './img/clanbattle/スピリットホーン.jpg', true],
   ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
   ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
+  ['ulfhedinn', 'ウールヴヘジン', './img/clanbattle/ウールヴヘジン.jpg', true],
   // 5番目
   ['aquarios', 'アクアリオス', './img/clanbattle/アクアリオス.jpg', true],
   ['torpedon', 'トルペドン', './img/clanbattle/トルペドン.jpg', true],
