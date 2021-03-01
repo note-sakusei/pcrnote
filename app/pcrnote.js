@@ -39,7 +39,7 @@ pcrnote.init = function() {
 
 if (window.File && window.FileReader && window.FileList && window.Blob) {
   // 処理開始
-  $(() => {
+  document.addEventListener("DOMContentLoaded", function(){
     pcrnote.init();
     pcrconfig.refreshConfigView();
   });

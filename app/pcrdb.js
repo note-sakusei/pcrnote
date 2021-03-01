@@ -848,16 +848,19 @@ pcrdb.VsSetTable.prototype.importDataFromServer = function(
 
   this.transaction.reset();
 
-  // サーバーから取得
-  const sendData = JSON.stringify(this.transaction.telegram);
-  $.ajax({
-    type: 'POST',
-    url: pcrdef.SERVER_URL_READ_CGI,
-    data: sendData
-  })
-  .done((data) => {
+  // サーバーと通信成功時処理
+  const transmitCompleted = ((event) => {
+    this.switchImportStateSync();
+    const req = event.target;
+    const data = req.response;
     try {
-      this.switchImportStateSync();
+      if (data === null) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0));
+      }
+      if (req.readyState !== 4 || req.status !== 200) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), data.message);
+      }
+
       // 重複チェック
       this.checkDuplicatedVsSet(data);
       // 受信データ(ファイル保存形式データ)を対戦情報テーブルデータに変換
@@ -871,21 +874,26 @@ pcrdb.VsSetTable.prototype.importDataFromServer = function(
 
       opt_processOnFailure();
     }
-  })
-  // 失敗時
-  .fail((e) => {
+  });
+  // サーバーと通信失敗時処理
+  const transmitFailed = ((event) => {
     this.switchImportStateSync();
-    const err = (() => {
-      if (e.responseText !== undefined) {
-        return pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), e.responseText);
-      } else {
-        return pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1));
-      }
-    })();
+    const err = pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 2));
+    console.error(err);
     this.setDataAndError(undefined, err);
 
     opt_processOnFailure();
   });
+
+  // サーバーに問い合わせ
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', transmitCompleted);
+  req.addEventListener('error', transmitFailed);
+  req.addEventListener('abort', transmitFailed);
+  req.responseType = 'json';
+  req.open('POST', pcrdef.SERVER_URL_READ_CGI);
+  const sendData = JSON.stringify(this.transaction.telegram);
+  req.send(sendData);
 
   this.switchImportStateWhileSync();
 };
@@ -933,35 +941,48 @@ pcrdb.VsSetTable.prototype.exportDataToServer = function(
 ) {
   const FUNC_NAME = 'pcrdb.VsSetTable.exportDataToServer';
 
-  // サーバーに送信
-  const sendData = JSON.stringify(this.transaction.telegram);
-  $.ajax({
-    type: 'POST',
-    url: pcrdef.SERVER_URL_WRITE_CGI,
-    data: sendData
-  })
-  // 成功時
-  .done((data) => {
+  // サーバーと通信成功時処理
+  const transmitCompleted = ((event) => {
     this.switchImportStateSync();
-    this.setDataAndError(undefined, '');
-    this.transaction.reset();
-
-    opt_processOnSuccess();
-  })
-  // 失敗時
-  .fail((e) => {
-    this.switchImportStateSync();
-    const err = (() => {
-      if (e.responseText !== undefined) {
-        return pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), e.responseText);
-      } else {
-        return pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1));
+    const req = event.target;
+    const data = req.response;
+    try {
+      if (data === null) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0));
       }
-    })();
+      if (req.readyState !== 4 || req.status !== 200) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 1), data.message);
+      }
+      this.setDataAndError(undefined, '');
+      this.transaction.reset();
+
+      opt_processOnSuccess();
+    } catch (e) {
+      console.error(e);
+      this.setDataAndError(undefined, e);
+
+      opt_processOnFailure();
+    }
+  });
+  // サーバーと通信失敗時処理
+  const transmitFailed = ((event) => {
+    this.switchImportStateSync();
+    const err = pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 2));
+    console.error(err);
     this.setDataAndError(undefined, err);
 
     opt_processOnFailure();
   });
+
+  // サーバーに問い合わせ
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', transmitCompleted);
+  req.addEventListener('error', transmitFailed);
+  req.addEventListener('abort', transmitFailed);
+  req.responseType = 'json';
+  req.open('POST', pcrdef.SERVER_URL_WRITE_CGI);
+  const sendData = JSON.stringify(this.transaction.telegram);
+  req.send(sendData);
 
   this.switchImportStateWhileSync();
 };

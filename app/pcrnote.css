@@ -104,7 +104,7 @@
   /* コメントの一行あたりの高さ */
   --comment-height-per-line: 1.3em;
   /* コメント入力部の高さ */
-  --comment-area-height: calc(var(--comment-height-per-line) * 3.0);
+  --comment-area-height: calc(var(--comment-height-per-line) * 3.1);
 
   /* 汎用的な枠角の丸みの半径 */
   --general-border-radius: 5px;
@@ -223,6 +223,8 @@ body::before {
   z-index: -1;
 }
 body {
+  /* iOSでのタップハイライトを無効化 */
+  -webkit-tap-highlight-color: transparent;
   font-family: var(--general-font-family);
   margin: 8px 0px; /* 上下、左右 */
 }
@@ -251,7 +253,7 @@ a {
 
 /* 汎用設定 */
 .is-hidden {
-  display: none;
+  display: none !important;
 }
 .is-invisible {
   opacity: 0.0;
@@ -273,7 +275,6 @@ a {
 
 /* ポップアップ */
 .popup {
-  display: none;
   height: 100%;
   position: fixed;
   width: 100%;
@@ -342,7 +343,6 @@ a {
   background-blend-mode: lighten;
   background-color: var(--base-layer-color);
   border: var(--general-border);
-  display: none;
   margin: 0px auto; /* 上下、左右 */
   padding: 20px 10px; /* 上下、左右 */
   width: var(--unit-catalog-outer-width);
@@ -356,7 +356,6 @@ a {
 .page-content {
   background-blend-mode: lighten;
   background-color: var(--base-layer-color);
-  display: none;
   margin: 0px 0px; /* 上下、左右 */
   padding: 20px 10px; /* 上下、左右 */
 }
@@ -364,43 +363,34 @@ a {
 
 /* コンテンツの各区画(配置調整) */
 .section-resident {
-  display: none;
   margin: 0px 0px 8px 0px; /* 上、右、下、左 */
 }
 .section-config {
-  display: block;
   margin: 0px 0px 0px 10px; /* 上、右、下、左 */
 }
 .section-menu {
-  display: block;
   margin: 0px 0px 0px 10px; /* 上、右、下、左 */
 }
 .section-new {
-  display: none;
   margin: 10px 0px 0px 0px; /* 上、右、下、左 */
 }
 .section-search {
-  display: none;
   margin: 10px 0px 0px 0px; /* 上、右、下、左 */
 }
 .section-unit-catalog {
-  display: none;
   margin: 5px 0px 0px 0px; /* 上、右、下、左 */
 }
 .section-result-control {
-  display: inline-block;
   margin: 10px 0px 0px 10px; /* 上、右、下、左 */
 }
 .section-result-message {
-  display: block;
   margin: 10px 0px 0px 10px; /* 上、右、下、左 */
 }
 .section-result {
-  display: block;
   margin: 5px 0px 0px 0px; /* 上、右、下、左 */
 }
 .section-common-template {
-  display: none;
+  margin: 0px;
 }
 
 /* 常駐領域 */
@@ -591,16 +581,16 @@ a {
 }
 .new-vs-set,
 .search-vs-set,
-.result-vs-set {
+.result-vs-set-rec {
   border: var(--general-border);
   border-radius: var(--general-border-radius);
   display: flex;
   padding: var(--vs-set-padding-height) var(--vs-set-padding-width);
 }
-.result-vs-set.is-first {
+.result-vs-set-rec.is-first {
   margin: 0px;
 }
-.result-vs-set.is-followers {
+.result-vs-set-rec.is-followers {
   margin: var(--vs-set-vertical-gap) 0px 0px 0px; /* 上、右、下、左 */
 }
 

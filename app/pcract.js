@@ -87,7 +87,7 @@ pcract.adjustSearchVsSet = function(slotSize) {
 
 // 攻撃側編成を取得(新規対戦情報、ユニット検索情報兼用)
 pcract.getOffenseParty = function(vsSet) {
-  if ('offenseParty' in vsSet) {
+  if (vsSet.currSlotNum === undefined) {
     return vsSet.offenseParty;
   } else {
     return vsSet.slotList[vsSet.currSlotNum].offenseParty;
@@ -95,7 +95,7 @@ pcract.getOffenseParty = function(vsSet) {
 };
 // 防衛側編成を取得(新規対戦情報、ユニット検索情報兼用)
 pcract.getDefenseParty = function(vsSet) {
-  if ('offenseParty' in vsSet) {
+  if (vsSet.currSlotNum === undefined) {
     return vsSet.defenseParty;
   } else {
     return vsSet.slotList[vsSet.currSlotNum].defenseParty;
@@ -214,10 +214,11 @@ pcract.toggleUnitWildcard = function(party, pos) {
 
 // 評価の増減
 // 評価部HTMLの押下位置(4つに区分)に応じてどれを増減するか変える
-pcract.raiseOrLowerRating = function(vsSet, centralPos, clickPos) {
-  if (clickPos[0] < centralPos[0]) {
+pcract.raiseOrLowerRating = function(vsSet, elemRect, clickPos) {
+  const centralPos = {x: elemRect.width / 2, y: elemRect.height / 2};
+  if (clickPos.x < centralPos.x) {
     // 左上部押下 => good増
-    if (clickPos[1] < centralPos[1]) {
+    if (clickPos.y < centralPos.y) {
       ++vsSet.rating.good;
     // 左下部押下 => good減
     } else {
@@ -225,7 +226,7 @@ pcract.raiseOrLowerRating = function(vsSet, centralPos, clickPos) {
     }
   } else {
     // 右上部押下 => bad減
-    if (clickPos[1] < centralPos[1]) {
+    if (clickPos.y < centralPos.y) {
       --vsSet.rating.bad;
     // 右下部押下 => bad増
     } else {
@@ -268,18 +269,10 @@ pcract.extractAllHashtagList = function() {
   return allHashtagList;
 };
 
-// 選択されているハッシュタグを取得
-pcract.getSelectedHashtag1 = function() {
-  return $('#hashtag1').find(':selected').val();
-};
-pcract.getSelectedHashtag2 = function() {
-  return $('#hashtag2').find(':selected').val();
-};
-
 // 対戦情報テーブルをソート
 pcract.sortVsSetTable = function() {
-  const compareFunc = $('#compareFunc').find(':selected').val();
-  const orderBy = $('#orderBy').find(':selected').val();
+  const compareFunc = pcrutil.getSelectBoxState($_('#compareFunc')).value;
+  const orderBy = pcrutil.getSelectBoxState($_('#orderBy')).value;
   pcrnote.gVsSetTable.sort(compareFunc, orderBy);
 };
 
@@ -344,7 +337,7 @@ pcract.filterVsSetTable = function() {
 
   // ハッシュタグで絞り込み関数作成
   for (const i of [1, 2]) {
-    const hashtag = pcract['getSelectedHashtag' + i]();
+    const hashtag = pcrutil.getSelectBoxState($_('#hashtag' + i)).value;
     if (hashtag !== undefined && hashtag !== '') {
       const hashtagFilterFunc = (vsSet) => {
         const hashtagList = pcrutil.extractHashtagList(vsSet.comment);

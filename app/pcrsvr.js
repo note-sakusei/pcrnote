@@ -46,8 +46,6 @@ pcrsvr.MIME_TYPE_MAP = {
 // サーバー側の実行ファイル、設定ファイル、データファイルを
 // 公開ディレクトリ配下に置いた場合のアクセス防止用
 pcrsvr.AVAILABLE_RESOURCE_LIST = [
-  //'/lib/jquery-3.5.1.js',
-  //'/lib/jquery-3.5.1.min.js',
   '/pcrnote.html',
   '/pcrnote.css',
   '/pcrdef.js',
@@ -572,11 +570,11 @@ pcrsvr.responseError = function(res, err) {
 
   // エラーメッセージの返信
   const responseHeader = {
-    'content-type': pcrsvr.MIME_TYPE_MAP['.txt'],
+    'content-type': pcrsvr.MIME_TYPE_MAP['.json'],
     'cache-control': 'no-cache'
   };
   res.writeHead(httpResponse.statusCode, responseHeader);
-  res.write(httpResponse.message + '\n');
+  res.write(JSON.stringify(httpResponse) + '\n');
   res.end();
 };
 

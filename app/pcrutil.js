@@ -1012,30 +1012,30 @@ pcrutil.popupConfirmEvent_ = undefined;
 pcrutil.popup = function(msg, opt_processOnConsent, opt_processOnRejected) {
   // ポップアップ
   if (opt_processOnConsent === undefined) {
-    $('#popupMessage').html(msg.replace(/\n/g, '<br>'));
-    $('#popupWindow').show();
-    $('#popupConfirmWindow').hide();
+    $_('#popupMessage').innerText = msg;
+    pcrutil.showHtmlElement($_('#popupWindow'));
+    pcrutil.hideHtmlElement($_('#popupConfirmWindow'));
 
     pcrutil.popupConfirmEvent_ = undefined;
   // 確認付きポップアップ
   } else {
-    $('#popupConfirmMessage').html(msg.replace(/\n/g, '<br>'));
-    $('#popupWindow').hide();
-    $('#popupConfirmWindow').show();
+    $_('#popupConfirmMessage').innerText = msg;
+    pcrutil.hideHtmlElement($_('#popupWindow'));
+    pcrutil.showHtmlElement($_('#popupConfirmWindow'));
 
     // ボタン押下時イベントを設定
     pcrutil.popupConfirmEvent_ = (pressYes, pressNo) => {
       if (pressYes) {
         opt_processOnConsent();
-      } else if (opt_processOnRejected !== undefined && pressNo) {
+      } else if (pressNo && opt_processOnRejected !== undefined) {
         opt_processOnRejected();
       }
     }
   }
-  $('#popup').show();
+  pcrutil.showHtmlElement($_('#popup'));
 };
 pcrutil.popupOff = function(pressYes, pressNo) {
-  $('.popup').hide();
+  pcrutil.hideHtmlElement($_('#popup'));
 
   if (pcrutil.popupConfirmEvent_ !== undefined) {
     // 後続処理からの連続ポップアップに備え、ボタン押下時イベントを初期化
@@ -1047,25 +1047,90 @@ pcrutil.popupOff = function(pressYes, pressNo) {
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+// HTML要素に対する処理
+
+// jQuery形式のセレクタ
+// querySelectorの代替
+function $_(sel) {
+  if (/^#[a-zA-Z][a-zA-Z0-9_-]*$/.test(sel)) {
+    return document.getElementById(sel.slice(1));
+  } else {
+    return document.querySelector(sel);
+  }
+};
+// querySelectorAllの代替
+function $$_(sel) {
+  return document.querySelectorAll(sel);
+};
+
+// イベントリスナー
+function $on(elem, type, listener) {
+  if (elem !== undefined && elem !== null) {
+    elem.addEventListener(type, listener);
+  }
+};
+
+// HTML要素を表示、非表示に切り替え、表示状態の取得
+pcrutil.showHtmlElement = function(elem, opt_flag = true) {
+  // 表示
+  if (opt_flag) {
+    elem.classList.remove('is-hidden');
+  // 非表示
+  } else {
+    elem.classList.add('is-hidden');
+  }
+};
+pcrutil.hideHtmlElement = function(elem) {
+  elem.classList.add('is-hidden');
+};
+pcrutil.isVisibleHtmlElement = function(elem) {
+  return !elem.classList.contains('is-hidden');
+};
+
+// HTML要素一覧のどれに合致するか取得
+pcrutil.indexOfHtmlElement = function(elemList, target) {
+  return Array.from(elemList).indexOf(target);
+};
+
+// HTML要素のクリック位置を取得
+pcrutil.getClickPosOnHtmlElement = function(elem, event) {
+  const elemRect = elem.getBoundingClientRect();
+  const clickPos = {
+    x: event.pageX - (elemRect.left + window.pageXOffset),
+    y: event.pageY - (elemRect.top + window.pageYOffset)
+  };
+  return clickPos;
+};
+
+// セレクトボックスの状態を取得
+pcrutil.getSelectBoxState = function(elem) {
+  return {
+    index: elem.selectedIndex,
+    value: elem.options[elem.selectedIndex].value
+  };
+};
+
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 pcrutil.addEventListener = function() {
   // リンクを無効化
-  $('a.is-disabled-link').on('click', function() {
-    return false;
+  $on($_('a.is-disabled-link'), 'click', function(event) {
+    event.preventDefault();
   });
 
   // ポップアップ用イベントハンドラ
   // ボタン以外を押してポップアップを閉じる
-  $('#popup').on('click', function() {
+  $on($_('#popup'), 'click', function() {
     pcrutil.popupOff(false, false);
   });
   // 「はい」を押してポップアップを閉じる
-  $('#popupConfirmYes').on('click', function(e) {
-    e.stopPropagation();
+  $on($_('#popupConfirmYes'), 'click', function(event) {
+    event.stopPropagation();
     pcrutil.popupOff(true, false);
   });
   // 「いいえ」を押してポップアップを閉じる
-  $('#popupConfirmNo').on('click', function(e) {
-    e.stopPropagation();
+  $on($_('#popupConfirmNo'), 'click', function(event) {
+    event.stopPropagation();
     pcrutil.popupOff(false, true);
   });
 };

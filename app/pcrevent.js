@@ -63,13 +63,13 @@ pcrevent.init = function() {
 
 // 経過時刻の表示
 pcrevent.resident.currentTime.onDblclick = function() {
-  $('#elapsedTime').toggleClass('is-hidden', false);
+  pcrutil.showHtmlElement($_('#elapsedTime'));
   const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_PICKED_TIME);
-  $('#pickedTime').html(formatter.format(new Date()));
+  $_('#pickedTime').textContent = formatter.format(new Date());
 };
 // 経過時刻の非表示
 pcrevent.resident.elapsedTime.onDblclick = function() {
-  $('#elapsedTime').toggleClass('is-hidden', true);
+  pcrutil.hideHtmlElement($_('#elapsedTime'));
 };
 
 // ユーザー設定ページへ遷移
@@ -80,9 +80,10 @@ pcrevent.goToConfig.onClick = function() {
   pcrconfig.refreshConfigView();
 };
 // コンテンツページでエスケープが押された場合、ユーザー設定ページへ遷移
-pcrevent.goToConfig.onKeydown = function(e) {
+pcrevent.goToConfig.onKeydown = function(event) {
   if (!pcrnote.gViewController.isPageContent()) return;
-  if (e.keyCode !== 27) return;
+  const ASCII_CODE_ESC = 27;
+  if (event.keyCode !== ASCII_CODE_ESC) return;
   pcrevent.goToConfig.onClick();
 };
 
@@ -106,7 +107,7 @@ pcrevent.importDataFromFile.onChange = function() {
 pcrevent.exportDataToFile.onClick = function() {
   const FUNC_NAME = 'pcrevent.exportDataToFile.onClick';
 
-  const selectedFileType = $('#fileType').find(':selected').val();
+  const selectedFileType = pcrutil.getSelectBoxState($_('#fileType')).value;
   // 対戦情報一覧をファイルに保存
   if (
     selectedFileType === pcrdef.FileType.JSON ||
@@ -141,12 +142,14 @@ pcrevent.syncDataWithServer.onClick = function() {
   // 同期(サーバーからデータ取得)
   if (pcrnote.gVsSetTable.isImportDataSync()) {
     pcrnote.gVsSetTable.importDataFromServer(
+      // 成功時後処理
       () => {
         pcrview.buildHashtagSelectBox();
         pcract.sortVsSetTable();
         pcract.filterVsSetTable();
         pcrview.refreshContentView();
       },
+      // 失敗時後処理
       () => {
         pcrview.refreshContentView();
       }
@@ -155,10 +158,12 @@ pcrevent.syncDataWithServer.onClick = function() {
   // 更新確定(サーバーに更新データ送信)
   } else if (pcrnote.gVsSetTable.isImportDataAsync()) {
     pcrnote.gVsSetTable.exportDataToServer(
+      // 成功時後処理
       () => {
         pcrutil.popup(pcrmsg.getN(FUNC_NAME, 0));
         pcrview.refreshContentView();
       },
+      // 失敗時後処理
       () => {
         pcrutil.popup(pcrmsg.getN(FUNC_NAME, 1));
         pcrview.refreshContentView();
@@ -200,9 +205,9 @@ pcrevent.startUnitSearch.onClick = function() {
 
 // ハッシュタグ切り替え
 pcrevent.hashtag.onChange = function() {
-  const hashtag1 = pcract.getSelectedHashtag1();
-  const hashtag2 = pcract.getSelectedHashtag2();
-  if (hashtag1 === 'rebuild' || hashtag2 === 'rebuild') {
+  const hashtag1 = pcrutil.getSelectBoxState($_('#hashtag1')).value;
+  const hashtag2 = pcrutil.getSelectBoxState($_('#hashtag2')).value;
+  if (hashtag1 === '[rebuild]' || hashtag2 === '[rebuild]') {
     pcrview.buildHashtagSelectBox();
   }
   pcract.filterVsSetTable();
@@ -221,18 +226,22 @@ pcrevent.newVsSet.defenseParty.onClick = function() {
 
 // 新規登録部の選択ユニットの更新(追加したユニットから操作)
 pcrevent.newVsSet.offensePartyUnit.onClick = function() {
-  const index = $('#newVsSet [name=offensePartyUnit]').index(this);
+  const unitIndex = pcrutil.indexOfHtmlElement(
+    $$_('#newVsSet [name=offensePartyUnit]'), this
+  );
   const offenseParty = pcrnote.gNewVsSet.offenseParty;
-  const unitID = offenseParty[offenseParty.length - 1 - index];
+  const unitID = offenseParty[offenseParty.length - 1 - unitIndex];
   if (unitID !== '') {
     pcract.toggleUnitSelection(pcrnote.gNewVsSet.offenseParty, unitID);
   }
   //pcrview.refreshContentView(); 画面更新は親要素で行っている
 };
 pcrevent.newVsSet.defensePartyUnit.onClick = function() {
-  const index = $('#newVsSet [name=defensePartyUnit]').index(this);
+  const unitIndex = pcrutil.indexOfHtmlElement(
+    $$_('#newVsSet [name=defensePartyUnit]'), this
+  );
   const defenseParty = pcrnote.gNewVsSet.defenseParty;
-  const unitID = defenseParty[defenseParty.length - 1 - index];
+  const unitID = defenseParty[defenseParty.length - 1 - unitIndex];
   if (unitID !== '') {
     pcract.toggleUnitSelection(pcrnote.gNewVsSet.defenseParty, unitID);
   }
@@ -240,24 +249,21 @@ pcrevent.newVsSet.defensePartyUnit.onClick = function() {
 };
 
 // 新規登録部の評価値の更新
-pcrevent.newVsSet.rating.onClick = function(e) {
-  const centralPos = [$(this).width() / 2, $(this).height() / 2];
-  const clickPos = [
-    e.pageX - $(this).offset().left,
-    e.pageY - $(this).offset().top
-  ];
+pcrevent.newVsSet.rating.onClick = function(event) {
+  const elemRect = this.getBoundingClientRect();
+  const clickPos = pcrutil.getClickPosOnHtmlElement(this, event);
 
-  pcract.raiseOrLowerRating(pcrnote.gNewVsSet, centralPos, clickPos);
+  pcract.raiseOrLowerRating(pcrnote.gNewVsSet, elemRect, clickPos);
 
   // 負荷を避けるため評価部のみ直接画面更新
-  $(this).html(pcrview.makeRatingHtml(pcrnote.gNewVsSet));
+  this.innerHTML = pcrview.makeRatingHtml(pcrnote.gNewVsSet);
 };
 
 // 新規登録部のコメントの更新
 pcrevent.newVsSet.commentArea.onChange = function() {
-  const $commentArea = $('#newVsSet [name=commentArea]');
-  const newComment = $commentArea.val().trimEnd();
-  $commentArea.val(newComment);
+  const $commentArea = $_('#newVsSet [name=commentArea]');
+  const newComment = $commentArea.value.trimEnd();
+  $commentArea.value = newComment;
   pcrnote.gNewVsSet.comment = newComment;
 };
 
@@ -351,11 +357,18 @@ pcrevent.newVsSet.copyVsSet.onClick = function() {
 
 // 新規登録内容の消去
 pcrevent.newVsSet.clearVsSet.onClick = function() {
+  const $newVsSet = $_('#newVsSet');
+  const $rating = $newVsSet.querySelector('[name=rating]');
+  const $commentArea = $newVsSet.querySelector('[name=commentArea]');
+
   pcract.initNewVsSet();
 
+  // 評価値とコメントは共通の画面更新処理を介さず直接更新するので、手動で消去
+  $rating.innerHTML = pcrview.makeRatingHtml(pcrnote.gNewVsSet);
+  $commentArea.value = '';
+
   // コメント入力部の大きさも復元
-  const height = $('#commentAreaForResotration').css('height');
-  $('#newVsSet [name=commentArea').css('height', height);
+  $commentArea.style.height = $_('#commentAreaForResotration').style.height;
 
   pcrview.refreshContentView();
 };
@@ -372,16 +385,20 @@ pcrevent.searchVsSet.defenseParty.onClick = function() {
 
 // ユニット検索部の選択ユニットの更新(追加したユニットから操作)
 pcrevent.searchVsSet.offensePartyUnit.onClick = function() {
-  const index = $('#searchVsSet [name=offensePartyUnit]').index(this);
+  const unitIndex = pcrutil.indexOfHtmlElement(
+    $$_('#searchVsSet [name=offensePartyUnit]'), this
+  );
   const offenseParty = pcract.getOffenseParty(pcrnote.gSearchVsSet);
-  const unitID = offenseParty[offenseParty.length - 1 - index];
+  const unitID = offenseParty[offenseParty.length - 1 - unitIndex];
   pcract.toggleUnitSelection(offenseParty, unitID);
   //pcrview.refreshContentView(); 画面更新は親要素で行っている
 };
 pcrevent.searchVsSet.defensePartyUnit.onClick = function() {
-  const index = $('#searchVsSet [name=defensePartyUnit]').index(this);
+  const unitIndex = pcrutil.indexOfHtmlElement(
+    $$_('#searchVsSet [name=defensePartyUnit]'), this
+  );
   const defenseParty = pcract.getDefenseParty(pcrnote.gSearchVsSet);
-  const unitID = defenseParty[defenseParty.length - 1 - index];
+  const unitID = defenseParty[defenseParty.length - 1 - unitIndex];
   pcract.toggleUnitSelection(defenseParty, unitID);
   pcract.filterVsSetTable();
   //pcrview.refreshContentView(); 画面更新は親要素で行っている
@@ -389,9 +406,11 @@ pcrevent.searchVsSet.defensePartyUnit.onClick = function() {
 
 // 編成用ワイルドカードの切り替え
 pcrevent.searchVsSet.defensePartyUnit.onDblclick = function() {
-  const index = $('#searchVsSet [name=defensePartyUnit]').index(this);
+  const unitIndex = pcrutil.indexOfHtmlElement(
+    $$_('#searchVsSet [name=defensePartyUnit]'), this
+  );
   const defenseParty = pcract.getDefenseParty(pcrnote.gSearchVsSet);
-  const pos = defenseParty.length - 1 - index;
+  const pos = defenseParty.length - 1 - unitIndex;
   pcract.toggleUnitWildcard(defenseParty, pos);
 
   pcract.filterVsSetTable();
@@ -402,10 +421,15 @@ pcrevent.searchVsSet.defensePartyUnit.onDblclick = function() {
 pcrevent.searchVsSet.currSlotNum.onDblclick = function() {
   const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
   const currSlot = pcrnote.gSearchVsSet.slotList[currSlotNum];
-  const tempParty = currSlot.offenseParty.slice();
-  currSlot.offenseParty = currSlot.defenseParty.slice();
+  const tempParty = currSlot.offenseParty;
+  currSlot.offenseParty = currSlot.defenseParty;
   currSlot.defenseParty = tempParty;
   pcract.removeUnitWildcardFromParty(currSlot.offenseParty);
+  if (pcrnote.gViewController.isSearchTabOffenseOn()) {
+    pcrnote.gViewController.switchSearchTabDefenseOn();
+  } else {
+    pcrnote.gViewController.switchSearchTabOffenseOn();
+  }
 
   pcract.filterVsSetTable();
   pcrview.refreshContentView(); // ダブルクリック(タップ)時は画面更新が必要
@@ -413,19 +437,22 @@ pcrevent.searchVsSet.currSlotNum.onDblclick = function() {
 
 // 検索登録部のコメントの更新
 pcrevent.searchVsSet.commentArea.onChange = function() {
-  const $commentArea = $('#searchVsSet [name=commentArea]');
-  const newComment = $commentArea.val().trimEnd();
-  $commentArea.val(newComment);
+  const $commentArea = $_('#searchVsSet [name=commentArea]');
+  const newComment = $commentArea.value.trimEnd();
+  $commentArea.value = newComment;
   pcrnote.gSearchVsSet.comment = newComment;
 };
 
 // ユニット検索部のスロット切り替え
 pcrevent.searchVsSet.switchVsSet.onClick = function() {
-  const index = $('#searchVsSet [name=switchVsSet]').index(this);
+  const buttonIndex = pcrutil.indexOfHtmlElement(
+    $$_('#searchVsSet [name=switchVsSet]'), this
+  );
+
   let nextSlotNum = pcrnote.gSearchVsSet.currSlotNum;
-  if (index === 0) {
+  if (buttonIndex === 0) {
     --nextSlotNum;
-  } else if (index === 1) {
+  } else if (buttonIndex === 1) {
     ++nextSlotNum;
   }
   if (nextSlotNum < 0) {
@@ -466,8 +493,8 @@ pcrevent.searchVsSet.clearVsSet.onClick = function() {
   currSlot.defenseParty = pcract.makeEmptyParty();
 
   // コメント入力部の大きさも復元
-  const height = $('#commentAreaForResotration').css('height');
-  $('#searchVsSet [name=commentArea').css('height', height);
+  $_('#searchVsSet [name=commentArea').style.height =
+    $_('#commentAreaForResotration').style.height;
 
   pcrnote.gViewController.switchSearchTabDefenseOn();
   pcract.filterVsSetTable();
@@ -476,8 +503,7 @@ pcrevent.searchVsSet.clearVsSet.onClick = function() {
 
 // ユニット一覧部から選択ユニットの更新
 pcrevent.unitCatalog.unitCatalogItem.onClick = function() {
-  const index = $('#unitCatalog [name=unitCatalogItem]').index(this);
-  const unitID = pcrnote.gUnitInfoTable.getAllData()[index].unitID;
+  const unitID = this.querySelector('[name=unitID]').textContent;
 
   let targetParty = undefined;
   if (pcrnote.gViewController.isNewTabOffenseOn()) {
@@ -507,43 +533,44 @@ pcrevent.unitCatalog.unitCatalogItem.onClick = function() {
 };
 
 // 検索結果一覧の評価値の更新
-pcrevent.resultVsSetList.rating.onClick = function(e) {
-  const index = $('#resultVsSetList [name=rating]').index(this);
-  const centralPos = [$(this).width() / 2, $(this).height() / 2];
-  const clickPos = [
-    e.pageX - $(this).offset().left,
-    e.pageY - $(this).offset().top
-  ];
+pcrevent.resultVsSetList.rating.onClick = function(event) {
+  const vsSetIndex = pcrutil.indexOfHtmlElement(
+    $$_('#resultVsSetList [name=rating]'), this
+  );
+  const elemRect = this.getBoundingClientRect();
+  const clickPos = pcrutil.getClickPosOnHtmlElement(this, event);
 
-  const updVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(index);
+  const updVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(vsSetIndex);
   const oldRating = pcrutil.deepCopy(updVsSet.rating);
-  pcract.raiseOrLowerRating(updVsSet, centralPos, clickPos);
+  pcract.raiseOrLowerRating(updVsSet, elemRect, clickPos);
 
   if (JSON.stringify(updVsSet.rating) !== JSON.stringify(oldRating)) {
     pcrnote.gVsSetTable.update(updVsSet);
   }
 
   // 負荷を避けるため評価部のみ直接画面更新
-  $(this).html(pcrview.makeRatingHtml(updVsSet));
+  this.innerHTML = pcrview.makeRatingHtml(updVsSet);
 
+  // メニュー部(同期ボタン)の更新
   pcrview.refreshContentView();
 };
 
 // 検索結果一覧のコメントの更新
 pcrevent.resultVsSetList.commentArea.onChange = function() {
-  const $allCommentArea = $('#resultVsSetList [name=commentArea]');
-  const index = $allCommentArea.index(this);
-  const $commentArea = $allCommentArea.eq(index);
-  const $commentLabel = $('#resultVsSetList [name=commentLabel]').eq(index);
+  const $commentAreaList = $$_('#resultVsSetList [name=commentArea]');
+  const commentIndex = pcrutil.indexOfHtmlElement($commentAreaList, this);
+  const $commentArea = $commentAreaList[commentIndex];
+  const $commentLabel =
+    $$_('#resultVsSetList [name=commentLabel]')[commentIndex];
 
-  const newComment = $commentArea.val().trimEnd();
-  $commentArea.val(newComment);
+  const newComment = $commentArea.value.trimEnd();
+  $commentArea.value = newComment;
   // 変更点がない場合、更新は行わない
-  if (newComment === $commentLabel.text()) return;
+  if (newComment === $commentLabel.textContent) return;
   // コメントラベルを同期
-  $commentLabel.text(newComment);
+  $commentLabel.textContent = newComment;
 
-  const updVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(index);
+  const updVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(commentIndex);
   updVsSet.comment = newComment;
   pcrnote.gVsSetTable.update(updVsSet);
 
@@ -552,12 +579,15 @@ pcrevent.resultVsSetList.commentArea.onChange = function() {
 
 // 検索結果一覧から新規登録部もしくはユニット検索部に編成を複製
 pcrevent.resultVsSetList.copyVsSet.onClick = function() {
-  const index = $('#resultVsSetList [name=copyVsSet]').index(this);
-  const resultVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(index);
+  const vsSetIndex = pcrutil.indexOfHtmlElement(
+    $$_('#resultVsSetList [name=copyVsSet]'), this
+  );
+  const resultVsSetRec =
+    pcrnote.gVsSetTable.getResult().pickDuplicating(vsSetIndex);
   if (pcrnote.gViewController.isNewTabOn()) {
     pcrnote.gNewVsSet = pcrutil.assignPartially(
       pcrnote.gNewVsSet,
-      resultVsSet,
+      resultVsSetRec,
       ['offenseParty', 'defenseParty', 'rating', 'comment']
     );
   } else if (pcrnote.gViewController.isSearchTabOn()) {
@@ -565,7 +595,7 @@ pcrevent.resultVsSetList.copyVsSet.onClick = function() {
     const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
     slotList[currSlotNum] = pcrutil.assignPartially(
       slotList[currSlotNum],
-      resultVsSet,
+      resultVsSetRec,
       ['offenseParty', 'defenseParty']
     );
   } else {
@@ -583,8 +613,11 @@ pcrevent.resultVsSetList.deleteVsSet.onClick = function() {
   const FUNC_NAME = 'pcrevent.resultVsSetList.deleteVsSet.onClick';
 
   const deleteVsSet = () => {
-    const index = $('#resultVsSetList [name=deleteVsSet]').index(this);
-    const delVsSet = pcrnote.gVsSetTable.getResult().pickDuplicating(index);
+    const buttonIndex = pcrutil.indexOfHtmlElement(
+      $$_('#resultVsSetList [name=deleteVsSet]'), this
+    );
+    const delVsSet =
+      pcrnote.gVsSetTable.getResult().pickDuplicating(buttonIndex);
     pcrnote.gVsSetTable.delete(delVsSet);
     pcract.filterVsSetTable();
     pcrview.refreshContentView();
@@ -601,15 +634,15 @@ pcrevent.switchViewStyle.onClick = function() {
 
 // 検索結果一覧のソート条件変更
 pcrevent.compareFunc.onChange = function() {
-  const compareFunc = $('#compareFunc').find(':selected').val();
-  pcrnote.gViewController.states.compareFunc = compareFunc;
+  pcrnote.gViewController.states.compareFunc =
+    pcrutil.getSelectBoxState($_('#compareFunc')).value;
   pcract.sortVsSetTable();
   pcract.filterVsSetTable();
   pcrview.refreshContentView();
 };
 pcrevent.orderBy.onChange = function() {
-  const orderBy = $('#orderBy').find(':selected').val();
-  pcrnote.gViewController.states.orderBy = orderBy;
+  pcrnote.gViewController.states.orderBy =
+    pcrutil.getSelectBoxState($_('#orderBy')).value;
   pcract.sortVsSetTable();
   pcract.filterVsSetTable();
   pcrview.refreshContentView();
@@ -617,45 +650,74 @@ pcrevent.orderBy.onChange = function() {
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-// イベントリスナー登録
+// 初期化時のイベントリスナー登録
 pcrevent.addEventListener = function() {
-  $('#currentTime').on('dblclick', pcrevent.resident.currentTime.onDblclick);
-  $('#pickedTime').on('dblclick', pcrevent.resident.pickedTime.onDblclick);
-  $('#elapsedTime').on('dblclick', pcrevent.resident.elapsedTime.onDblclick);
-  $('#goToConfig').on('click', pcrevent.goToConfig.onClick);
-  $(window).on('keydown', pcrevent.goToConfig.onKeydown);
-  $('#importDataFromFile').on('change', pcrevent.importDataFromFile.onChange);
-  $('#exportDataToFile').on('click', pcrevent.exportDataToFile.onClick);
-  $('#syncDataWithServer').on('click', pcrevent.syncDataWithServer.onClick);
-  $('#switchUsedFor').on('click', pcrevent.switchUsedFor.onClick);
-  $('#startNewRegist').on('click', pcrevent.startNewRegist.onClick);
-  $('#startUnitSearch').on('click', pcrevent.startUnitSearch.onClick);
-  $('#hashtag1').on('change', pcrevent.hashtag.onChange);
-  $('#hashtag2').on('change', pcrevent.hashtag.onChange);
-  $('#newVsSet').on('click', '[name=offenseParty]', pcrevent.newVsSet.offenseParty.onClick);
-  $('#newVsSet').on('click', '[name=defenseParty]', pcrevent.newVsSet.defenseParty.onClick);
-  $('#newVsSet').on('click', '[name=offensePartyUnit]', pcrevent.newVsSet.offensePartyUnit.onClick);
-  $('#newVsSet').on('click', '[name=defensePartyUnit]', pcrevent.newVsSet.defensePartyUnit.onClick);
-  $('#newVsSet').on('click', '[name=rating]', pcrevent.newVsSet.rating.onClick);
-  $('#newVsSet').on('change', '[name=commentArea]', pcrevent.newVsSet.commentArea.onChange);
-  $('#newVsSet').on('click', '[name=registVsSet]', pcrevent.newVsSet.registVsSet.onClick);
-  $('#newVsSet').on('click', '[name=copyVsSet]', pcrevent.newVsSet.copyVsSet.onClick);
-  $('#newVsSet').on('click', '[name=clearVsSet]', pcrevent.newVsSet.clearVsSet.onClick);
-  $('#searchVsSet').on('click', '[name=offenseParty]', pcrevent.searchVsSet.offenseParty.onClick);
-  $('#searchVsSet').on('click', '[name=defenseParty]', pcrevent.searchVsSet.defenseParty.onClick);
-  $('#searchVsSet').on('click', '[name=offensePartyUnit]', pcrevent.searchVsSet.offensePartyUnit.onClick);
-  $('#searchVsSet').on('click', '[name=defensePartyUnit]', pcrevent.searchVsSet.defensePartyUnit.onClick);
-  $('#searchVsSet').on('dblclick', '[name=defensePartyUnit]', pcrevent.searchVsSet.defensePartyUnit.onDblclick);
-  $('#searchVsSet').on('dblclick', '[name=currSlotNum]', pcrevent.searchVsSet.currSlotNum.onDblclick);
-  $('#searchVsSet').on('change', '[name=commentArea]', pcrevent.searchVsSet.commentArea.onChange);
-  $('#searchVsSet').on('click', '[name=switchVsSet]', pcrevent.searchVsSet.switchVsSet.onClick);
-  $('#searchVsSet').on('click', '[name=clearVsSet]', pcrevent.searchVsSet.clearVsSet.onClick);
-  $('#unitCatalog').on('click', '[name=unitCatalogItem]', pcrevent.unitCatalog.unitCatalogItem.onClick);
-  $('#resultVsSetList').on('click', '[name=rating]', pcrevent.resultVsSetList.rating.onClick);
-  $('#resultVsSetList').on('change', '[name=commentArea]', pcrevent.resultVsSetList.commentArea.onChange);
-  $('#resultVsSetList').on('click', '[name=copyVsSet]', pcrevent.resultVsSetList.copyVsSet.onClick);
-  $('#resultVsSetList').on('click', '[name=deleteVsSet]', pcrevent.resultVsSetList.deleteVsSet.onClick);
-  $('#switchViewStyle').on('click', pcrevent.switchViewStyle.onClick);
-  $('#compareFunc').on('change', pcrevent.compareFunc.onChange);
-  $('#orderBy').on('change', pcrevent.orderBy.onChange);
+  $on($_('#blur'), 'click', function() {}); // iOSのフォーカス外し用
+  $on($_('#currentTime'), 'dblclick', pcrevent.resident.currentTime.onDblclick);
+  $on($_('#pickedTime'), 'dblclick', pcrevent.resident.pickedTime.onDblclick);
+  $on($_('#elapsedTime'), 'dblclick', pcrevent.resident.elapsedTime.onDblclick);
+  $on($_('#goToConfig'), 'click', pcrevent.goToConfig.onClick);
+  $on(window, 'keydown', pcrevent.goToConfig.onKeydown);
+  $on($_('#importDataFromFile'), 'change', pcrevent.importDataFromFile.onChange);
+  $on($_('#exportDataToFile'), 'click', pcrevent.exportDataToFile.onClick);
+  $on($_('#syncDataWithServer'), 'click', pcrevent.syncDataWithServer.onClick);
+  $on($_('#switchUsedFor'), 'click', pcrevent.switchUsedFor.onClick);
+  $on($_('#startNewRegist'), 'click', pcrevent.startNewRegist.onClick);
+  $on($_('#startUnitSearch'), 'click', pcrevent.startUnitSearch.onClick);
+  $on($_('#hashtag1'), 'change', pcrevent.hashtag.onChange);
+  $on($_('#hashtag2'), 'change', pcrevent.hashtag.onChange);
+  const $newVsSet = $_('#newVsSet');
+  $on($newVsSet.querySelector('[name=offenseParty]'), 'click', pcrevent.newVsSet.offenseParty.onClick);
+  $on($newVsSet.querySelector('[name=defenseParty]'), 'click', pcrevent.newVsSet.defenseParty.onClick);
+  $on($newVsSet.querySelector('[name=rating]'), 'click', pcrevent.newVsSet.rating.onClick);
+  $on($newVsSet.querySelector('[name=commentArea]'), 'change', pcrevent.newVsSet.commentArea.onChange);
+  $on($newVsSet.querySelector('[name=registVsSet]'), 'click', pcrevent.newVsSet.registVsSet.onClick);
+  $on($newVsSet.querySelector('[name=copyVsSet]'), 'click', pcrevent.newVsSet.copyVsSet.onClick);
+  $on($newVsSet.querySelector('[name=clearVsSet]'), 'click', pcrevent.newVsSet.clearVsSet.onClick);
+  const $searchVsSet = $_('#searchVsSet');
+  $on($searchVsSet.querySelector('[name=offenseParty]'), 'click', pcrevent.searchVsSet.offenseParty.onClick);
+  $on($searchVsSet.querySelector('[name=defenseParty]'), 'click', pcrevent.searchVsSet.defenseParty.onClick);
+  $on($searchVsSet.querySelector('[name=currSlotNum]'), 'dblclick', pcrevent.searchVsSet.currSlotNum.onDblclick);
+  $on($searchVsSet.querySelector('[name=commentArea]'), 'change', pcrevent.searchVsSet.commentArea.onChange);
+  $searchVsSet.querySelectorAll('[name=switchVsSet]').forEach(($switchVsSet) => {
+    $on($switchVsSet, 'click', pcrevent.searchVsSet.switchVsSet.onClick);
+  });
+  $on($searchVsSet.querySelector('[name=clearVsSet]'), 'click', pcrevent.searchVsSet.clearVsSet.onClick);
+  $$_('#unitCatalog [name=unitCatalogItem]').forEach(($unitCatalogItem) => {
+    $on($unitCatalogItem, 'click', pcrevent.unitCatalog.unitCatalogItem.onClick);
+  });
+  $on($_('#switchViewStyle'), 'click', pcrevent.switchViewStyle.onClick);
+  $on($_('#compareFunc'), 'change', pcrevent.compareFunc.onChange);
+  $on($_('#orderBy'), 'change', pcrevent.orderBy.onChange);
+};
+
+// 新規登録部のイベントリスナー追加登録
+pcrevent.addEventListenerOnNewVsSet = function() {
+  $$_('#newVsSet [name=offensePartyUnit]').forEach(($offensePartyUnit) => {
+    $on($offensePartyUnit, 'click', pcrevent.newVsSet.offensePartyUnit.onClick);
+  });
+  $$_('#newVsSet [name=defensePartyUnit]').forEach(($defensePartyUnit) => {
+    $on($defensePartyUnit, 'click', pcrevent.newVsSet.defensePartyUnit.onClick);
+  });
+};
+
+// ユニット検索部のイベントリスナー追加登録
+pcrevent.addEventListenerOnSearchVsSet = function() {
+  $$_('#searchVsSet [name=offensePartyUnit]').forEach(($offensePartyUnit) => {
+    $on($offensePartyUnit, 'click', pcrevent.searchVsSet.offensePartyUnit.onClick);
+  });
+  $$_('#searchVsSet [name=defensePartyUnit]').forEach(($defensePartyUnit) => {
+    $on($defensePartyUnit, 'click', pcrevent.searchVsSet.defensePartyUnit.onClick);
+    $on($defensePartyUnit, 'dblclick', pcrevent.searchVsSet.defensePartyUnit.onDblclick);
+  });
+};
+
+// 検索結果一覧部のイベントリスナー追加登録
+pcrevent.addEventListenerOnResultVsSetList = function() {
+  $$_('#resultVsSetList [name=resultVsSetRec]').forEach(($resultVsSetRec) => {
+    $on($resultVsSetRec.querySelector('[name=rating]'), 'click', pcrevent.resultVsSetList.rating.onClick);
+    $on($resultVsSetRec.querySelector('[name=commentArea]'), 'change', pcrevent.resultVsSetList.commentArea.onChange);
+    $on($resultVsSetRec.querySelector('[name=copyVsSet]'), 'click', pcrevent.resultVsSetList.copyVsSet.onClick);
+    $on($resultVsSetRec.querySelector('[name=deleteVsSet]'), 'click', pcrevent.resultVsSetList.deleteVsSet.onClick);
+  });
 };

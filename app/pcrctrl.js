@@ -284,8 +284,8 @@ pcrctrl.ContentViewRefreshObserver.prototype.collectCurrStates = function() {
     lastModified: pcrnote.gVsSetTable.getResult().lastModified,
     newVsSet: pcrutil.deepCopy(pcrnote.gNewVsSet),
     searchVsSet: pcrutil.deepCopy(pcrnote.gSearchVsSet),
-    hashtag1: pcract.getSelectedHashtag1(),
-    hashtag2: pcract.getSelectedHashtag2()
+    hashtag1: pcrutil.getSelectBoxState($_('#hashtag1')).value,
+    hashtag2: pcrutil.getSelectBoxState($_('#hashtag2')).value
   };
 };
 

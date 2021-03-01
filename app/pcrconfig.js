@@ -76,34 +76,34 @@ pcrconfig.init = function() {
 // ユーザー設定を画面表示から内部データへ
 pcrconfig.configViewToConfigData = function(configData) {
   configData.items = {
-    userName: $('#userName').val().trim(),
-    keepUserName: $('#keepUserName').prop('checked'),
-    hideUserName: $('#hideUserName').prop('checked'),
-    dbName: $('#dbName').val().trim(),
-    keepDBName: $('#keepDBName').prop('checked'),
-    hideDBName: $('#hideDBName').prop('checked'),
-    searchStartUnitsMin: $('#searchStartUnitsMin').find(':selected').val(),
-    numOfSearchPartySlots: $('#numOfSearchPartySlots').find(':selected').val(),
-    searchResultLimit: $('#searchResultLimit').find(':selected').val(),
-    displayCurrentTime: $('#displayCurrentTime').prop('checked'),
-    clientServerMode: $('#clientServerMode').prop('checked'),
-    saveCookie: $('#saveCookie').prop('checked')
+    userName: $_('#userName').value.trim(),
+    keepUserName: $_('#keepUserName').checked,
+    hideUserName: $_('#hideUserName').checked,
+    dbName: $_('#dbName').value.trim(),
+    keepDBName: $_('#keepDBName').checked,
+    hideDBName: $_('#hideDBName').checked,
+    searchStartUnitsMin: pcrutil.getSelectBoxState($_('#searchStartUnitsMin')).value,
+    numOfSearchPartySlots: pcrutil.getSelectBoxState($_('#numOfSearchPartySlots')).value,
+    searchResultLimit: pcrutil.getSelectBoxState($_('#searchResultLimit')).value,
+    displayCurrentTime: $_('#displayCurrentTime').checked,
+    clientServerMode: $_('#clientServerMode').checked,
+    saveCookie: $_('#saveCookie').checked
   };
 }
 // ユーザー設定を内部データから画面表示へ
 pcrconfig.configDataToConfigView = function(configData) {
-  $('#userName').val(configData.userName);
-  $('#keepUserName').prop('checked', configData.keepUserName);
-  $('#hideUserName').prop('checked', configData.hideUserName);
-  $('#dbName').val(configData.dbName);
-  $('#keepDBName').prop('checked', configData.keepDBName);
-  $('#hideDBName').prop('checked', configData.hideDBName);
-  $('#searchStartUnitsMin').val(configData.searchStartUnitsMin);
-  $('#numOfSearchPartySlots').val(configData.numOfSearchPartySlots);
-  $('#searchResultLimit').val(configData.searchResultLimit);
-  $('#displayCurrentTime').prop('checked', configData.displayCurrentTime);
-  $('#clientServerMode').prop('checked', configData.clientServerMode);
-  $('#saveCookie').prop('checked', configData.saveCookie);
+  $_('#userName').value = configData.userName;
+  $_('#keepUserName').checked = configData.keepUserName;
+  $_('#hideUserName').checked = configData.hideUserName;
+  $_('#dbName').value = configData.dbName;
+  $_('#keepDBName').checked = configData.keepDBName;
+  $_('#hideDBName').checked = configData.hideDBName;
+  $_('#searchStartUnitsMin').value = configData.searchStartUnitsMin;
+  $_('#numOfSearchPartySlots').value = configData.numOfSearchPartySlots;
+  $_('#searchResultLimit').value = configData.searchResultLimit;
+  $_('#displayCurrentTime').checked = configData.displayCurrentTime;
+  $_('#clientServerMode').checked = configData.clientServerMode;
+  $_('#saveCookie').checked = configData.saveCookie;
 };
 
 // ユーザー設定のうち保持しない項目を消去
@@ -149,22 +149,22 @@ pcrconfig.removeConfigDataFromCookie = function() {
 
 // ユーザー設定画面のユーザー名入力フィールド内容の表示非表示を切り替え
 pcrconfig.switchDisplayOfUserNameInputField = function() {
-  const $userName = $('#userName');
-  const $hideUserName = $('#hideUserName');
-  if (!$hideUserName.prop('checked')) {
-    $userName.attr('type', 'text');
+  const $userName = $_('#userName');
+  const $hideUserName = $_('#hideUserName');
+  if (!$hideUserName.checked) {
+    $userName.setAttribute('type', 'text');
   } else {
-    $userName.attr('type', 'password');
+    $userName.setAttribute('type', 'password');
   }
 };
 // ユーザー設定画面のデータベース名入力フィールド内容の表示非表示を切り替え
 pcrconfig.switchDisplayOfDBNameInputField = function() {
-  const $dbName = $('#dbName');
-  const $hideDBName = $('#hideDBName');
-  if (!$hideDBName.prop('checked')) {
-    $dbName.attr('type', 'text');
+  const $dbName = $_('#dbName');
+  const $hideDBName = $_('#hideDBName');
+  if (!$hideDBName.checked) {
+    $dbName.setAttribute('type', 'text');
   } else {
-    $dbName.attr('type', 'password');
+    $dbName.setAttribute('type', 'password');
   }
 };
 
@@ -179,7 +179,7 @@ pcrconfig.refreshConfigView = function() {
   // ユーザー設定を画面表示へ反映
   pcrconfig.configDataToConfigView(pcrnote.gConfigData);
   // キーボードで扱いやすいようフォーカスを設定
-  $('#dummyConfigItem1').focus();
+  $_('#dummyConfigItem1').focus();
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -211,9 +211,10 @@ pcrconfig.goToContent.onClick = function() {
   pcrview.refreshContentView();
 };
 // ユーザー設定ページでエンターが押された場合、コンテンツページへ遷移
-pcrconfig.goToContent.onKeydown = function(e) {
+pcrconfig.goToContent.onKeydown = function(event) {
   if (!pcrnote.gViewController.isPageConfig()) return;
-  if (e.keyCode !== 13) return;
+  const ASCII_CODE_CR = 13;
+  if (event.keyCode !== ASCII_CODE_CR) return;
   pcrconfig.goToContent.onClick();
 };
 
@@ -233,9 +234,9 @@ pcrconfig.displayCurrentTime.onClick = function() {
 
 // イベントリスナー登録
 pcrconfig.addEventListener = function() {
-  $('#goToContent').on('click', pcrconfig.goToContent.onClick);
-  $(window).on('keydown', pcrconfig.goToContent.onKeydown);
-  $('#hideUserName').on('click', pcrconfig.hideUserName.onClick);
-  $('#hideDBName').on('click', pcrconfig.hideDBName.onClick);
-  $('#displayCurrentTime').on('click', pcrconfig.displayCurrentTime.onClick);
+  $on($_('#goToContent'), 'click', pcrconfig.goToContent.onClick);
+  $on(window, 'keydown', pcrconfig.goToContent.onKeydown);
+  $on($_('#hideUserName'), 'click', pcrconfig.hideUserName.onClick);
+  $on($_('#hideDBName'), 'click', pcrconfig.hideDBName.onClick);
+  $on($_('#displayCurrentTime'), 'click', pcrconfig.displayCurrentTime.onClick);
 };

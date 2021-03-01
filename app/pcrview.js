@@ -36,15 +36,16 @@ pcrview.convertToNumForDisplay = function(num) {
 pcrview.setLabelOfSyncDataWithServer = function() {
   const FUNC_NAME = 'pcrview.setLabelOfSyncDataWithServer';
 
+  const $syncDataWithServer = $_('#syncDataWithServer');
   switch (pcrnote.gVsSetTable.getImportState()) {
   case pcrdef.VsSetTableImportState.SYNC:
-    $('#syncDataWithServer').html(pcrmsg.getN(FUNC_NAME, 0));
+    $syncDataWithServer.textContent = pcrmsg.getN(FUNC_NAME, 0);
     break;
   case pcrdef.VsSetTableImportState.ASYNC:
-    $('#syncDataWithServer').html(pcrmsg.getN(FUNC_NAME, 1));
+    $syncDataWithServer.textContent = pcrmsg.getN(FUNC_NAME, 1);
     break;
   case pcrdef.VsSetTableImportState.WHILE_SYNC:
-    $('#syncDataWithServer').html(pcrmsg.getN(FUNC_NAME, 2));
+    $syncDataWithServer.textContent = pcrmsg.getN(FUNC_NAME, 2);
     break;
   }
 };
@@ -53,12 +54,13 @@ pcrview.setLabelOfSyncDataWithServer = function() {
 pcrview.setUsedForLabel = function() {
   const FUNC_NAME = 'pcrview.setUsedForLabel';
 
+  const $usedFor = $_('#switchUsedFor');
   switch (pcrnote.gViewController.usedFor) {
   case pcrdef.ViewController.USED_FOR_ARENA:
-    $('#switchUsedFor').html(pcrmsg.getN(FUNC_NAME, 0));
+    $usedFor.textContent = pcrmsg.getN(FUNC_NAME, 0);
     break;
   case pcrdef.ViewController.USED_FOR_CLANBATTLE:
-    $('#switchUsedFor').html(pcrmsg.getN(FUNC_NAME, 1));
+    $usedFor.textContent = pcrmsg.getN(FUNC_NAME, 1);
     break;
   }
 };
@@ -67,38 +69,38 @@ pcrview.setUsedForLabel = function() {
 pcrview.setViewStyleLabel = function() {
   const FUNC_NAME = 'pcrview.setViewStyleLabel';
 
-  const $viewStyle = $('#switchViewStyle');
+  const $viewStyle = $_('#switchViewStyle');
   switch (pcrnote.gViewController.viewStyle) {
   case pcrdef.ViewController.VIEW_STYLE_MINIMUM:
-    $viewStyle.html(pcrmsg.getN(FUNC_NAME, 0));
+    $viewStyle.textContent = pcrmsg.getN(FUNC_NAME, 0);
     break;
   case pcrdef.ViewController.VIEW_STYLE_SIMPLE:
-    $viewStyle.html(pcrmsg.getN(FUNC_NAME, 1));
+    $viewStyle.textContent = pcrmsg.getN(FUNC_NAME, 1);
     break;
   case pcrdef.ViewController.VIEW_STYLE_NORMAL:
-    $viewStyle.html(pcrmsg.getN(FUNC_NAME, 2));
+    $viewStyle.textContent = pcrmsg.getN(FUNC_NAME, 2);
     break;
   }
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-// jQueryオブジェクトで作成すると遅くなるので、頻繁に呼び出される部分はHTMLで作成
+// オブジェクトで作成すると遅くなるので、頻繁に呼び出される部分はHTML文字列で作成
 
 // ユニット情報(ID、名称、画像)HTML作成
 pcrview.UNIT_INFO_TEMPLATE_HTML_ = undefined;
 pcrview.makeUnitInfoHtml = function(unitInfo) {
   if (pcrview.UNIT_INFO_TEMPLATE_HTML_ === undefined) {
-    pcrview.UNIT_INFO_TEMPLATE_HTML_ = $('#unitInfoTemplate').html();
+    pcrview.UNIT_INFO_TEMPLATE_HTML_ = $_('#unitInfoTemplate').innerHTML;
   }
   const escUnitImageURL =
     unitInfo.imageURL.replace('(', '\\(').replace(')', '\\)');
-  const unitNameTitle = `title="${unitInfo.unitName}"`;
+  const title = `title="${unitInfo.unitName}"`;
   const bgImageStyle = `style="background-image: url(${escUnitImageURL});"`;
   const html = pcrview.UNIT_INFO_TEMPLATE_HTML_
     .replace('<!--UNIT_ID-->', unitInfo.unitID)
     .replace('<!--UNIT_NAME-->', unitInfo.unitName)
-    .replace('title="UNIT_NAME"', unitNameTitle)
+    .replace('title="UNIT_NAME"', title)
     .replace('style="background-image: none;"', bgImageStyle);
   return html;
 };
@@ -107,7 +109,7 @@ pcrview.makeUnitInfoHtml = function(unitInfo) {
 pcrview.UNIT_WILDCARD_TEMPLATE_HTML_ = undefined;
 pcrview.makeUnitWildcardHtml = function() {
   if (pcrview.UNIT_WILDCARD_TEMPLATE_HTML_ === undefined) {
-    pcrview.UNIT_WILDCARD_TEMPLATE_HTML_ = $('#unitWildcardTemplate').html();
+    pcrview.UNIT_WILDCARD_TEMPLATE_HTML_ = $_('#unitWildcardTemplate').innerHTML;
   }
   return pcrview.UNIT_WILDCARD_TEMPLATE_HTML_;
 };
@@ -132,7 +134,7 @@ pcrview.makePartyHtml = function(html, party) {
 pcrview.OFFENSE_PARTY_TEMPLATE_HTML_ = undefined;
 pcrview.makeOffensePartyHtml = function(vsSet) {
   if (pcrview.OFFENSE_PARTY_TEMPLATE_HTML_ === undefined) {
-    pcrview.OFFENSE_PARTY_TEMPLATE_HTML_ = $('#offensePartyTemplate').html();
+    pcrview.OFFENSE_PARTY_TEMPLATE_HTML_ = $_('#offensePartyTemplate').innerHTML;
   }
   return pcrview.makePartyHtml(
     pcrview.OFFENSE_PARTY_TEMPLATE_HTML_,
@@ -143,7 +145,7 @@ pcrview.makeOffensePartyHtml = function(vsSet) {
 pcrview.DEFENSE_PARTY_TEMPLATE_HTML_ = undefined;
 pcrview.makeDefensePartyHtml = function(vsSet) {
   if (pcrview.DEFENSE_PARTY_TEMPLATE_HTML_ === undefined) {
-    pcrview.DEFENSE_PARTY_TEMPLATE_HTML_ = $('#defensePartyTemplate').html();
+    pcrview.DEFENSE_PARTY_TEMPLATE_HTML_ = $_('#defensePartyTemplate').innerHTML;
   }
   return pcrview.makePartyHtml(
     pcrview.DEFENSE_PARTY_TEMPLATE_HTML_,
@@ -155,7 +157,7 @@ pcrview.makeDefensePartyHtml = function(vsSet) {
 pcrview.RATING_TEMPLATE_HTML_ = undefined;
 pcrview.makeRatingHtml = function(vsSet) {
   if (pcrview.RATING_TEMPLATE_HTML_ === undefined) {
-    pcrview.RATING_TEMPLATE_HTML_ = $('#ratingTemplate').html();
+    pcrview.RATING_TEMPLATE_HTML_ = $_('#ratingTemplate').innerHTML;
   }
   const goodMarkStateClassName =
     (vsSet.rating.good !== 0) ? 'is-on' : 'is-off';
@@ -232,119 +234,112 @@ pcrview.buildHashtagSelectBox = function() {
   for (const hashtag of allHashtagList) {
     html += `<option value="${hashtag}">${hashtag}</option>`;
   }
-  html += `<option value="rebuild">${pcrmsg.getN(FUNC_NAME, 1)}</option>`;
+  html += `<option value="[rebuild]">${pcrmsg.getN(FUNC_NAME, 1)}</option>`;
 
-  $('#hashtag1').html(html);
-  $('#hashtag1').val('');
-  $('#hashtag2').html(html);
-  $('#hashtag2').val('');
+  $_('#hashtag1').innerHTML = html;
+  $_('#hashtag1').selectedIndex = 0;
+  $_('#hashtag2').innerHTML = html;
+  $_('#hashtag2').selectedIndex = 0;
 };
 
 // 新規登録HTML構築
 pcrview.buildNewVsSetHtml = function() {
-  const $vsSet = $('#newVsSet');
+  const $vsSet = $_('#newVsSet');
   // 攻撃側HTML
-  $vsSet.find('[name=offenseParty]').html(
+  $vsSet.querySelector('[name=offenseParty]').innerHTML =
     pcrview.makeOffensePartyHtml(pcrnote.gNewVsSet)
-  );
   // 防衛側HTML
-  $vsSet.find('[name=defenseParty]').html(
+  $vsSet.querySelector('[name=defenseParty]').innerHTML =
     pcrview.makeDefensePartyHtml(pcrnote.gNewVsSet)
-  );
   // 評価HTML
-  $vsSet.find('[name=rating]').html(
+  $vsSet.querySelector('[name=rating]').innerHTML =
     pcrview.makeRatingHtml(pcrnote.gNewVsSet)
-  );
   // コメント入力領域
-  $vsSet.find('[name=commentArea]').val(
+  $vsSet.querySelector('[name=commentArea]').value =
     pcrnote.gNewVsSet.comment
-  );
 };
 
 // ユニット検索HTML構築
 pcrview.buildSearchVsSetHtml = function() {
-  const $vsSet = $('#searchVsSet');
+  const $vsSet = $_('#searchVsSet');
   // 攻撃側HTML
-  $vsSet.find('[name=offenseParty]').html(
+  $vsSet.querySelector('[name=offenseParty]').innerHTML =
     pcrview.makeOffensePartyHtml(pcrnote.gSearchVsSet)
-  );
   // 防衛側HTML
-  $vsSet.find('[name=defenseParty]').html(
+  $vsSet.querySelector('[name=defenseParty]').innerHTML =
     pcrview.makeDefensePartyHtml(pcrnote.gSearchVsSet)
-  );
   // コメント入力領域
-  $vsSet.find('[name=commentArea]').val(
+  $vsSet.querySelector('[name=commentArea]').value =
     pcrnote.gSearchVsSet.comment
-  );
   // 現在のスロット番号HTML
-  $vsSet.find('[name=currSlotNum]').html(
+  $vsSet.querySelector('[name=currSlotNum]').innerHTML =
     pcrview.makeCurrSlotNumHtml()
-  );
   // 切り替えボタンのラベルを変更
-  $('#searchVsSet [name=switchVsSet]').each((index, buttonDom) => {
-    $(buttonDom).html(
+  $vsSet.querySelectorAll('[name=switchVsSet]').forEach(($button, index) => {
+    $button.innerHTML =
       pcrview.makeSwitchButtonLabelHtml(pcrnote.gSearchVsSet, index)
-    );
   });
 };
 
 // ユニット一覧HTML構築
 pcrview.buildUnitCatalogHtml = function() {
-  const $unitCatalogItemTemplate = $('#unitCatalogItemTemplate');
-  $('#unitCatalog').empty();
+  const $unitCatalogItemTemplate =
+    $_('#unitCatalogItemTemplate').content.firstElementChild;
+  const $unitCatalog = $_('#unitCatalog');
+
+  $unitCatalog.textContent = '';
   const unitInfoList = pcrnote.gUnitInfoTable.getAllData();
   for (const unitInfo of unitInfoList) {
-    const $unitCatalogItem = $unitCatalogItemTemplate.children().clone();
-    $unitCatalogItem.html(pcrview.makeUnitInfoHtml(unitInfo));
-    $('#unitCatalog').append($unitCatalogItem);
+    const $unitCatalogItem = $unitCatalogItemTemplate.cloneNode(true);
+    $unitCatalogItem.innerHTML = pcrview.makeUnitInfoHtml(unitInfo);
+    $unitCatalog.appendChild($unitCatalogItem);
   }
 };
 
 // 検索結果一覧HTML構築
 pcrview.buildResultVsSetListHtml = function() {
-  const $resultVsSetTemplate = $('#resultVsSetTemplate').children();
+  const $resultVsSetTemplate =
+    $_('#resultVsSetTemplate').content.firstElementChild;
+  const $resultVsSetList = $_('#resultVsSetList');
+
+  $resultVsSetList.textContent = '';
   const resultVsSetList = pcrnote.gVsSetTable.getResult().limitedList;
-  $('#resultVsSetList').empty();
   for (const vsSet of resultVsSetList) {
-    const $vsSet = $resultVsSetTemplate.clone();
+    const $vsSet = $resultVsSetTemplate.cloneNode(true);
 
     // 攻撃側HTML
-    $vsSet.find('[name=offenseParty]').html(
+    $vsSet.querySelector('[name=offenseParty]').innerHTML =
       pcrview.makeOffensePartyHtml(vsSet)
-    );
     // 評価HTML
-    $vsSet.find('[name=rating]').html(
+    $vsSet.querySelector('[name=rating]').innerHTML =
       pcrview.makeRatingHtml(vsSet)
-    );
     // 防衛側HTML
-    $vsSet.find('[name=defenseParty]').html(
+    $vsSet.querySelector('[name=defenseParty]').innerHTML =
       pcrview.makeDefensePartyHtml(vsSet)
-    );
     // コメント入力領域
-    $vsSet.find('[name=commentArea]').val(
-      vsSet.comment
-    );
+    $vsSet.querySelector('[name=commentArea]').value = vsSet.comment
     // コメントラベル
-    $vsSet.find('[name=commentLabel]').text(
-      vsSet.comment
-    );
+    $vsSet.querySelector('[name=commentLabel]').innerText = vsSet.comment
     // 作成ユーザーHTML
-    $vsSet.find('[name=touchUser]').html(
+    $vsSet.querySelector('[name=touchUser]').innerHTML =
       pcrview.makeTouchUserHtml(vsSet)
-    );
     // 作成日時HTML
-    $vsSet.find('[name=touchDate]').html(
+    $vsSet.querySelector('[name=touchDate]').innerHTML =
       pcrview.makeTouchDateHtml(vsSet)
-    );
 
-    $('#resultVsSetList').append($vsSet);
+    $resultVsSetList.appendChild($vsSet);
   }
 
-  // 検索結果一覧のパディング設定
-  const $resultVsSetList = $('#resultVsSetList [name=resultVsSet]');
-  $resultVsSetList.toggleClass('is-followers', true);
-  // 最初の表示データは上側のパディング調整を行う
-  $resultVsSetList.first().removeClass('is-followers').addClass('is-first');
+  // 各検索結果間のパディング設定
+  const $resultVsSetRecList =
+    $resultVsSetList.querySelectorAll('[name=resultVsSetRec]');
+  $resultVsSetRecList.forEach(($vsSet, index) => {
+    if (index === 0) {
+      $vsSet.classList.add('is-first');
+    } else {
+      $vsSet.classList.add('is-followers');
+    }
+  });
 };
 
 // 検索結果メッセージHTML構築
@@ -361,7 +356,7 @@ pcrview.buildResultMessageHtml = function() {
   let resultMsg = undefined;
   // エラーが発生した場合
   if (errMsg !== '') {
-    resultMsg = errMsg.replace(/\n/g, '<br>');
+    resultMsg = errMsg;
   // 対戦情報テーブルにデータが1件もない場合
   } else if (vsSetList.length === 0) {
     resultMsg = pcrnote.gConfigData.clientServerMode ?
@@ -381,7 +376,7 @@ pcrview.buildResultMessageHtml = function() {
   } else {
     resultMsg = pcrutil.buildMessage(pcrmsg.getN(FUNC_NAME, 5), displayedNum);
   }
-  $('#resultMessage').html(resultMsg);
+  $_('#resultMessage').innerText = resultMsg;
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -390,60 +385,59 @@ pcrview.buildResultMessageHtml = function() {
 pcrview.colorMenu = function() {
   const isNewTabOn = pcrnote.gViewController.isNewTabOn();
   const isSearchTabOn = pcrnote.gViewController.isSearchTabOn();
-  $('#startNewRegist')
-    .toggleClass('is-selected', isNewTabOn)
-    .toggleClass('is-noselected', !isNewTabOn);
-  $('#startUnitSearch')
-    .toggleClass('is-selected', isSearchTabOn)
-    .toggleClass('is-noselected', !isSearchTabOn);
+  const $startNewRegist = $_('#startNewRegist');
+  $startNewRegist.classList.toggle('is-selected', isNewTabOn);
+  $startNewRegist.classList.toggle('is-noselected', !isNewTabOn);
+  const $startUnitSearch = $_('#startUnitSearch')
+  $startUnitSearch.classList.toggle('is-selected', isSearchTabOn);
+  $startUnitSearch.classList.toggle('is-noselected', !isSearchTabOn);
 };
 
 // 新規登録部色付け
 pcrview.colorNewVsSet = function() {
   const isNewTabOffenseOn = pcrnote.gViewController.isNewTabOffenseOn();
   const isNewTabDefenseOn = pcrnote.gViewController.isNewTabDefenseOn();
-  const $newVsSet = $('#newVsSet');
-  $newVsSet.find('[name=offenseParty]')
-    .toggleClass('is-selected', isNewTabOffenseOn)
-    .toggleClass('is-noselected', !isNewTabOffenseOn);
-  $newVsSet.find('[name=offensePartyTag]')
-    .toggleClass('is-selected', isNewTabOffenseOn)
-    .toggleClass('is-noselected', !isNewTabOffenseOn);
-  $newVsSet.find('[name=defenseParty]')
-    .toggleClass('is-selected', isNewTabDefenseOn)
-    .toggleClass('is-noselected', !isNewTabDefenseOn);
-  $newVsSet.find('[name=defensePartyTag]')
-    .toggleClass('is-selected', isNewTabDefenseOn)
-    .toggleClass('is-noselected', !isNewTabDefenseOn);
+  const $vsSet = $_('#newVsSet');
+  const $offenseParty = $vsSet.querySelector('[name=offenseParty]');
+  $offenseParty.classList.toggle('is-selected', isNewTabOffenseOn);
+  $offenseParty.classList.toggle('is-noselected', !isNewTabOffenseOn);
+  const $offensePartyTag = $vsSet.querySelector('[name=offensePartyTag]');
+  $offensePartyTag.classList.toggle('is-selected', isNewTabOffenseOn);
+  $offensePartyTag.classList.toggle('is-noselected', !isNewTabOffenseOn);
+  const $defenseParty = $vsSet.querySelector('[name=defenseParty]');
+  $defenseParty.classList.toggle('is-selected', isNewTabDefenseOn);
+  $defenseParty.classList.toggle('is-noselected', !isNewTabDefenseOn);
+  const $defensePartyTag = $vsSet.querySelector('[name=defensePartyTag]');
+  $defensePartyTag.classList.toggle('is-selected', isNewTabDefenseOn);
+  $defensePartyTag.classList.toggle('is-noselected', !isNewTabDefenseOn);
 };
 
 // ユニット検索部色付け
 pcrview.colorSearchVsSet = function() {
   const isSearchTabOffenseOn = pcrnote.gViewController.isSearchTabOffenseOn();
   const isSearchTabDefenseOn = pcrnote.gViewController.isSearchTabDefenseOn();
-  const $searchVsSet = $('#searchVsSet');
-  $searchVsSet.find('[name=offenseParty]')
-    .toggleClass('is-selected', isSearchTabOffenseOn)
-    .toggleClass('is-noselected', !isSearchTabOffenseOn);
-  $searchVsSet.find('[name=offensePartyTag]')
-    .toggleClass('is-selected', isSearchTabOffenseOn)
-    .toggleClass('is-noselected', !isSearchTabOffenseOn);
-  $searchVsSet.find('[name=defenseParty]')
-    .toggleClass('is-selected', isSearchTabDefenseOn)
-    .toggleClass('is-noselected', !isSearchTabDefenseOn);
-  $searchVsSet.find('[name=defensePartyTag]')
-    .toggleClass('is-selected', isSearchTabDefenseOn)
-    .toggleClass('is-noselected', !isSearchTabDefenseOn);
+  const $vsSet = $_('#searchVsSet');
+  const $offenseParty = $vsSet.querySelector('[name=offenseParty]');
+  $offenseParty.classList.toggle('is-selected', isSearchTabOffenseOn);
+  $offenseParty.classList.toggle('is-noselected', !isSearchTabOffenseOn);
+  const $offensePartyTag = $vsSet.querySelector('[name=offensePartyTag]');
+  $offensePartyTag.classList.toggle('is-selected', isSearchTabOffenseOn);
+  $offensePartyTag.classList.toggle('is-noselected', !isSearchTabOffenseOn);
+  const $defenseParty = $vsSet.querySelector('[name=defenseParty]');
+  $defenseParty.classList.toggle('is-selected', isSearchTabDefenseOn);
+  $defenseParty.classList.toggle('is-noselected', !isSearchTabDefenseOn);
+  const $defensePartyTag = $vsSet.querySelector('[name=defensePartyTag]');
+  $defensePartyTag.classList.toggle('is-selected', isSearchTabDefenseOn);
+  $defensePartyTag.classList.toggle('is-noselected', !isSearchTabDefenseOn);
 
   // 切り替えボタンの有効化、無効化の表示切り替え
-  const $prevButton = $searchVsSet.find('[name=switchVsSet]').eq(0);
-  const $nextButton = $searchVsSet.find('[name=switchVsSet]').eq(1);
+  const $buttons = $vsSet.querySelectorAll('[name=switchVsSet]');
   const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
   const isFirstSlot = (currSlotNum === 0);
   const isLastSlot =
     (currSlotNum === pcrnote.gConfigData.numOfSearchPartySlots - 1);
-  $prevButton.toggleClass('is-disabled', isFirstSlot);
-  $nextButton.toggleClass('is-disabled', isLastSlot);
+  $buttons[0].classList.toggle('is-disabled', isFirstSlot);
+  $buttons[1].classList.toggle('is-disabled', isLastSlot);
 };
 
 // ユニット一覧部色付け
@@ -453,17 +447,17 @@ pcrview.colorUnitCatalog = function() {
   const isSearchTabOffenseOn = pcrnote.gViewController.isSearchTabOffenseOn();
   const isSearchTabDefenseOn = pcrnote.gViewController.isSearchTabDefenseOn();
 
-  $('#unitCatalog')
-    .toggleClass('for-new-offense', isNewTabOffenseOn)
-    .toggleClass('for-new-defense', isNewTabDefenseOn)
-    .toggleClass('for-search-offense', isSearchTabOffenseOn)
-    .toggleClass('for-search-defense', isSearchTabDefenseOn);
+  const $unitCatalog = $_('#unitCatalog');
+  $unitCatalog.classList.toggle('for-new-offense', isNewTabOffenseOn);
+  $unitCatalog.classList.toggle('for-new-defense', isNewTabDefenseOn);
+  $unitCatalog.classList.toggle('for-search-offense', isSearchTabOffenseOn);
+  $unitCatalog.classList.toggle('for-search-defense', isSearchTabDefenseOn);
 
-  const $unitCatalogItemList = $('#unitCatalog [name=unitCatalogItem]');
-  $unitCatalogItemList.each((index, unitCatalogItemDom) => {
-    const $unitCatalogItem = $(unitCatalogItemDom);
-    const unitID = $unitCatalogItem.find('[name=unitID]').html();
-    const $unitImage = $unitCatalogItem.find('[name=unitImage]');
+  const $unitCatalogItemList =
+    $unitCatalog.querySelectorAll('[name=unitCatalogItem]');
+  $unitCatalogItemList.forEach(($unitCatalogItem) => {
+    const unitID = $unitCatalogItem.querySelector('[name=unitID]').textContent;
+    const $unitImage = $unitCatalogItem.querySelector('[name=unitImage]');
 
     // 選択中の編成を取得
     let targetParty = undefined;
@@ -479,31 +473,33 @@ pcrview.colorUnitCatalog = function() {
     // 対象ユニットが選択中の編成に含まれているかチェック
     const isSelectedUnit = targetParty.includes(unitID);
 
-    $unitImage
-      .toggleClass('is-selected', isSelectedUnit)
-      .toggleClass('is-noselected', !isSelectedUnit);
-    $unitCatalogItem
-      .toggleClass('is-selected', isSelectedUnit)
-      .toggleClass('is-noselected', !isSelectedUnit);
+    $unitImage.classList.toggle('is-selected', isSelectedUnit);
+    $unitImage.classList.toggle('is-noselected', !isSelectedUnit);
+    $unitCatalogItem.classList.toggle('is-selected', isSelectedUnit);
+    $unitCatalogItem.classList.toggle('is-noselected', !isSelectedUnit);
   });
 };
 
 // 検索結果一覧部色付け
 pcrview.colorResultVsSetList = function() {
-  $('#resultVsSetList [name=offenseParty]')
-    .toggleClass('is-selected', true);
-  $('#resultVsSetList [name=offensePartyTag]')
-    .toggleClass('is-selected', true);
-  $('#resultVsSetList [name=defenseParty]')
-    .toggleClass('is-selected', true);
-  $('#resultVsSetList [name=defensePartyTag]')
-    .toggleClass('is-selected', true);
+  const $resultVsSetRecList =
+    $_('#resultVsSetList').querySelectorAll('[name=resultVsSetRec]');
+  $resultVsSetRecList.forEach(($vsSet) => {
+    const $offenseParty = $vsSet.querySelector('[name=offenseParty]');
+    $offenseParty.classList.toggle('is-selected', true);
+    const $offensePartyTag = $vsSet.querySelector('[name=offensePartyTag]');
+    $offensePartyTag.classList.toggle('is-selected', true);
+    const $defenseParty = $vsSet.querySelector('[name=defenseParty]');
+    $defenseParty.classList.toggle('is-selected', true);
+    const $defensePartyTag = $vsSet.querySelector('[name=defensePartyTag]');
+    $defensePartyTag.classList.toggle('is-selected', true);
+  });
 };
 
 // 検索結果メッセージ部色付け
 pcrview.colorResultMessage = function() {
   const errMsg = pcrnote.gVsSetTable.getErrorMessage();
-  $('#resultMessage').toggleClass('is-error', errMsg !== '');
+  $_('#resultMessage').classList.toggle('is-error', errMsg !== '');
 };
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -519,36 +515,35 @@ pcrview.showResident = function() {
   const refreshCurrentTime = () => {
     const formatter = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_CURRENT_TIME);
     const nowStr = formatter.format(new Date());
-    $('#currentTime').html(nowStr);
+    $_('#currentTime').textContent = nowStr;
 
     // ついでに経過時間も更新
     refreshElapsedTime();
   };
   // 経過時間を更新
   const refreshElapsedTime = () => {
-    if ($('#elapsedTime').hasClass('is-hidden')) return;
+    if (!pcrutil.isVisibleHtmlElement($_('#elapsedTime'))) return;
     const formatter1 = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_PICKED_TIME);
     const formatter2 = new pcrutil.DateFormat(pcrdef.DATE_FORMAT_FOR_RESIDENT_ELAPSED_TIME);
     // 計測開始時刻を取得
-    const pickedTime = formatter1.parse($('#pickedTime').html());
+    const pickedTime = formatter1.parse($_('#pickedTime').textContent);
     // 計測開始時刻から現在時刻までの差分を取得
     const deltaTime = new Date(new Date().getTime() - pickedTime.getTime());
     const elapsedTimeStr = formatter2.formatUTC(deltaTime);
-    $('#elapsedTime').html(elapsedTimeStr);
+    $_('#elapsedTime').textContent = elapsedTimeStr;
   };
 
   // 現在時刻の表示を切り替え
-  const displayCurrentTime = $('#displayCurrentTime').prop('checked');
-  if (displayCurrentTime) {
+  if ($_('#displayCurrentTime').checked) {
     if (pcrview.refreshCurrentTimeID_ !== undefined) {
       throw pcrutil.makeError(pcrmsg.get('fatalError'));
     }
-    $('#sectionResident').show();
+    pcrutil.showHtmlElement($_('#sectionResident'));
     // 現在時刻の繰り返し更新開始
     pcrview.refreshCurrentTimeID_ =
       setInterval(refreshCurrentTime, pcrdef.REFRESH_CURRENT_TIME_FREQUENCY);
   } else {
-    $('#sectionResident').hide();
+    pcrutil.hideHtmlElement($_('#sectionResident'));
     // 現在時刻の繰り返し更新停止
     clearInterval(pcrview.refreshCurrentTimeID_);
     pcrview.refreshCurrentTimeID_ = undefined;
@@ -558,11 +553,11 @@ pcrview.showResident = function() {
 // ページの表示を切り替え
 pcrview.showPage = function() {
   if (pcrnote.gViewController.isPageConfig()) {
-    $('#pageConfig').show();
-    $('#pageContent').hide();
+    pcrutil.showHtmlElement($_('#pageConfig'));
+    pcrutil.hideHtmlElement($_('#pageContent'));
   } else if (pcrnote.gViewController.isPageContent()) {
-    $('#pageConfig').hide();
-    $('#pageContent').show();
+    pcrutil.hideHtmlElement($_('#pageConfig'));
+    pcrutil.showHtmlElement($_('#pageContent'));
   } else {
     throw pcrutil.makeError(pcrmsg.get('fatalError'));
   }
@@ -571,33 +566,29 @@ pcrview.showPage = function() {
 // メニュー部の表示を切り替え
 pcrview.showMenu = function() {
   if (pcrnote.gConfigData.clientServerMode) {
-    $('#groupOfImportDataFromFile').hide();
-    $('#syncDataWithServer').show();
+    pcrutil.hideHtmlElement($_('#groupOfImportDataFromFile'));
+    pcrutil.showHtmlElement($_('#syncDataWithServer'));
   } else {
-    $('#groupOfImportDataFromFile').show();
-    $('#syncDataWithServer').hide();
+    pcrutil.showHtmlElement($_('#groupOfImportDataFromFile'));
+    pcrutil.hideHtmlElement($_('#syncDataWithServer'));
   }
 };
 
 // 新規登録部の表示を切り替え
 pcrview.showNewTab = function() {
   if (pcrnote.gViewController.isNewTabOn()) {
-    $('#sectionNew').show();
-  } else if (pcrnote.gViewController.isSearchTabOn()) {
-    $('#sectionNew').hide();
+    pcrutil.showHtmlElement($_('#sectionNew'));
   } else {
-    $('#sectionNew').hide();
+    pcrutil.hideHtmlElement($_('#sectionNew'));
   }
 };
 
 // ユニット検索部の表示を切り替え
 pcrview.showSearchTab = function() {
-  if (pcrnote.gViewController.isNewTabOn()) {
-    $('#sectionSearch').hide();
-  } else if (pcrnote.gViewController.isSearchTabOn()) {
-    $('#sectionSearch').show();
+  if (pcrnote.gViewController.isSearchTabOn()) {
+    pcrutil.showHtmlElement($_('#sectionSearch'));
   } else {
-    $('#sectionSearch').hide();
+    pcrutil.hideHtmlElement($_('#sectionSearch'));
   }
 };
 
@@ -607,34 +598,34 @@ pcrview.showUnitCatalog = function() {
     pcrnote.gViewController.isNewTabOn() ||
     pcrnote.gViewController.isSearchTabOn()
   ) {
-    $('#sectionUnitCatalog').show();
+    pcrutil.showHtmlElement($_('#sectionUnitCatalog'));
   } else {
-    $('#sectionUnitCatalog').hide();
+    pcrutil.hideHtmlElement($_('#sectionUnitCatalog'));
     return;
   }
 
   const unitInfoList = pcrnote.gUnitInfoTable.getAllData();
-  const $unitCatalogItemList = $('#unitCatalog [name=unitCatalogItem]');
+  const $unitCatalogItemList = $$_('#unitCatalog [name=unitCatalogItem]');
   // アリーナ用表示
   if (
     pcrnote.gViewController.isUsedForArena() ||
     pcrnote.gViewController.isNewTabOffenseOn() ||
     pcrnote.gViewController.isSearchTabOffenseOn()
   ) {
-    $unitCatalogItemList.each((index, itemDom) => {
-      unitInfoList[index].isPC ? $(itemDom).show() : $(itemDom).hide();
+    $unitCatalogItemList.forEach(($item, index) => {
+      pcrutil.showHtmlElement($item, unitInfoList[index].isPC);
     });
   // クラバト用表示
   } else {
-    $unitCatalogItemList.each((index, itemDom) => {
-      unitInfoList[index].isNPC ? $(itemDom).show() : $(itemDom).hide();
+    $unitCatalogItemList.forEach(($item, index) => {
+      pcrutil.showHtmlElement($item, unitInfoList[index].isNPC);
     });
   }
 };
 
 // 検索結果一覧部の表示を切り替え
 pcrview.showResultVsSetList = function() {
-  const $sectionResult = $('#sectionResult');
+  const $sectionResult = $_('#sectionResult');
   const vsSetList = pcrnote.gVsSetTable.getAllData();
   const errMsg = pcrnote.gVsSetTable.getErrorMessage();
   const searchResult = pcrnote.gVsSetTable.getResult();
@@ -643,42 +634,55 @@ pcrview.showResultVsSetList = function() {
 
   // エラーが発生した場合
   if (errMsg !== '') {
-    $sectionResult.hide();
+    pcrutil.hideHtmlElement($sectionResult);
   // 対戦情報テーブルにデータが1件もない場合
   } else if (vsSetList.length === 0) {
-    $sectionResult.hide();
+    pcrutil.hideHtmlElement($sectionResult);
   // 検索未実行
   } else if (!filtering) {
-    $sectionResult.hide();
+    pcrutil.hideHtmlElement($sectionResult);
   // 検索結果が0件
   } else if (totalNum === 0) {
-    $sectionResult.hide();
+    pcrutil.hideHtmlElement($sectionResult);
   // 検索結果有
   } else {
-    $sectionResult.show();
+    pcrutil.showHtmlElement($sectionResult);
   }
 };
 
 // 検索結果一覧の表示方法を切り替え
 pcrview.switchResultVsSetViewStyle = function() {
-  const $resultVsSetList = $('#resultVsSetList [name=resultVsSet]');
+  const $resultVsSetRecList = $$_('#resultVsSetList [name=resultVsSetRec]');
+  // name="vsSetPanelSimple vsSetPanelNormal"と両方を持つ要素用に~=を使用
   switch (pcrnote.gViewController.viewStyle) {
   case pcrdef.ViewController.VIEW_STYLE_MINIMUM:
-    $resultVsSetList.each((index, vsSetDom) => {
-      $(vsSetDom).find('[name~=vsSetPanelSimple]').hide();
-      $(vsSetDom).find('[name~=vsSetPanelNormal]').hide();
+    $resultVsSetRecList.forEach(($vsSet) => {
+      $vsSet.querySelectorAll('[name~=vsSetPanelSimple]').forEach(($panel) => {
+        pcrutil.hideHtmlElement($panel);
+      });
+      $vsSet.querySelectorAll('[name~=vsSetPanelNormal]').forEach(($panel) => {
+        pcrutil.hideHtmlElement($panel);
+      });
     });
     break;
   case pcrdef.ViewController.VIEW_STYLE_SIMPLE:
-    $resultVsSetList.each((index, vsSetDom) => {
-      $(vsSetDom).find('[name~=vsSetPanelSimple]').show();
-      $(vsSetDom).find('[name=vsSetPanelNormal]').hide();
+    $resultVsSetRecList.forEach(($vsSet) => {
+      $vsSet.querySelectorAll('[name~=vsSetPanelSimple]').forEach(($panel) => {
+        pcrutil.showHtmlElement($panel);
+      });
+      $vsSet.querySelectorAll('[name=vsSetPanelNormal]').forEach(($panel) => {
+        pcrutil.hideHtmlElement($panel);
+      });
     });
     break;
   case pcrdef.ViewController.VIEW_STYLE_NORMAL:
-    $resultVsSetList.each((index, vsSetDom) => {
-      $(vsSetDom).find('[name=vsSetPanelSimple]').hide();
-      $(vsSetDom).find('[name~=vsSetPanelNormal]').show();
+    $resultVsSetRecList.forEach(($vsSet) => {
+      $vsSet.querySelectorAll('[name=vsSetPanelSimple]').forEach(($panel) => {
+        pcrutil.hideHtmlElement($panel);
+      });
+      $vsSet.querySelectorAll('[name~=vsSetPanelNormal]').forEach(($panel) => {
+        pcrutil.showHtmlElement($panel);
+      });
     });
     break;
   }
@@ -700,6 +704,7 @@ pcrview.refreshNewVsSet = function() {
   if (pcrnote.gViewController.isNewTabOn()) {
     pcrview.buildNewVsSetHtml();
     pcrview.colorNewVsSet();
+    pcrevent.addEventListenerOnNewVsSet();
   }
 };
 
@@ -709,6 +714,7 @@ pcrview.refreshSearchVsSet = function() {
   if (pcrnote.gViewController.isSearchTabOn()) {
     pcrview.buildSearchVsSetHtml();
     pcrview.colorSearchVsSet();
+    pcrevent.addEventListenerOnSearchVsSet()
   }
 };
 
@@ -729,13 +735,14 @@ pcrview.refreshResultVsSetList = function() {
   pcrview.buildResultVsSetListHtml();
   pcrview.switchResultVsSetViewStyle();
   pcrview.colorResultVsSetList();
+  pcrevent.addEventListenerOnResultVsSetList();
 };
 
 // 検索結果制御部の画面更新
 pcrview.refreshResultControl = function() {
   pcrview.setViewStyleLabel();
-  $('#compareFunc').val(pcrnote.gViewController.compareFunc);
-  $('#orderBy').val(pcrnote.gViewController.orderBy);
+  $_('#compareFunc').value = pcrnote.gViewController.compareFunc;
+  $_('#orderBy').value = pcrnote.gViewController.orderBy;
 };
 
 // 検索結果メッセージ部の画面更新
