@@ -276,7 +276,7 @@ Object.seal(pcrdb.UnitInfoTable.prototype);
 
 // ユニット情報テーブルにユニットを追加
 pcrdb.UnitInfoTable.prototype.addUnit = function(
-  unitID, unitName, imageURL, isPC, isNPC
+  unitID, unitName, imageURL, tierNum, isPC, isNPC
 ) {
   const FUNC_NAME = 'pcrdb.UnitInfoTable.addUnit';
 
@@ -288,6 +288,7 @@ pcrdb.UnitInfoTable.prototype.addUnit = function(
     unitID: unitID,
     unitName: unitName,
     imageURL: imageURL,
+    tierNum: tierNum,
     isPC: isPC,
     isNPC: isNPC
   };
@@ -300,17 +301,22 @@ pcrdb.UnitInfoTable.prototype.addUnit = function(
 pcrdb.UnitInfoTable.prototype.addPCList = function() {
   const FUNC_NAME = 'pcrdb.UnitInfoTable.addPCList';
 
-  for (const unitInfo of pcrunit.PC_UNIT_INFO_LIST) {
-    if (
-      !pcrutil.isString(unitInfo[0]) ||
-      !pcrutil.isString(unitInfo[1]) ||
-      !pcrutil.isString(unitInfo[2]) ||
-      !pcrutil.isBoolean(unitInfo[3])
-    ) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
-    }
+  const unitInfoList = pcrunit.PC_UNIT_INFO_LIST;
+  for (const [tierNum, unitInfoTierList] of unitInfoList.entries()) {
+    for (const unitInfo of unitInfoTierList) {
+      if (
+        !pcrutil.isString(unitInfo[0]) ||
+        !pcrutil.isString(unitInfo[1]) ||
+        !pcrutil.isString(unitInfo[2]) ||
+        !pcrutil.isBoolean(unitInfo[3])
+      ) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
+      }
 
-    this.addUnit(unitInfo[0], unitInfo[1], unitInfo[2], unitInfo[3], false);
+      this.addUnit(
+        unitInfo[0], unitInfo[1], unitInfo[2], tierNum, unitInfo[3], false
+      );
+    }
   }
 };
 
@@ -318,17 +324,22 @@ pcrdb.UnitInfoTable.prototype.addPCList = function() {
 pcrdb.UnitInfoTable.prototype.addNPCList = function() {
   const FUNC_NAME = 'pcrdb.UnitInfoTable.addNPCList';
 
-  for (const unitInfo of pcrunit.NPC_UNIT_INFO_LIST) {
-    if (
-      !pcrutil.isString(unitInfo[0]) ||
-      !pcrutil.isString(unitInfo[1]) ||
-      !pcrutil.isString(unitInfo[2]) ||
-      !pcrutil.isBoolean(unitInfo[3])
-    ) {
-      throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
-    }
+  const unitInfoList = pcrunit.NPC_UNIT_INFO_LIST;
+  for (const [tierNum, unitInfoTierList] of unitInfoList.entries()) {
+    for (const unitInfo of unitInfoTierList) {
+      if (
+        !pcrutil.isString(unitInfo[0]) ||
+        !pcrutil.isString(unitInfo[1]) ||
+        !pcrutil.isString(unitInfo[2]) ||
+        !pcrutil.isBoolean(unitInfo[3])
+      ) {
+        throw pcrutil.makeError(pcrmsg.getN(FUNC_NAME, 0), JSON.stringify(unitInfo));
+      }
 
-    this.addUnit(unitInfo[0], unitInfo[1], unitInfo[2], false, unitInfo[3]);
+      this.addUnit(
+        unitInfo[0], unitInfo[1], unitInfo[2], tierNum, false, unitInfo[3]
+      );
+    }
   }
 };
 

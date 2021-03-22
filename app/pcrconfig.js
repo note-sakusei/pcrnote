@@ -32,6 +32,8 @@ pcrconfig.ConfigData = function(opt_rhs) {
       searchResultLimit: 50,
       // 現在時刻を表示
       displayCurrentTime: false,
+      // ユニット一覧を分類
+      tieredUnitCatalog: false,
       // サーバーモード
       clientServerMode: false,
       // クッキーに保存
@@ -57,6 +59,7 @@ pcrconfig.ConfigData.prototype = {
   get numOfSearchPartySlots() { return this.items.numOfSearchPartySlots; },
   get searchResultLimit() { return this.items.searchResultLimit; },
   get displayCurrentTime() { return this.items.displayCurrentTime; },
+  get tierUnitCatalog() { return this.items.tierUnitCatalog; },
   get clientServerMode() { return this.items.clientServerMode; },
   get saveCookie() { return this.items.saveCookie; }
 };
@@ -86,6 +89,7 @@ pcrconfig.configViewToConfigData = function(configData) {
     numOfSearchPartySlots: pcrutil.getSelectBoxState($_('#numOfSearchPartySlots')).value,
     searchResultLimit: pcrutil.getSelectBoxState($_('#searchResultLimit')).value,
     displayCurrentTime: $_('#displayCurrentTime').checked,
+    tierUnitCatalog: $_('#tierUnitCatalog').checked,
     clientServerMode: $_('#clientServerMode').checked,
     saveCookie: $_('#saveCookie').checked
   };
@@ -102,6 +106,7 @@ pcrconfig.configDataToConfigView = function(configData) {
   $_('#numOfSearchPartySlots').value = configData.numOfSearchPartySlots;
   $_('#searchResultLimit').value = configData.searchResultLimit;
   $_('#displayCurrentTime').checked = configData.displayCurrentTime;
+  $_('#tierUnitCatalog').checked = configData.tierUnitCatalog;
   $_('#clientServerMode').checked = configData.clientServerMode;
   $_('#saveCookie').checked = configData.saveCookie;
 };

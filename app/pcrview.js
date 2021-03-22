@@ -247,16 +247,16 @@ pcrview.buildNewVsSetHtml = function() {
   const $vsSet = $_('#newVsSet');
   // 攻撃側HTML
   $vsSet.querySelector('[name=offenseParty]').innerHTML =
-    pcrview.makeOffensePartyHtml(pcrnote.gNewVsSet)
+    pcrview.makeOffensePartyHtml(pcrnote.gNewVsSet);
   // 防衛側HTML
   $vsSet.querySelector('[name=defenseParty]').innerHTML =
-    pcrview.makeDefensePartyHtml(pcrnote.gNewVsSet)
+    pcrview.makeDefensePartyHtml(pcrnote.gNewVsSet);
   // 評価HTML
   $vsSet.querySelector('[name=rating]').innerHTML =
-    pcrview.makeRatingHtml(pcrnote.gNewVsSet)
+    pcrview.makeRatingHtml(pcrnote.gNewVsSet);
   // コメント入力領域
   $vsSet.querySelector('[name=commentArea]').value =
-    pcrnote.gNewVsSet.comment
+    pcrnote.gNewVsSet.comment;
 };
 
 // ユニット検索HTML構築
@@ -264,20 +264,20 @@ pcrview.buildSearchVsSetHtml = function() {
   const $vsSet = $_('#searchVsSet');
   // 攻撃側HTML
   $vsSet.querySelector('[name=offenseParty]').innerHTML =
-    pcrview.makeOffensePartyHtml(pcrnote.gSearchVsSet)
+    pcrview.makeOffensePartyHtml(pcrnote.gSearchVsSet);
   // 防衛側HTML
   $vsSet.querySelector('[name=defenseParty]').innerHTML =
-    pcrview.makeDefensePartyHtml(pcrnote.gSearchVsSet)
+    pcrview.makeDefensePartyHtml(pcrnote.gSearchVsSet);
   // コメント入力領域
   $vsSet.querySelector('[name=commentArea]').value =
-    pcrnote.gSearchVsSet.comment
+    pcrnote.gSearchVsSet.comment;
   // 現在のスロット番号HTML
   $vsSet.querySelector('[name=currSlotNum]').innerHTML =
-    pcrview.makeCurrSlotNumHtml()
+    pcrview.makeCurrSlotNumHtml();
   // 切り替えボタンのラベルを変更
   $vsSet.querySelectorAll('[name=switchVsSet]').forEach(($button, index) => {
     $button.innerHTML =
-      pcrview.makeSwitchButtonLabelHtml(pcrnote.gSearchVsSet, index)
+      pcrview.makeSwitchButtonLabelHtml(pcrnote.gSearchVsSet, index);
   });
 };
 
@@ -286,13 +286,28 @@ pcrview.buildUnitCatalogHtml = function() {
   const $unitCatalogItemTemplate =
     $_('#unitCatalogItemTemplate').content.firstElementChild;
   const $unitCatalog = $_('#unitCatalog');
+  const $flatPanel = $unitCatalog.querySelector('[name=flatPanel]');
+  const $tieredPanel = $unitCatalog.querySelector('[name=tieredPanel]');
+  const $flatPCUnitCatalog = $flatPanel.querySelector('[name=pcUnitCatalog]');
+  const $flatNPCUnitCatalog = $flatPanel.querySelector('[name=npcUnitCatalog]');
+  const $tieredPCUnitCatalogList =
+    $tieredPanel.querySelectorAll('[name=pcUnitCatalog]');
+  const $tieredNPCUnitCatalogList =
+    $tieredPanel.querySelectorAll('[name=npcUnitCatalog]');
 
-  $unitCatalog.textContent = '';
   const unitInfoList = pcrnote.gUnitInfoTable.getAllData();
   for (const unitInfo of unitInfoList) {
-    const $unitCatalogItem = $unitCatalogItemTemplate.cloneNode(true);
-    $unitCatalogItem.innerHTML = pcrview.makeUnitInfoHtml(unitInfo);
-    $unitCatalog.appendChild($unitCatalogItem);
+    const $unitCatalogItem1 = $unitCatalogItemTemplate.cloneNode(false);
+    $unitCatalogItem1.innerHTML = pcrview.makeUnitInfoHtml(unitInfo);
+    const $unitCatalogItem2 = $unitCatalogItem1.cloneNode(true);
+
+    if (unitInfo.isPC) {
+      $flatPCUnitCatalog.appendChild($unitCatalogItem1);
+      $tieredPCUnitCatalogList[unitInfo.tierNum].appendChild($unitCatalogItem2);
+    } else if (unitInfo.isNPC) {
+      $flatNPCUnitCatalog.appendChild($unitCatalogItem1);
+      $tieredNPCUnitCatalogList[unitInfo.tierNum].appendChild($unitCatalogItem2);
+    }
   }
 };
 
@@ -309,23 +324,23 @@ pcrview.buildResultVsSetListHtml = function() {
 
     // 攻撃側HTML
     $vsSet.querySelector('[name=offenseParty]').innerHTML =
-      pcrview.makeOffensePartyHtml(vsSet)
+      pcrview.makeOffensePartyHtml(vsSet);
     // 評価HTML
     $vsSet.querySelector('[name=rating]').innerHTML =
-      pcrview.makeRatingHtml(vsSet)
+      pcrview.makeRatingHtml(vsSet);
     // 防衛側HTML
     $vsSet.querySelector('[name=defenseParty]').innerHTML =
-      pcrview.makeDefensePartyHtml(vsSet)
+      pcrview.makeDefensePartyHtml(vsSet);
     // コメント入力領域
-    $vsSet.querySelector('[name=commentArea]').value = vsSet.comment
+    $vsSet.querySelector('[name=commentArea]').value = vsSet.comment;
     // コメントラベル
-    $vsSet.querySelector('[name=commentLabel]').innerText = vsSet.comment
+    $vsSet.querySelector('[name=commentLabel]').innerText = vsSet.comment;
     // 作成ユーザーHTML
     $vsSet.querySelector('[name=touchUser]').innerHTML =
-      pcrview.makeTouchUserHtml(vsSet)
+      pcrview.makeTouchUserHtml(vsSet);
     // 作成日時HTML
     $vsSet.querySelector('[name=touchDate]').innerHTML =
-      pcrview.makeTouchDateHtml(vsSet)
+      pcrview.makeTouchDateHtml(vsSet);
 
     $resultVsSetList.appendChild($vsSet);
   }
@@ -538,12 +553,12 @@ pcrview.showResident = function() {
     if (pcrview.refreshCurrentTimeID_ !== undefined) {
       throw pcrutil.makeError(pcrmsg.get('fatalError'));
     }
-    pcrutil.showHtmlElement($_('#sectionResident'));
+    pcrutil.showHtmlElement($_('#pageResident'));
     // 現在時刻の繰り返し更新開始
     pcrview.refreshCurrentTimeID_ =
       setInterval(refreshCurrentTime, pcrdef.REFRESH_CURRENT_TIME_FREQUENCY);
   } else {
-    pcrutil.hideHtmlElement($_('#sectionResident'));
+    pcrutil.hideHtmlElement($_('#pageResident'));
     // 現在時刻の繰り返し更新停止
     clearInterval(pcrview.refreshCurrentTimeID_);
     pcrview.refreshCurrentTimeID_ = undefined;
@@ -604,22 +619,46 @@ pcrview.showUnitCatalog = function() {
     return;
   }
 
-  const unitInfoList = pcrnote.gUnitInfoTable.getAllData();
-  const $unitCatalogItemList = $$_('#unitCatalog [name=unitCatalogItem]');
+  const $unitCatalog = $_('#unitCatalog');
+  const $flatPanel = $unitCatalog.querySelector('[name=flatPanel]');
+  const $tieredPanel = $unitCatalog.querySelector('[name=tieredPanel]');
+  const $activePanel =
+    !pcrnote.gConfigData.tierUnitCatalog ? $flatPanel : $tieredPanel;
+  const $pcUnitCatalogList =
+    $activePanel.querySelectorAll('[name=pcUnitCatalog]');
+  const $npcUnitCatalogList =
+    $activePanel.querySelectorAll('[name=npcUnitCatalog]');
+
+  // 平坦表示
+  if (!pcrnote.gConfigData.tierUnitCatalog) {
+    pcrutil.showHtmlElement($flatPanel);
+    pcrutil.hideHtmlElement($tieredPanel);
+  // 段階表示
+  } else {
+    pcrutil.hideHtmlElement($flatPanel);
+    pcrutil.showHtmlElement($tieredPanel);
+  }
+
   // アリーナ用表示
   if (
     pcrnote.gViewController.isUsedForArena() ||
     pcrnote.gViewController.isNewTabOffenseOn() ||
     pcrnote.gViewController.isSearchTabOffenseOn()
   ) {
-    $unitCatalogItemList.forEach(($item, index) => {
-      pcrutil.showHtmlElement($item, unitInfoList[index].isPC);
-    });
+    $pcUnitCatalogList.forEach(
+      ($pcUnitCatalog) => pcrutil.showHtmlElement($pcUnitCatalog)
+    );
+    $npcUnitCatalogList.forEach(
+      ($npcUnitCatalog) => pcrutil.hideHtmlElement($npcUnitCatalog)
+    );
   // クラバト用表示
   } else {
-    $unitCatalogItemList.forEach(($item, index) => {
-      pcrutil.showHtmlElement($item, unitInfoList[index].isNPC);
-    });
+    $pcUnitCatalogList.forEach(
+      ($pcUnitCatalog) => pcrutil.hideHtmlElement($pcUnitCatalog)
+    );
+    $npcUnitCatalogList.forEach(
+      ($npcUnitCatalog) => pcrutil.showHtmlElement($npcUnitCatalog)
+    );
   }
 };
 
@@ -714,7 +753,7 @@ pcrview.refreshSearchVsSet = function() {
   if (pcrnote.gViewController.isSearchTabOn()) {
     pcrview.buildSearchVsSetHtml();
     pcrview.colorSearchVsSet();
-    pcrevent.addEventListenerOnSearchVsSet()
+    pcrevent.addEventListenerOnSearchVsSet();
   }
 };
 

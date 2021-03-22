@@ -402,9 +402,7 @@ pcrutil.makeFileNameWithDate = function(baseFileName, fileType) {
   // 元となるファイル名が〇〇＋日時形式の場合
   // 日時部分を置き換え(日時の前にアンダースコアがなければ付加)
   if (/_?[\d-]+$/.test(fileName)) {
-    fileName = fileName.replace(
-      /_?[\d-]+$/, '_' + nowStr
-    );
+    fileName = fileName.replace(/_?[\d-]+$/, '_' + nowStr);
   // 元となるファイル名に日時が付いていない場合
   // 日時を付加(日時の前にアンダースコアがなければ付加)
   } else {
@@ -1092,7 +1090,7 @@ pcrutil.indexOfHtmlElement = function(elemList, target) {
   return Array.from(elemList).indexOf(target);
 };
 
-// HTML要素のクリック位置を取得
+// HTML要素のクリック(タップ)位置を取得
 pcrutil.getClickPosOnHtmlElement = function(elem, event) {
   const elemRect = elem.getBoundingClientRect();
   const clickPos = {

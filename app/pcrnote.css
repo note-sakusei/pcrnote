@@ -83,6 +83,15 @@
     var(--unit-catalog-padding-width) * 2 +
     var(--general-border-width) * 2
   );
+  /* ページのパディング */
+  --page-padding-width: 10px;
+  --page-padding-height: 20px;
+  /* ページの幅 */
+  --page-outer-width: calc(
+    var(--unit-catalog-outer-width) +
+    var(--page-padding-width) * 2 +
+    var(--general-border-width) * 2
+  );
   /* 対戦情報用のボタンの幅、高さ(枠は除く) */
   --vs-set-button-inner-width: 40px;
   --vs-set-button-inner-height: 30px;
@@ -226,7 +235,7 @@ body {
   /* iOSでのタップハイライトを無効化 */
   -webkit-tap-highlight-color: transparent;
   font-family: var(--general-font-family);
-  margin: 8px 0px; /* 上下、左右 */
+  margin: 0px;
 }
 input[type=text],
 input[type=password] {
@@ -260,6 +269,9 @@ a {
   position: absolute;
 }
 
+.margin-top-5px {
+  margin-top: 5px;
+}
 .margin-left-5px {
   margin-left: 5px;
 }
@@ -273,10 +285,26 @@ a {
   margin-right: 8px;
 }
 
+/* 描画領域(ポップアップは除く) */
+@media only screen and (min-width: 740px) {
+.board {
+  margin: 8px auto; /* 上下、左右 */
+  width: var(--page-outer-width);
+}
+}
+@media only screen and (max-width: 739px) {
+.board {
+  margin: 8px 0px; /* 上下、左右 */
+  width: 100%;
+}
+}
+
 /* ポップアップ */
 .popup {
   height: 100%;
+  left: 0px;
   position: fixed;
+  top: 0px;
   width: 100%;
   z-index: 1;
 }
@@ -333,32 +361,12 @@ a {
 }
 
 /* ページ */
-@media only screen and (min-width: 740px) {
-.page-resident {
-  margin: 0px auto; /* 上下、左右 */
-  width: calc(var(--unit-catalog-outer-width) + 10px * 2);
-}
 .page-config,
 .page-content {
   background-blend-mode: lighten;
   background-color: var(--base-layer-color);
   border: var(--general-border);
-  margin: 0px auto; /* 上下、左右 */
-  padding: 20px 10px; /* 上下、左右 */
-  width: var(--unit-catalog-outer-width);
-}
-}
-@media only screen and (max-width: 739px) {
-.page-resident {
-  margin: 0px 0px; /* 上下、左右 */
-}
-.page-config,
-.page-content {
-  background-blend-mode: lighten;
-  background-color: var(--base-layer-color);
-  margin: 0px 0px; /* 上下、左右 */
-  padding: 20px 10px; /* 上下、左右 */
-}
+  padding: var(--page-padding-height) var(--page-padding-width); /* 上下、左右 */
 }
 
 /* コンテンツの各区画(配置調整) */
@@ -490,6 +498,9 @@ a {
 }
 .config-item-8-1 {
   grid-area: 8/1/9/6;
+}
+.config-item-9-1 {
+  grid-area: 9/1/10/6;
 }
 .config-button {
   align-items: center;
@@ -882,9 +893,6 @@ a {
 .unit-catalog {
   border: var(--general-border);
   border-radius: var(--general-border-radius);
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
   padding:
     var(--unit-catalog-padding-height)
     var(--unit-catalog-padding-width);
@@ -895,13 +903,16 @@ a {
 .unit-catalog {
   border: var(--general-border);
   border-radius: var(--general-border-radius);
-  display: flex;
-  flex-wrap: wrap;
   padding:
     var(--unit-catalog-padding-height)
     var(--unit-catalog-padding-width);
   width: 100%;
 }
+}
+.pc-unit-catalog,
+.npc-unit-catalog {
+  display: flex;
+  flex-wrap: wrap;
 }
 .unit-catalog-item {
   border-radius: var(--party-unit-border-radius);

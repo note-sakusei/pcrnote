@@ -31,6 +31,9 @@
 </head>
 <body id="blur">
 
+<!-- 描画領域 -->
+<div class="board">
+
 <!-- ポップアップ -->
 <div id="popup" class="popup is-hidden">
   <div class="popup-layer">
@@ -48,11 +51,11 @@
 </div>
 
 <!-- 常駐領域 -->
-<div class="page-resident">
-  <div id="sectionResident" class="section-resident is-hidden">
+<div id="pageResident" class="page-resident is-hidden">
+  <div class="section-resident">
     <div class="resident">
       <!-- 現在時刻 -->
-      <div id="currentTime" class="current-time"></div>
+      <div id="currentTime" class="current-time" title="ダブルクリック(タップ)すると経過時間を表示"></div>
       <!-- 計測開始時刻 -->
       <div id="pickedTime" class="picked-time is-hidden margin-left-5px"></div>
       <!-- 経過時間 -->
@@ -133,12 +136,17 @@
         </div>
         <!-- 7行目 -->
         <div class="config-item config-item-7-1">
-          <input id="clientServerMode" type="checkbox" tabindex="12">
-          <label for="clientServerMode" title="使用するにはNode.jsによるサーバーの構築が必要">サーバーに接続</label>
+          <input id="tierUnitCatalog" type="checkbox" tabindex="12">
+          <label for="tierUnitCatalog" >ユニット一覧を分類</label>
         </div>
         <!-- 8行目 -->
         <div class="config-item config-item-8-1">
-          <input id="saveCookie" type="checkbox" tabindex="13">
+          <input id="clientServerMode" type="checkbox" tabindex="13">
+          <label for="clientServerMode" title="使用するにはNode.jsによるサーバーの構築が必要">サーバーに接続</label>
+        </div>
+        <!-- 9行目 -->
+        <div class="config-item config-item-9-1">
+          <input id="saveCookie" type="checkbox" tabindex="14">
           <label for="saveCookie" title="ローカルファイルから起動する場合は無効">クッキーに保存</label>
         </div>
       </div>
@@ -241,7 +249,22 @@
 
   <!-- ユニット一覧 -->
   <div id="sectionUnitCatalog" class="section-unit-catalog is-hidden">
-    <div id="unitCatalog" class="unit-catalog"></div>
+    <div id="unitCatalog" class="unit-catalog">
+      <div name="flatPanel">
+        <div name="pcUnitCatalog" class="pc-unit-catalog"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog"></div>
+      </div>
+      <div name="tieredPanel">
+        <div name="pcUnitCatalog" class="pc-unit-catalog"></div>
+        <div name="pcUnitCatalog" class="pc-unit-catalog margin-top-5px"></div>
+        <div name="pcUnitCatalog" class="pc-unit-catalog margin-top-5px"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog margin-top-5px"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog margin-top-5px"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog margin-top-5px"></div>
+        <div name="npcUnitCatalog" class="npc-unit-catalog margin-top-5px"></div>
+      </div>
+    </div>
 
     <template id="unitCatalogItemTemplate">
       <div name="unitCatalogItem" class="unit-catalog-item"></div>
@@ -357,6 +380,8 @@
     <!-- コメント入力部の復元用 -->
     <textarea id="commentAreaForResotration" class="comment-area-for-restoration is-hidden" cols="0" rows="0" value=""></textarea>
   </div>
+</div>
+
 </div>
 
 </body>
