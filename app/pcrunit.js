@@ -39,6 +39,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['akino', 'アキノ', './img/arena/アキノ.jpg', true],
     ['makoto_summer', 'マコト(サマー)', './img/arena/マコト(サマー).jpg', true],
     ['jun_summer', 'ジュン(サマー)', './img/arena/ジュン(サマー).jpg', true],
+    ['chloe_schoolfestival', 'クロエ(聖学祭)', './img/arena/クロエ(聖学祭).jpg', true],
     ['matsuri', 'マツリ', './img/arena/マツリ.jpg', true],
     ['chloe', 'クロエ', './img/arena/クロエ.jpg', true],
     ['matsuri_halloween', 'マツリ(ハロウィン)', './img/arena/マツリ(ハロウィン).jpg', true],
