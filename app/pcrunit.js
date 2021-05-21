@@ -33,6 +33,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['makoto', 'マコト', './img/arena/マコト.jpg', true],
     ['makoto_cinderella', 'マコト(シンデレラ)', './img/arena/マコト(シンデレラ).jpg', true],
     ['kaya', 'カヤ', './img/arena/カヤ.jpg', true],
+    ['kaya_timetravel', 'カヤ(タイムトラベル)', './img/arena/カヤ(タイムトラベル).jpg', true],
     ['hiyori_newyear', 'ヒヨリ(ニューイヤー)', './img/arena/ヒヨリ(ニューイヤー).jpg', true],
     ['rima_cinderella', 'リマ(シンデレラ)', './img/arena/リマ(シンデレラ).jpg', true],
     ['ninon_ooedo', 'ニノン(オーエド)', './img/arena/ニノン(オーエド).jpg', true],
