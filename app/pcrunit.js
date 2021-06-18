@@ -71,6 +71,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ilya_christmas', 'イリヤ(クリスマス)', './img/arena/イリヤ(クリスマス).jpg', true],
     ['anna_summer', 'アンナ(サマー)', './img/arena/アンナ(サマー).jpg', true],
     ['christina_chrismas', 'クリスティーナ(クリスマス)', './img/arena/クリスティーナ(クリスマス).jpg', true],
+    ['mihuyu_workclothes', 'ミフユ(作業服)', './img/arena/ミフユ(作業服).jpg', true],
     ['shizuru', 'シズル', './img/arena/シズル.jpg', true],
     ['christina', 'クリスティーナ', './img/arena/クリスティーナ.jpg', true],
     ['kurumi_christmas', 'クルミ(クリスマス)', './img/arena/クルミ(クリスマス).jpg', true]
