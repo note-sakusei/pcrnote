@@ -90,6 +90,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
     ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
+    ['eriko_summer', 'エリコ(サマー)', './img/arena/エリコ(サマー).jpg', true],
     ['yukari_christmas', 'ユカリ(クリスマス)', './img/arena/ユカリ(クリスマス).jpg', true],
     ['monika', 'モニカ', './img/arena/モニカ.jpg', true],
     ['ninon', 'ニノン', './img/arena/ニノン.jpg', true],
