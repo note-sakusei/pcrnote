@@ -30,6 +30,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kokkoro_newyear', 'コッコロ(ニューイヤー)', './img/arena/コッコロ(ニューイヤー).jpg', true],
     ['nozomi', 'ノゾミ', './img/arena/ノゾミ.jpg', true],
     ['muimi', 'ムイミ', './img/arena/ムイミ.jpg', true],
+    ['shizuru_summer', 'シズル(サマー)', './img/arena/シズル(サマー).jpg', true],
     ['makoto', 'マコト', './img/arena/マコト.jpg', true],
     ['makoto_cinderella', 'マコト(シンデレラ)', './img/arena/マコト(シンデレラ).jpg', true],
     ['kaya', 'カヤ', './img/arena/カヤ.jpg', true],
