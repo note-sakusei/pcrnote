@@ -79,6 +79,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ],
   // 中衛
   [
+    ['tsumugi_summer', 'ツムギ(サマー)', './img/arena/ツムギ(サマー).jpg', true],
     ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
     ['shinobu', 'シノブ', './img/arena/シノブ.jpg', true],
     ['mimi_halloween', 'ミミ(ハロウィン)', './img/arena/ミミ(ハロウィン).jpg', true],
@@ -95,6 +96,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yukari_christmas', 'ユカリ(クリスマス)', './img/arena/ユカリ(クリスマス).jpg', true],
     ['monika', 'モニカ', './img/arena/モニカ.jpg', true],
     ['ninon', 'ニノン', './img/arena/ニノン.jpg', true],
+    ['nozomi_summer', 'ノゾミ(サマー)', './img/arena/ノゾミ(サマー).jpg', true],
     ['nozomi_christmas', 'ノゾミ(クリスマス)', './img/arena/ノゾミ(クリスマス).jpg', true],
     ['mihuyu', 'ミフユ', './img/arena/ミフユ.jpg', true],
     ['rin_ranger', 'リン(レンジャー)', './img/arena/リン(レンジャー).jpg', true],
