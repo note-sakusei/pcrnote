@@ -221,6 +221,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['neputerion', 'ネプテリオン', './img/clanbattle/ネプテリオン.jpg', true],
     ['obsidianwyvern', 'オブシダンワイバーン', './img/clanbattle/オブシダンワイバーン.jpg', true],
     ['spirithorn', 'スピリットホーン', './img/clanbattle/スピリットホーン.jpg', true],
+    ['swordcobra', 'ソードコブラ', './img/clanbattle/ソードコブラ.jpg', true],
     ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
     ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
     ['ulfhedinn', 'ウールヴヘジン', './img/clanbattle/ウールヴヘジン.jpg', true]
