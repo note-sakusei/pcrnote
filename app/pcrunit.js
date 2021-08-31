@@ -156,6 +156,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kasumi', 'カスミ', './img/arena/カスミ.jpg', true],
     ['kasumi_magical', 'カスミ(マジカル)', './img/arena/カスミ(マジカル).jpg', true],
     ['rino_wonder', 'リノ(ワンダー)', './img/arena/リノ(ワンダー).jpg', true],
+    ['hatsune_and_shiori', 'ハツネ＆シオリ', './img/arena/ハツネ＆シオリ.jpg', true],
     ['misato', 'ミサト', './img/arena/ミサト.jpg', true],
     ['kasumi_summer', 'カスミ(サマー)', './img/arena/カスミ(サマー).jpg', true],
     ['nanaka', 'ナナカ', './img/arena/ナナカ.jpg', true],

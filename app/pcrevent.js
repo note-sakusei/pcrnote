@@ -584,13 +584,19 @@ pcrevent.resultVsSetList.copyVsSet.onClick = function() {
   );
   const resultVsSetRec =
     pcrnote.gVsSetTable.getResult().pickDuplicating(vsSetIndex);
+  // 新規登録部に複製
   if (pcrnote.gViewController.isNewTabOn()) {
     pcrnote.gNewVsSet = pcrutil.assignPartially(
       pcrnote.gNewVsSet,
       resultVsSetRec,
       ['offenseParty', 'defenseParty', 'rating', 'comment']
     );
+  // ユニット検索部に複製
   } else if (pcrnote.gViewController.isSearchTabOn()) {
+    // クラバト用編成の場合、防衛側ユニットの重複を除去
+    resultVsSetRec.defenseParty = resultVsSetRec.defenseParty.map(
+      (elem, index, self) => self.indexOf(elem) === index ? elem : ''
+    );
     const slotList = pcrnote.gSearchVsSet.slotList;
     const currSlotNum = pcrnote.gSearchVsSet.currSlotNum;
     slotList[currSlotNum] = pcrutil.assignPartially(
