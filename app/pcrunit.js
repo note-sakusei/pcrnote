@@ -175,6 +175,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['chika', 'チカ', './img/arena/チカ.jpg', true],
     ['maho_summer', 'マホ(サマー)', './img/arena/マホ(サマー).jpg', true],
     ['maho', 'マホ', './img/arena/マホ.jpg', true],
+    ['yuki_ooedo', 'ユキ(オーエド)', './img/arena/ユキ(オーエド).jpg', true],
     ['yui', 'ユイ', './img/arena/ユイ.jpg', true],
     ['yuki', 'ユキ', './img/arena/ユキ.jpg', true],
     ['yuni', 'ユニ', './img/arena/ユニ.jpg', true],
