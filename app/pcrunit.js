@@ -164,6 +164,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
     ['kyaru_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
     ['kyaru', 'キャル', './img/arena/キャル.jpg', true],
+    ['creditta', 'クレジッタ', './img/arena/クレジッタ.jpg', true],
     ['hatsune', 'ハツネ', './img/arena/ハツネ.jpg', true],
     ['misaki', 'ミサキ', './img/arena/ミサキ.jpg', true],
     ['luna', 'ルナ', './img/arena/ルナ.jpg', true],
