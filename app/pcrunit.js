@@ -169,6 +169,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['creditta', 'クレジッタ', './img/arena/クレジッタ.jpg', true],
     ['hatsune', 'ハツネ', './img/arena/ハツネ.jpg', true],
     ['misaki', 'ミサキ', './img/arena/ミサキ.jpg', true],
+    ['suzuna_halloween', 'スズナ(ハロウィン)', './img/arena/スズナ(ハロウィン).jpg', true],
     ['luna', 'ルナ', './img/arena/ルナ.jpg', true],
     ['yui_princess', 'ユイ(プリンセス)', './img/arena/ユイ(プリンセス).jpg', true],
     ['chika_christmas', 'チカ(クリスマス)', './img/arena/チカ(クリスマス).jpg', true],
