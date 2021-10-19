@@ -176,6 +176,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['suzume_summer', 'スズメ(サマー)', './img/arena/スズメ(サマー).jpg', true],
     ['kyaru_summer', 'キャル(サマー)', './img/arena/キャル(サマー).jpg', true],
     ['aoi', 'アオイ', './img/arena/アオイ.jpg', true],
+    ['karin', 'カリン', './img/arena/カリン.jpg', true],
     ['chika', 'チカ', './img/arena/チカ.jpg', true],
     ['maho_summer', 'マホ(サマー)', './img/arena/マホ(サマー).jpg', true],
     ['maho', 'マホ', './img/arena/マホ.jpg', true],
