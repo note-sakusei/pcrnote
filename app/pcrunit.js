@@ -151,6 +151,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['suzuna_summer', 'スズナ(サマー)', './img/arena/スズナ(サマー).jpg', true],
     ['shiori', 'シオリ', './img/arena/シオリ.jpg', true],
     ['shiori_magical', 'シオリ(マジカル)', './img/arena/シオリ(マジカル).jpg', true],
+    ['io_noir', 'イオ(ノワール)', './img/arena/イオ(ノワール).jpg', true],
     ['io', 'イオ', './img/arena/イオ.jpg', true],
     ['io_summer', 'イオ(サマー)', './img/arena/イオ(サマー).jpg', true],
     ['suzume', 'スズメ', './img/arena/スズメ.jpg', true],
