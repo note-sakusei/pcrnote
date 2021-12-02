@@ -81,6 +81,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   ],
   // 中衛
   [
+    ['miyako_christmas', 'ミヤコ(クリスマス)', './img/arena/ミヤコ(クリスマス).jpg', true],
     ['tsumugi_summer', 'ツムギ(サマー)', './img/arena/ツムギ(サマー).jpg', true],
     ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
     ['shinobu', 'シノブ', './img/arena/シノブ.jpg', true],
@@ -92,6 +93,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['shizuru_valentine', 'シズル(バレンタイン)', './img/arena/シズル(バレンタイン).jpg', true],
     ['mahiru_ranger', 'マヒル(レンジャー)', './img/arena/マヒル(レンジャー).jpg', true],
     ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
+    ['mahiru_christmas', 'マヒル(クリスマス)', './img/arena/マヒル(クリスマス).jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
     ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
     ['eriko_summer', 'エリコ(サマー)', './img/arena/エリコ(サマー).jpg', true],
