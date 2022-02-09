@@ -76,6 +76,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ilya_christmas', 'イリヤ(クリスマス)', './img/arena/イリヤ(クリスマス).jpg', true],
     ['anna_summer', 'アンナ(サマー)', './img/arena/アンナ(サマー).jpg', true],
     ['christina_chrismas', 'クリスティーナ(クリスマス)', './img/arena/クリスティーナ(クリスマス).jpg', true],
+    ['labyrista_overlord', 'ラビリスタ(オーバーロード)', './img/arena/ラビリスタ(オーバーロード).jpg', true],
     ['mihuyu_workclothes', 'ミフユ(作業服)', './img/arena/ミフユ(作業服).jpg', true],
     ['shefi_newyear', 'シェフィ(ニューイヤー)', './img/arena/シェフィ(ニューイヤー).jpg', true],
     ['shizuru', 'シズル', './img/arena/シズル.jpg', true],
@@ -195,6 +196,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yui', 'ユイ', './img/arena/ユイ.jpg', true],
     ['yuki', 'ユキ', './img/arena/ユキ.jpg', true],
     ['yuni', 'ユニ', './img/arena/ユニ.jpg', true],
+    ['yuni_schoolfestival', 'ユニ(聖学祭)', './img/arena/ユニ(聖学祭).jpg', true],
     ['kyouka', 'キョウカ', './img/arena/キョウカ.jpg', true],
     ['misaki_halloween', 'ミサキ(ハロウィン)', './img/arena/ミサキ(ハロウィン).jpg', true],
     ['kyouka_halloween', 'キョウカ(ハロウィン)', './img/arena/キョウカ(ハロウィン).jpg', true]
