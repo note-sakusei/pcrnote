@@ -142,6 +142,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yori', 'ヨリ', './img/arena/ヨリ.jpg', true],
     ['yui_gishouzoku', 'ユイ(儀装束)', './img/arena/ユイ(儀装束).jpg', true],
     ['saren_summer', 'サレン(サマー)', './img/arena/サレン(サマー).jpg', true],
+    ['kyaru_overlord', 'キャル(オーバーロード)', './img/arena/キャル(オーバーロード).jpg', true],
     ['miyako_halloween', 'ミヤコ(ハロウィン)', './img/arena/ミヤコ(ハロウィン).jpg', true]
   ],
   // 後衛
