@@ -570,6 +570,9 @@ a {
   color: var(--general-select-box-font-color);
   font-size: var(--general-select-box-font-size);
 }
+.menu-command-part-file-type select {
+  width: 70px;
+}
 .menu-command.is-fixed-width {
   width: var(--menu-command-inner-width);
 }
