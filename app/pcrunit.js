@@ -143,7 +143,8 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yui_gishouzoku', 'ユイ(儀装束)', './img/arena/ユイ(儀装束).jpg', true],
     ['saren_summer', 'サレン(サマー)', './img/arena/サレン(サマー).jpg', true],
     ['kyaru_overlord', 'キャル(オーバーロード)', './img/arena/キャル(オーバーロード).jpg', true],
-    ['miyako_halloween', 'ミヤコ(ハロウィン)', './img/arena/ミヤコ(ハロウィン).jpg', true]
+    ['miyako_halloween', 'ミヤコ(ハロウィン)', './img/arena/ミヤコ(ハロウィン).jpg', true],
+    ['ayumi_phantomthief', 'アユミ(怪盗)', './img/arena/アユミ(怪盗).jpg', true]
   ],
   // 後衛
   [
