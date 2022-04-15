@@ -81,6 +81,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['shefi_newyear', 'シェフィ(ニューイヤー)', './img/arena/シェフィ(ニューイヤー).jpg', true],
     ['shizuru', 'シズル', './img/arena/シズル.jpg', true],
     ['christina', 'クリスティーナ', './img/arena/クリスティーナ.jpg', true],
+    ['inori_phantomthief', 'イノリ(怪盗)', './img/arena/イノリ(怪盗).jpg', true],
     ['kurumi_christmas', 'クルミ(クリスマス)', './img/arena/クルミ(クリスマス).jpg', true]
   ],
   // 中衛
