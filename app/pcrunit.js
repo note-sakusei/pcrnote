@@ -109,6 +109,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['nozomi_christmas', 'ノゾミ(クリスマス)', './img/arena/ノゾミ(クリスマス).jpg', true],
     ['mihuyu', 'ミフユ', './img/arena/ミフユ.jpg', true],
     ['rin_ranger', 'リン(レンジャー)', './img/arena/リン(レンジャー).jpg', true],
+    ['akino_and_saren', 'アキノ＆サレン', './img/arena/アキノ＆サレン.jpg', true],
     ['ilya_newyear', 'イリヤ(ニューイヤー)', './img/arena/イリヤ(ニューイヤー).jpg', true],
     ['ilya', 'イリヤ', './img/arena/イリヤ.jpg', true],
     ['kaori_summer', 'カオリ(サマー)', './img/arena/カオリ(サマー).jpg', true],
