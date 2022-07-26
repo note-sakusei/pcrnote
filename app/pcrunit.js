@@ -225,6 +225,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   // 1番目
   [
     ['goblingreat', 'ゴブリングレート', './img/clanbattle/ゴブリングレート.jpg', true],
+    ['madamelectra', 'マダムエレクトラ', './img/clanbattle/マダムエレクトラ.jpg', true],
     ['wyvern', 'ワイバーン', './img/clanbattle/ワイバーン.jpg', true]
   ],
   // 2番目
