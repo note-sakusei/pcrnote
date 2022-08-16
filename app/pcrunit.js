@@ -215,6 +215,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yuni', 'ユニ', './img/arena/ユニ.jpg', true],
     ['yuni_schoolfestival', 'ユニ(聖学祭)', './img/arena/ユニ(聖学祭).jpg', true],
     ['kyouka', 'キョウカ', './img/arena/キョウカ.jpg', true],
+    ['kyouka_summer', 'キョウカ(サマー)', './img/arena/キョウカ(サマー).jpg', true],
     ['misaki_halloween', 'ミサキ(ハロウィン)', './img/arena/ミサキ(ハロウィン).jpg', true],
     ['kyouka_halloween', 'キョウカ(ハロウィン)', './img/arena/キョウカ(ハロウィン).jpg', true]
   ]
