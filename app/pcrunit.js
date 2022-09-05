@@ -209,6 +209,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['karin', 'カリン', './img/arena/カリン.jpg', true],
     ['chika', 'チカ', './img/arena/チカ.jpg', true],
     ['maho_summer', 'マホ(サマー)', './img/arena/マホ(サマー).jpg', true],
+    ['maho_explorer', 'マホ(エクスプローラー)', './img/arena/マホ(エクスプローラー).jpg', true],
     ['maho', 'マホ', './img/arena/マホ.jpg', true],
     ['yuki_ooedo', 'ユキ(オーエド)', './img/arena/ユキ(オーエド).jpg', true],
     ['yui', 'ユイ', './img/arena/ユイ.jpg', true],
