@@ -92,6 +92,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   // 中衛
   [
     ['miyako_christmas', 'ミヤコ(クリスマス)', './img/arena/ミヤコ(クリスマス).jpg', true],
+    ['nea', 'ネア', './img/arena/ネア.jpg', true],
     ['tsumugi_summer', 'ツムギ(サマー)', './img/arena/ツムギ(サマー).jpg', true],
     ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
     ['mimi_summer', 'ミミ(サマー)', './img/arena/ミミ(サマー).jpg', true],
