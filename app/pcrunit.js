@@ -193,6 +193,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misato', 'ミサト', './img/arena/ミサト.jpg', true],
     ['kasumi_summer', 'カスミ(サマー)', './img/arena/カスミ(サマー).jpg', true],
     ['nanaka', 'ナナカ', './img/arena/ナナカ.jpg', true],
+    ['nanaka_halloween', 'ナナカ(ハロウィン)', './img/arena/ナナカ(ハロウィン).jpg', true],
     ['misaki_stage', 'ミサキ(ステージ)', './img/arena/ミサキ(ステージ).jpg', true],
     ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
     ['ames', 'アメス', './img/arena/アメス.jpg', true],
