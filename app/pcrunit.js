@@ -68,6 +68,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['tamaki_summer', 'タマキ(サマー)', './img/arena/タマキ(サマー).jpg', true],
     ['eriko', 'エリコ', './img/arena/エリコ.jpg', true],
     ['pecorine_summer', 'ペコリーヌ(サマー)', './img/arena/ペコリーヌ(サマー).jpg', true],
+    ['christina_wild', 'クリスティーナ(ワイルド)', './img/arena/クリスティーナ(ワイルド).jpg', true],
     ['misogi_summer', 'ミソギ(サマー)', './img/arena/ミソギ(サマー).jpg', true],
     ['kurumi', 'クルミ', './img/arena/クルミ.jpg', true],
     ['djeeta', 'ジータ', './img/arena/ジータ.jpg', true],
