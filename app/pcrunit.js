@@ -159,12 +159,14 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['hatsune_summer', 'ハツネ(サマー)', './img/arena/ハツネ(サマー).jpg', true],
     ['akari', 'アカリ', './img/arena/アカリ.jpg', true],
     ['yori', 'ヨリ', './img/arena/ヨリ.jpg', true],
+    ['anne_and_grea', 'アン＆グレア', './img/arena/アン＆グレア.jpg', true],
     ['yui_gishouzoku', 'ユイ(儀装束)', './img/arena/ユイ(儀装束).jpg', true],
     ['rin_halloween', 'リン(ハロウィン)', './img/arena/リン(ハロウィン).jpg', true],
     ['saren_summer', 'サレン(サマー)', './img/arena/サレン(サマー).jpg', true],
     ['kyaru_overlord', 'キャル(オーバーロード)', './img/arena/キャル(オーバーロード).jpg', true],
     ['miyako_halloween', 'ミヤコ(ハロウィン)', './img/arena/ミヤコ(ハロウィン).jpg', true],
-    ['ayumi_phantomthief', 'アユミ(怪盗)', './img/arena/アユミ(怪盗).jpg', true]
+    ['ayumi_phantomthief', 'アユミ(怪盗)', './img/arena/アユミ(怪盗).jpg', true],
+    ['mitsuki_newyear', 'ミツキ(ニューイヤー)', './img/arena/ミツキ(ニューイヤー).jpg', true]
   ],
   // 後衛
   [
@@ -178,6 +180,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kyaru_newyear', 'キャル(ニューイヤー)', './img/arena/キャル(ニューイヤー).jpg', true],
     ['mio_deremas', 'ミオ(デレマス)', './img/arena/ミオ(デレマス).jpg', true],
     ['misato_summer', 'ミサト(サマー)', './img/arena/ミサト(サマー).jpg', true],
+    ['misato_newyear', 'ミサト(ニューイヤー)', './img/arena/ミサト(ニューイヤー).jpg', true],
     ['rino', 'リノ', './img/arena/リノ.jpg', true],
     ['suzuna', 'スズナ', './img/arena/スズナ.jpg', true],
     ['suzuna_summer', 'スズナ(サマー)', './img/arena/スズナ(サマー).jpg', true],
