@@ -66,6 +66,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['tamaki', 'タマキ', './img/arena/タマキ.jpg', true],
     ['tamaki_workclothes', 'タマキ(作業服)', './img/arena/タマキ(作業服).jpg', true],
     ['tomo', 'トモ', './img/arena/トモ.jpg', true],
+    ['muimi_liberator', 'ムイミ(リベレイター)', './img/arena/ムイミ(リベレイター).jpg', true],
     ['chieru', 'チエル', './img/arena/チエル.jpg', true],
     ['chieru_schoolfestival', 'チエル(聖学祭)', './img/arena/チエル(聖学祭).jpg', true],
     ['tamaki_summer', 'タマキ(サマー)', './img/arena/タマキ(サマー).jpg', true],
