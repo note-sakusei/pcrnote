@@ -238,7 +238,8 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kyouka', 'キョウカ', './img/arena/キョウカ.jpg', true],
     ['kyouka_summer', 'キョウカ(サマー)', './img/arena/キョウカ(サマー).jpg', true],
     ['misaki_halloween', 'ミサキ(ハロウィン)', './img/arena/ミサキ(ハロウィン).jpg', true],
-    ['kyouka_halloween', 'キョウカ(ハロウィン)', './img/arena/キョウカ(ハロウィン).jpg', true]
+    ['kyouka_halloween', 'キョウカ(ハロウィン)', './img/arena/キョウカ(ハロウィン).jpg', true],
+    ['tamaki_cafe', 'タマキ(カフェ)', './img/arena/タマキ(カフェ).jpg', true]
   ]
 ];
 
