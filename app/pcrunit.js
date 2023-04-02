@@ -216,6 +216,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kyaru_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
     ['kyaru', 'キャル', './img/arena/キャル.jpg', true],
     ['creditta', 'クレジッタ', './img/arena/クレジッタ.jpg', true],
+    ['kokkoro_ranger', 'コッコロ(レンジャー)', './img/arena/コッコロ(レンジャー).jpg', true],
     ['hatsune', 'ハツネ', './img/arena/ハツネ.jpg', true],
     ['misaki', 'ミサキ', './img/arena/ミサキ.jpg', true],
     ['suzuna_halloween', 'スズナ(ハロウィン)', './img/arena/スズナ(ハロウィン).jpg', true],
