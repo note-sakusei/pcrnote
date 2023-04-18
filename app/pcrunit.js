@@ -136,6 +136,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['anna', 'アンナ', './img/arena/アンナ.jpg', true],
     ['shinobu_halloween', 'シノブ(ハロウィン)', './img/arena/シノブ(ハロウィン).jpg', true],
     ['monika_cafe', 'モニカ(カフェ)', './img/arena/モニカ(カフェ).jpg', true],
+    ['riri_fallen', 'リリ(フォールン)', './img/arena/リリ(フォールン).jpg', true],
     ['misogi_and_mimi_and_kyouka', 'ミソギ＆ミミ＆キョウカ', './img/arena/ミソギ＆ミミ＆キョウカ.jpg', true],
     ['nanaka_summer', 'ナナカ(サマー)', './img/arena/ナナカ(サマー).jpg', true],
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
