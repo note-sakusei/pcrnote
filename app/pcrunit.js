@@ -165,6 +165,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['vampy', 'ヴァンピィ', './img/arena/ヴァンピィ.jpg', true],
     ['mitsuki', 'ミツキ', './img/arena/ミツキ.jpg', true],
     ['hatsune_summer', 'ハツネ(サマー)', './img/arena/ハツネ(サマー).jpg', true],
+    ['ilya_gishouzoku', 'イリヤ(儀装束)', './img/arena/イリヤ(儀装束).jpg', true],
     ['akari', 'アカリ', './img/arena/アカリ.jpg', true],
     ['yori', 'ヨリ', './img/arena/ヨリ.jpg', true],
     ['anne_and_grea', 'アン＆グレア', './img/arena/アン＆グレア.jpg', true],
