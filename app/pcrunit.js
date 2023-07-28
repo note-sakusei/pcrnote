@@ -277,6 +277,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   // 3番目
   [
     ['basilisk', 'バジリスク', './img/clanbattle/バジリスク.jpg', true],
+    ['burnsaurus', 'バーンサウルス', './img/clanbattle/バーンサウルス.jpg', true],
     ['dragator', 'ドロゲーター', './img/clanbattle/ドロゲーター.jpg', true],
     ['jackalthief', 'ジャッカルシーフ', './img/clanbattle/ジャッカルシーフ.jpg', true],
     ['madamprism', 'マダムプリズム', './img/clanbattle/マダムプリズム.jpg', true],
