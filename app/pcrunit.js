@@ -85,6 +85,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['rei_summer', 'レイ(サマー)', './img/arena/レイ(サマー).jpg', true],
     ['inori_timetravel', 'イノリ(タイムトラベル)', './img/arena/イノリ(タイムトラベル).jpg', true],
     ['ilya_christmas', 'イリヤ(クリスマス)', './img/arena/イリヤ(クリスマス).jpg', true],
+    ['shinobu_summer', 'シノブ(サマー)', './img/arena/シノブ(サマー).jpg', true],
     ['anna_summer', 'アンナ(サマー)', './img/arena/アンナ(サマー).jpg', true],
     ['ayane_explorer', 'アヤネ(エクスプローラー)', './img/arena/アヤネ(エクスプローラー).jpg', true],
     ['labyrista_overlord', 'ラビリスタ(オーバーロード)', './img/arena/ラビリスタ(オーバーロード).jpg', true],
