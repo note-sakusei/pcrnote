@@ -104,6 +104,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   // 中衛
   [
     ['miyako_christmas', 'ミヤコ(クリスマス)', './img/arena/ミヤコ(クリスマス).jpg', true],
+    ['saren_sarasaria', 'サレン(サラサリア)', './img/arena/サレン(サラサリア).jpg', true],
     ['nea', 'ネア', './img/arena/ネア.jpg', true],
     ['tsumugi_summer', 'ツムギ(サマー)', './img/arena/ツムギ(サマー).jpg', true],
     ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
@@ -269,6 +270,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
 pcrunit.NPC_UNIT_INFO_LIST = [
   // 1番目
   [
+    ['frosthound', 'フロストハウンド', './img/clanbattle/フロストハウンド.jpg', true],
     ['goblingreat', 'ゴブリングレート', './img/clanbattle/ゴブリングレート.jpg', true],
     ['madamelectra', 'マダムエレクトラ', './img/clanbattle/マダムエレクトラ.jpg', true],
     ['wyvern', 'ワイバーン', './img/clanbattle/ワイバーン.jpg', true]
