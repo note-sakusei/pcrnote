@@ -30,6 +30,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['pecorine', 'ペコリーヌ', './img/arena/ペコリーヌ.jpg', true],
     ['pecorine_princess', 'ペコリーヌ(プリンセス)', './img/arena/ペコリーヌ(プリンセス).jpg', true],
     ['kaori_halloween', 'カオリ(ハロウィン)', './img/arena/カオリ(ハロウィン).jpg', true],
+    ['ruka_sarasaria', 'ルカ(サラサリア)', './img/arena/ルカ(サラサリア).jpg', true],
     ['ruka', 'ルカ', './img/arena/ルカ.jpg', true],
     ['kokkoro_newyear', 'コッコロ(ニューイヤー)', './img/arena/コッコロ(ニューイヤー).jpg', true],
     ['yukari_summer', 'ユカリ(サマー)', './img/arena/ユカリ(サマー).jpg', true],
