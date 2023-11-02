@@ -124,6 +124,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['mahiru_christmas', 'マヒル(クリスマス)', './img/arena/マヒル(クリスマス).jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
     ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
+    ['kuria_fallen', 'クリア(フォールン)', './img/arena/クリア(フォールン).jpg', true],
     ['eriko_summer', 'エリコ(サマー)', './img/arena/エリコ(サマー).jpg', true],
     ['yukari_christmas', 'ユカリ(クリスマス)', './img/arena/ユカリ(クリスマス).jpg', true],
     ['monika', 'モニカ', './img/arena/モニカ.jpg', true],
