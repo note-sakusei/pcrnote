@@ -216,6 +216,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['io_summer', 'イオ(サマー)', './img/arena/イオ(サマー).jpg', true],
     ['suzume', 'スズメ', './img/arena/スズメ.jpg', true],
     ['suzume_newyear', 'スズメ(ニューイヤー)', './img/arena/スズメ(ニューイヤー).jpg', true],
+    ['creditta_christmas', 'クレジッタ(クリスマス)', './img/arena/クレジッタ(クリスマス).jpg', true],
     ['emilia', 'エミリア', './img/arena/エミリア.jpg', true],
     ['homare', 'ホマレ', './img/arena/ホマレ.jpg', true],
     ['kasumi', 'カスミ', './img/arena/カスミ.jpg', true],
