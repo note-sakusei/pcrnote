@@ -77,6 +77,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['chieru_schoolfestival', 'チエル(聖学祭)', './img/arena/チエル(聖学祭).jpg', true],
     ['akino_summer', 'アキノ(サマー)', './img/arena/アキノ(サマー).jpg', true],
     ['tamaki_summer', 'タマキ(サマー)', './img/arena/タマキ(サマー).jpg', true],
+    ['hiyori_astral', 'ヒヨリ(アストラル)', './img/arena/ヒヨリ(アストラル).jpg', true],
     ['eriko', 'エリコ', './img/arena/エリコ.jpg', true],
     ['pecorine_summer', 'ペコリーヌ(サマー)', './img/arena/ペコリーヌ(サマー).jpg', true],
     ['misogi_summer', 'ミソギ(サマー)', './img/arena/ミソギ(サマー).jpg', true],
