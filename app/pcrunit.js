@@ -55,6 +55,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['chloe', 'クロエ', './img/arena/クロエ.jpg', true],
     ['matsuri_halloween', 'マツリ(ハロウィン)', './img/arena/マツリ(ハロウィン).jpg', true],
     ['eriko_valentine', 'エリコ(バレンタイン)', './img/arena/エリコ(バレンタイン).jpg', true],
+    ['chloe_winter', 'クロエ(ウィンター)', './img/arena/クロエ(ウィンター).jpg', true],
     ['akino_christmas', 'アキノ(クリスマス)', './img/arena/アキノ(クリスマス).jpg', true],
     ['ayane_christmas', 'アヤネ(クリスマス)', './img/arena/アヤネ(クリスマス).jpg', true],
     ['shizuru_noir', 'シズル(ノワール)', './img/arena/シズル(ノワール).jpg', true],
