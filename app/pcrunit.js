@@ -295,6 +295,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['goblinrider', 'ゴブリンライダー', './img/clanbattle/ゴブリンライダー.jpg', true],
     ['landsloth', 'ランドスロース', './img/clanbattle/ランドスロース.jpg', true],
     ['rairai', 'ライライ', './img/clanbattle/ライライ.jpg', true],
+    ['toughgeist', 'タフガイスト', './img/clanbattle/タフガイスト.jpg', true],
     ['wildgriffin', 'ワイルドグリフォン', './img/clanbattle/ワイルドグリフォン.jpg', true]
   ],
   // 3番目
