@@ -98,6 +98,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['hiyori_summer', 'ヒヨリ(サマー)', './img/arena/ヒヨリ(サマー).jpg', true],
     ['christina_chrismas', 'クリスティーナ(クリスマス)', './img/arena/クリスティーナ(クリスマス).jpg', true],
     ['vikala', 'ビカラ', './img/arena/ビカラ.jpg', true],
+    ['makoto_commander', 'マコト(コマンダー)', './img/arena/マコト(コマンダー).jpg', true],
     ['mihuyu_workclothes', 'ミフユ(作業服)', './img/arena/ミフユ(作業服).jpg', true],
     ['shefi_newyear', 'シェフィ(ニューイヤー)', './img/arena/シェフィ(ニューイヤー).jpg', true],
     ['shizuru', 'シズル', './img/arena/シズル.jpg', true],
