@@ -105,6 +105,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['christina', 'クリスティーナ', './img/arena/クリスティーナ.jpg', true],
     ['inori_phantomthief', 'イノリ(怪盗)', './img/arena/イノリ(怪盗).jpg', true],
     ['anna_pirate', 'アンナ(パイレーツ)', './img/arena/アンナ(パイレーツ).jpg', true],
+    ['eriko_commander', 'エリコ(コマンダー)', './img/arena/エリコ(コマンダー).jpg', true],
     ['kurumi_christmas', 'クルミ(クリスマス)', './img/arena/クルミ(クリスマス).jpg', true]
   ],
   // 中衛
