@@ -151,6 +151,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['akari_christmas', 'アカリ(クリスマス)', './img/arena/アカリ(クリスマス).jpg', true],
     ['anna', 'アンナ', './img/arena/アンナ.jpg', true],
     ['shinobu_halloween', 'シノブ(ハロウィン)', './img/arena/シノブ(ハロウィン).jpg', true],
+    ['kururu', 'クルル', './img/arena/クルル.jpg', true],
     ['djeeta_warlock', 'ジータ(ウォーロック)', './img/arena/ジータ(ウォーロック).jpg', true],
     ['yuki_gishouzoku', 'ユキ(儀装束)', './img/arena/ユキ(儀装束).jpg', true],
     ['monika_cafe', 'モニカ(カフェ)', './img/arena/モニカ(カフェ).jpg', true],
