@@ -130,6 +130,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['mahiru_ranger', 'マヒル(レンジャー)', './img/arena/マヒル(レンジャー).jpg', true],
     ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
     ['mahiru_christmas', 'マヒル(クリスマス)', './img/arena/マヒル(クリスマス).jpg', true],
+    ['lily_summer', 'リリ(サマー)', './img/arena/リリ(サマー).jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
     ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
     ['clear_fallen', 'クリア(フォールン)', './img/arena/クリア(フォールン).jpg', true],
