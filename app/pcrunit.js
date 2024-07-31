@@ -249,6 +249,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['lirael', 'ライラエル', './img/arena/ライラエル.jpg', true],
     ['nanaka_halloween', 'ナナカ(ハロウィン)', './img/arena/ナナカ(ハロウィン).jpg', true],
     ['misaki_stage', 'ミサキ(ステージ)', './img/arena/ミサキ(ステージ).jpg', true],
+    ['ames_summer', 'アメス(サマー)', './img/arena/アメス(サマー).jpg', true],
     ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
     ['ames', 'アメス', './img/arena/アメス.jpg', true],
     ['kyaru_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
