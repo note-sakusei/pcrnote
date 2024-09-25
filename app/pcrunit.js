@@ -305,6 +305,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   [
     ['frosthound', 'フロストハウンド', './img/clanbattle/フロストハウンド.jpg', true],
     ['goblingreat', 'ゴブリングレート', './img/clanbattle/ゴブリングレート.jpg', true],
+    ['greatergolem', 'グレーターゴーレム', './img/clanbattle/グレーターゴーレム.jpg', true],
     ['madamelectra', 'マダムエレクトラ', './img/clanbattle/マダムエレクトラ.jpg', true],
     ['wyvern', 'ワイバーン', './img/clanbattle/ワイバーン.jpg', true]
   ],
@@ -330,6 +331,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['raiden', 'ライデン', './img/clanbattle/ライデン.jpg', true],
     ['seadrake', 'シードレイク', './img/clanbattle/シードレイク.jpg', true],
     ['skyvalkyrie', 'スカイワルキューレ', './img/clanbattle/スカイワルキューレ.jpg', true],
+    ['venomsalamander', 'ベノムサラマンドラ', './img/clanbattle/ベノムサラマンドラ.jpg', true],
     ['wraithlord', 'レイスロード', './img/clanbattle/レイスロード.jpg', true]
   ],
   // 4番目
