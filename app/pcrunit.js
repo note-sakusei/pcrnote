@@ -217,6 +217,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['aoi_hennyuusei', 'アオイ(編入生)', './img/arena/アオイ(編入生).jpg', true],
     ['ranpha_summer', 'ランファ(サマー)', './img/arena/ランファ(サマー).jpg', true],
     ['karyl_newyear', 'キャル(ニューイヤー)', './img/arena/キャル(ニューイヤー).jpg', true],
+    ['lind', 'リンド', './img/arena/リンド.jpg', true],
     ['mio_deremas', 'ミオ(デレマス)', './img/arena/ミオ(デレマス).jpg', true],
     ['misato_summer', 'ミサト(サマー)', './img/arena/ミサト(サマー).jpg', true],
     ['misato_newyear', 'ミサト(ニューイヤー)', './img/arena/ミサト(ニューイヤー).jpg', true],
