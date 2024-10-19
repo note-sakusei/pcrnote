@@ -225,6 +225,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['maho_dreampark', 'マホ(ドリームパーク)', './img/arena/マホ(ドリームパーク).jpg', true],
     ['suzuna', 'スズナ', './img/arena/スズナ.jpg', true],
     ['suzuna_summer', 'スズナ(サマー)', './img/arena/スズナ(サマー).jpg', true],
+    ['wurm', 'ヴルム', './img/arena/ヴルム.jpg', true],
     ['homare_newyear', 'ホマレ(ニューイヤー)', './img/arena/ホマレ(ニューイヤー).jpg', true],
     ['yuni_winter', 'ユニ(ウィンター)', './img/arena/ユニ(ウィンター).jpg', true],
     ['homare_summer', 'ホマレ(サマー)', './img/arena/ホマレ(サマー).jpg', true],
