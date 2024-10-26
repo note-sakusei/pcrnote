@@ -335,6 +335,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['seadrake', 'シードレイク', './img/clanbattle/シードレイク.jpg', true],
     ['skyvalkyrie', 'スカイワルキューレ', './img/clanbattle/スカイワルキューレ.jpg', true],
     ['venomsalamander', 'ベノムサラマンドラ', './img/clanbattle/ベノムサラマンドラ.jpg', true],
+    ['wildclaw', 'ワイルドクロウ', './img/clanbattle/ワイルドクロウ.jpg', true],
     ['wraithlord', 'レイスロード', './img/clanbattle/レイスロード.jpg', true]
   ],
   // 4番目
@@ -349,6 +350,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['obsidianwyvern', 'オブシダンワイバーン', './img/clanbattle/オブシダンワイバーン.jpg', true],
     ['rainspirit', 'レインスピリット', './img/clanbattle/レインスピリット.jpg', true],
     ['spirithorn', 'スピリットホーン', './img/clanbattle/スピリットホーン.jpg', true],
+    ['stormziz', 'ストーム・ジズ', './img/clanbattle/ストーム・ジズ.jpg', true],
     ['swordcobra', 'ソードコブラ', './img/clanbattle/ソードコブラ.jpg', true],
     ['titanoturtle', 'ティタノタートル', './img/clanbattle/ティタノタートル.jpg', true],
     ['trylocker', 'トライロッカー', './img/clanbattle/トライロッカー.jpg', true],
