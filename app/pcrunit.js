@@ -123,6 +123,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['sheffy', 'シェフィ', './img/arena/シェフィ.jpg', true],
     ['sheffy_princess', 'シェフィ(プリンセス)', './img/arena/シェフィ(プリンセス).jpg', true],
     ['uzuki_deremas', 'ウヅキ(デレマス)', './img/arena/ウヅキ(デレマス).jpg', true],
+    ['fubuki', 'フブキ', './img/arena/フブキ.jpg', true],
     ['pecorine_christmas', 'ペコリーヌ(クリスマス)', './img/arena/ペコリーヌ(クリスマス).jpg', true],
     ['croce', 'クローチェ', './img/arena/クローチェ.jpg', true],
     ['rei_halloween', 'レイ(ハロウィン)', './img/arena/レイ(ハロウィン).jpg', true],
