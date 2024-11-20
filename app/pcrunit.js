@@ -178,6 +178,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yori_angel', 'ヨリ(エンジェル)', './img/arena/ヨリ(エンジェル).jpg', true],
     ['kokkoro_gishouzoku', 'コッコロ(儀装束)', './img/arena/コッコロ(儀装束).jpg', true],
     ['kokkoro_summer', 'コッコロ(サマー)', './img/arena/コッコロ(サマー).jpg', true],
+    ['wakana', 'ワカナ', './img/arena/ワカナ.jpg', true],
     ['rem', 'レム', './img/arena/レム.jpg', true],
     ['nephinera', 'ネフィ＝ネラ', './img/arena/ネフィ＝ネラ.jpg', true],
     ['ram', 'ラム', './img/arena/ラム.jpg', true],
