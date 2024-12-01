@@ -265,6 +265,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['karyl_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
     ['karyl', 'キャル', './img/arena/キャル.jpg', true],
     ['suzuna_hennyuusei', 'スズナ(編入生)', './img/arena/スズナ(編入生).jpg', true],
+    ['lyrael_christmas', 'ライラエル(クリスマス)', './img/arena/ライラエル(クリスマス).jpg', true],
     ['creditta', 'クレジッタ', './img/arena/クレジッタ.jpg', true],
     ['kokkoro_ranger', 'コッコロ(レンジャー)', './img/arena/コッコロ(レンジャー).jpg', true],
     ['misora_summer', 'ミソラ(サマー)', './img/arena/ミソラ(サマー).jpg', true],
