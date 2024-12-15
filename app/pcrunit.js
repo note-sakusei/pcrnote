@@ -263,6 +263,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
     ['ameth', 'アメス', './img/arena/アメス.jpg', true],
     ['karyl_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
+    ['io_christmas', 'イオ(クリスマス)', './img/arena/イオ(クリスマス).jpg', true],
     ['karyl', 'キャル', './img/arena/キャル.jpg', true],
     ['suzuna_hennyuusei', 'スズナ(編入生)', './img/arena/スズナ(編入生).jpg', true],
     ['lyrael_christmas', 'ライラエル(クリスマス)', './img/arena/ライラエル(クリスマス).jpg', true],
