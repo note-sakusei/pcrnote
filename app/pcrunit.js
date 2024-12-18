@@ -88,6 +88,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['christina_wild', 'クリスティーナ(ワイルド)', './img/arena/クリスティーナ(ワイルド).jpg', true],
     ['kurumi', 'クルミ', './img/arena/クルミ.jpg', true],
     ['djeeta', 'ジータ', './img/arena/ジータ.jpg', true],
+    ['chieru_winter', 'チエル(ウィンター)', './img/arena/チエル(ウィンター).jpg', true],
     ['pecorine_newyear', 'ペコリーヌ(ニューイヤー)', './img/arena/ペコリーヌ(ニューイヤー).jpg', true],
     ['rei', 'レイ', './img/arena/レイ.jpg', true],
     ['rei_summer', 'レイ(サマー)', './img/arena/レイ(サマー).jpg', true],
