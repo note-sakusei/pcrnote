@@ -83,6 +83,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['tamaki_summer', 'タマキ(サマー)', './img/arena/タマキ(サマー).jpg', true],
     ['hiyori_astral', 'ヒヨリ(アストラル)', './img/arena/ヒヨリ(アストラル).jpg', true],
     ['eriko', 'エリコ', './img/arena/エリコ.jpg', true],
+    ['grace', 'グレイス', './img/arena/グレイス.jpg', true],
     ['pecorine_summer', 'ペコリーヌ(サマー)', './img/arena/ペコリーヌ(サマー).jpg', true],
     ['misogi_summer', 'ミソギ(サマー)', './img/arena/ミソギ(サマー).jpg', true],
     ['christina_wild', 'クリスティーナ(ワイルド)', './img/arena/クリスティーナ(ワイルド).jpg', true],
@@ -110,7 +111,8 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['inori_phantomthief', 'イノリ(怪盗)', './img/arena/イノリ(怪盗).jpg', true],
     ['anna_pirate', 'アンナ(パイレーツ)', './img/arena/アンナ(パイレーツ).jpg', true],
     ['eriko_commander', 'エリコ(コマンダー)', './img/arena/エリコ(コマンダー).jpg', true],
-    ['kurumi_christmas', 'クルミ(クリスマス)', './img/arena/クルミ(クリスマス).jpg', true]
+    ['kurumi_christmas', 'クルミ(クリスマス)', './img/arena/クルミ(クリスマス).jpg', true],
+    ['monika_newyear', 'モニカ(ニューイヤー)', './img/arena/モニカ(ニューイヤー).jpg', true]
   ],
   // 中衛
   [
@@ -239,6 +241,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['io_noir', 'イオ(ノワール)', './img/arena/イオ(ノワール).jpg', true],
     ['io', 'イオ', './img/arena/イオ.jpg', true],
     ['io_summer', 'イオ(サマー)', './img/arena/イオ(サマー).jpg', true],
+    ['saren_newyear', 'サレン(ニューイヤー)', './img/arena/サレン(ニューイヤー).jpg', true],
     ['suzume', 'スズメ', './img/arena/スズメ.jpg', true],
     ['nozomi_alchemist', 'ノゾミ(アルケミスト)', './img/arena/ノゾミ(アルケミスト).jpg', true],
     ['suzume_newyear', 'スズメ(ニューイヤー)', './img/arena/スズメ(ニューイヤー).jpg', true],
