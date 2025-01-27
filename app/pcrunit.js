@@ -350,6 +350,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ],
   // 4番目
   [
+    ['basiliskarose', 'バジリスク・アロス', './img/clanbattle/バジリスク・アロス.jpg', true],
     ['cyclops', 'サイクロプス', './img/clanbattle/サイクロプス.jpg', true],
     ['darkgargoyle', 'ダークガーゴイル', './img/clanbattle/ダークガーゴイル.jpg', true],
     ['flowerchevalier', 'フラワーシュバリエ', './img/clanbattle/フラワーシュバリエ.jpg', true],
