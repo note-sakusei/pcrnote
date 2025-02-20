@@ -278,6 +278,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kokkoro_ranger', 'コッコロ(レンジャー)', './img/arena/コッコロ(レンジャー).jpg', true],
     ['misora_summer', 'ミソラ(サマー)', './img/arena/ミソラ(サマー).jpg', true],
     ['hatsune', 'ハツネ', './img/arena/ハツネ.jpg', true],
+    ['neneka_alpha', 'ネネカ(アルファ)', './img/arena/ネネカ(アルファ).jpg', true],
     ['misaki', 'ミサキ', './img/arena/ミサキ.jpg', true],
     ['suzuna_halloween', 'スズナ(ハロウィン)', './img/arena/スズナ(ハロウィン).jpg', true],
     ['rino_christmas', 'リノ(クリスマス)', './img/arena/リノ(クリスマス).jpg', true],
