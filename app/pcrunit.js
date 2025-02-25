@@ -327,6 +327,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ],
   // 2番目
   [
+    ['demicalid', 'デミ・カリド', './img/clanbattle/デミ・カリド.jpg', true],
     ['goblinrider', 'ゴブリンライダー', './img/clanbattle/ゴブリンライダー.jpg', true],
     ['landsloth', 'ランドスロース', './img/clanbattle/ランドスロース.jpg', true],
     ['rairai', 'ライライ', './img/clanbattle/ライライ.jpg', true],
