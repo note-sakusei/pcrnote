@@ -287,6 +287,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['yui_princess', 'ユイ(プリンセス)', './img/arena/ユイ(プリンセス).jpg', true],
     ['chika_christmas', 'チカ(クリスマス)', './img/arena/チカ(クリスマス).jpg', true],
     ['yui_astral', 'ユイ(アストラル)', './img/arena/ユイ(アストラル).jpg', true],
+    ['chika_gishouzoku', 'チカ(儀装束)', './img/arena/チカ(儀装束).jpg', true],
     ['suzume_summer', 'スズメ(サマー)', './img/arena/スズメ(サマー).jpg', true],
     ['echidna_summer', 'エキドナ(サマー)', './img/arena/エキドナ(サマー).jpg', true],
     ['ranpha_gishouzoku', 'ランファ(儀装束)', './img/arena/ランファ(儀装束).jpg', true],
