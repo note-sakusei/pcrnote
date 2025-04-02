@@ -177,6 +177,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ninon_halloween', 'ニノン(ハロウィン)', './img/arena/ニノン(ハロウィン).jpg', true],
     ['chika_summer', 'チカ(サマー)', './img/arena/チカ(サマー).jpg', true],
     ['grea', 'グレア', './img/arena/グレア.jpg', true],
+    ['aoi_pilot', 'アオイ(パイロット)', './img/arena/アオイ(パイロット).jpg', true],
     ['aoi_workclothes', 'アオイ(作業服)', './img/arena/アオイ(作業服).jpg', true],
     ['monika_magical', 'モニカ(マジカル)', './img/arena/モニカ(マジカル).jpg', true],
     ['akari_angel', 'アカリ(エンジェル)', './img/arena/アカリ(エンジェル).jpg', true],
