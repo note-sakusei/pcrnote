@@ -246,6 +246,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['io_summer', 'イオ(サマー)', './img/arena/イオ(サマー).jpg', true],
     ['labyrista_alpha', 'ラビリスタ(アルファ)', './img/arena/ラビリスタ(アルファ).jpg', true],
     ['saren_newyear', 'サレン(ニューイヤー)', './img/arena/サレン(ニューイヤー).jpg', true],
+    ['croce_aerial', 'クローチェ(エアリアル)', './img/arena/クローチェ(エアリアル).jpg', true],
     ['suzume', 'スズメ', './img/arena/スズメ.jpg', true],
     ['nozomi_alchemist', 'ノゾミ(アルケミスト)', './img/arena/ノゾミ(アルケミスト).jpg', true],
     ['suzume_newyear', 'スズメ(ニューイヤー)', './img/arena/スズメ(ニューイヤー).jpg', true],
