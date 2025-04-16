@@ -170,6 +170,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misogi_and_mimi_and_kyouka', 'ミソギ＆ミミ＆キョウカ', './img/arena/ミソギ＆ミミ＆キョウカ.jpg', true],
     ['nanaka_summer', 'ナナカ(サマー)', './img/arena/ナナカ(サマー).jpg', true],
     ['precia_fallen', 'プレシア(フォールン)', './img/arena/プレシア(フォールン).jpg', true],
+    ['houou', 'ホウオウ', './img/arena/ホウオウ.jpg', true],
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
     ['kokkoro', 'コッコロ', './img/arena/コッコロ.jpg', true],
     ['ayumi_wonder', 'アユミ(ワンダー)', './img/arena/アユミ(ワンダー).jpg', true],
