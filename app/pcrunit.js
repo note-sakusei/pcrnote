@@ -282,6 +282,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['creditta', 'クレジッタ', './img/arena/クレジッタ.jpg', true],
     ['kokkoro_ranger', 'コッコロ(レンジャー)', './img/arena/コッコロ(レンジャー).jpg', true],
     ['misora_summer', 'ミソラ(サマー)', './img/arena/ミソラ(サマー).jpg', true],
+    ['louisemarie', 'ルイズマリー', './img/arena/ルイズマリー.jpg', true],
     ['hatsune', 'ハツネ', './img/arena/ハツネ.jpg', true],
     ['neneka_alpha', 'ネネカ(アルファ)', './img/arena/ネネカ(アルファ).jpg', true],
     ['misaki', 'ミサキ', './img/arena/ミサキ.jpg', true],
