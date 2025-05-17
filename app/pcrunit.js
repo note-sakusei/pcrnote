@@ -220,6 +220,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   [
     ['arisa', 'アリサ', './img/arena/アリサ.jpg', true],
     ['anne', 'アン', './img/arena/アン.jpg', true],
+    ['sono', 'ソノ', './img/arena/ソノ.jpg', true],
     ['lou', 'ルゥ', './img/arena/ルゥ.jpg', true],
     ['maho_cinderella', 'マホ(シンデレラ)', './img/arena/マホ(シンデレラ).jpg', true],
     ['neneka_summer', 'ネネカ(サマー)', './img/arena/ネネカ(サマー).jpg', true],
