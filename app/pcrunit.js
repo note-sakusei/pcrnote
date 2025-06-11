@@ -68,6 +68,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ruka_newyear', 'ルカ(ニューイヤー)', './img/arena/ルカ(ニューイヤー).jpg', true],
     ['rei_astral', 'レイ(アストラル)', './img/arena/レイ(アストラル).jpg', true],
     ['tsumugi', 'ツムギ', './img/arena/ツムギ.jpg', true],
+    ['kanon', 'カノン', './img/arena/カノン.jpg', true],
     ['inori', 'イノリ', './img/arena/イノリ.jpg', true],
     ['hiyori_princess', 'ヒヨリ(プリンセス)', './img/arena/ヒヨリ(プリンセス).jpg', true],
     ['hiyori', 'ヒヨリ', './img/arena/ヒヨリ.jpg', true],
