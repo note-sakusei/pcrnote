@@ -176,6 +176,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['houou', 'ホウオウ', './img/arena/ホウオウ.jpg', true],
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
     ['kokkoro', 'コッコロ', './img/arena/コッコロ.jpg', true],
+    ['iroha', 'イロハ', './img/arena/イロハ.jpg', true],
     ['ayumi_wonder', 'アユミ(ワンダー)', './img/arena/アユミ(ワンダー).jpg', true],
     ['ayumi', 'アユミ', './img/arena/アユミ.jpg', true],
     ['ninon_halloween', 'ニノン(ハロウィン)', './img/arena/ニノン(ハロウィン).jpg', true],
