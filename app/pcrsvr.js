@@ -59,6 +59,7 @@ pcrsvr.AVAILABLE_RESOURCE_LIST = [
   '/pcrview.js',
   '/pcrevent.js',
   '/pcrnote.js',
+  '/robots.txt',
   /^\/img\/.+\.(?:png|jpg)$/,
   /^\/img\/.+\/(?:arena|clanbattle)\/.(?:png|jpg)$/
 ];
