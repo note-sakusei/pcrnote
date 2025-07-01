@@ -303,6 +303,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['karyl_summer', 'キャル(サマー)', './img/arena/キャル(サマー).jpg', true],
     ['ranpha', 'ランファ', './img/arena/ランファ.jpg', true],
     ['aoi', 'アオイ', './img/arena/アオイ.jpg', true],
+    ['eris_summer', 'エリス(サマー)', './img/arena/エリス(サマー).jpg', true],
     ['karin', 'カリン', './img/arena/カリン.jpg', true],
     ['chika', 'チカ', './img/arena/チカ.jpg', true],
     ['maho_summer', 'マホ(サマー)', './img/arena/マホ(サマー).jpg', true],
