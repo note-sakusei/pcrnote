@@ -21,6 +21,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['muimi_newyear', 'ムイミ(ニューイヤー)', './img/arena/ムイミ(ニューイヤー).jpg', true],
     ['kuuka_ooedo', 'クウカ(オーエド)', './img/arena/クウカ(オーエド).jpg', true],
     ['kuuka_noir', 'クウカ(ノワール)', './img/arena/クウカ(ノワール).jpg', true],
+    ['sheffy_summer', 'シェフィ(サマー)', './img/arena/シェフィ(サマー).jpg', true],
     ['jun_christmas', 'ジュン(クリスマス)', './img/arena/ジュン(クリスマス).jpg', true],
     ['kaori', 'カオリ', './img/arena/カオリ.jpg', true],
     ['rem_summer', 'レム(サマー)', './img/arena/レム(サマー).jpg', true],
