@@ -194,6 +194,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['rem', 'レム', './img/arena/レム.jpg', true],
     ['nephinera', 'ネフィ＝ネラ', './img/arena/ネフィ＝ネラ.jpg', true],
     ['ram', 'ラム', './img/arena/ラム.jpg', true],
+    ['precia_summer', 'プレシア(サマー)', './img/arena/プレシア(サマー).jpg', true],
     ['rin', 'リン', './img/arena/リン.jpg', true],
     ['anemone', 'アネモネ', './img/arena/アネモネ.jpg', true],
     ['shizuru_and_rino', 'シズル＆リノ', './img/arena/シズル＆リノ.jpg', true],
