@@ -148,6 +148,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['eriko_summer', 'エリコ(サマー)', './img/arena/エリコ(サマー).jpg', true],
     ['yukari_christmas', 'ユカリ(クリスマス)', './img/arena/ユカリ(クリスマス).jpg', true],
     ['monika', 'モニカ', './img/arena/モニカ.jpg', true],
+    ['quria_summer', 'クリア(サマー)', './img/arena/クリア(サマー).jpg', true],
     ['ninon', 'ニノン', './img/arena/ニノン.jpg', true],
     ['nozomi_summer', 'ノゾミ(サマー)', './img/arena/ノゾミ(サマー).jpg', true],
     ['nozomi_christmas', 'ノゾミ(クリスマス)', './img/arena/ノゾミ(クリスマス).jpg', true],
