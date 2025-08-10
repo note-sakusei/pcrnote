@@ -200,6 +200,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['anemone', 'アネモネ', './img/arena/アネモネ.jpg', true],
     ['shizuru_and_rino', 'シズル＆リノ', './img/arena/シズル＆リノ.jpg', true],
     ['mitsuki_ooedo', 'ミツキ(オーエド)', './img/arena/ミツキ(オーエド).jpg', true],
+    ['anemone_summer', 'アネモネ(サマー)', './img/arena/アネモネ(サマー).jpg', true],
     ['yui_summer', 'ユイ(サマー)', './img/arena/ユイ(サマー).jpg', true],
     ['kokkoro_princess', 'コッコロ(プリンセス)', './img/arena/コッコロ(プリンセス).jpg', true],
     ['suzume_spring', 'スズメ(スプリング)', './img/arena/スズメ(スプリング).jpg', true],
