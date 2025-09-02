@@ -76,6 +76,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misogi', 'ミソギ', './img/arena/ミソギ.jpg', true],
     ['ayane', 'アヤネ', './img/arena/アヤネ.jpg', true],
     ['misogi_halloween', 'ミソギ(ハロウィン)', './img/arena/ミソギ(ハロウィン).jpg', true],
+    ['aira', 'アイラ', './img/arena/アイラ.jpg', true],
     ['tamaki', 'タマキ', './img/arena/タマキ.jpg', true],
     ['tamaki_workclothes', 'タマキ(作業服)', './img/arena/タマキ(作業服).jpg', true],
     ['tomo', 'トモ', './img/arena/トモ.jpg', true],
