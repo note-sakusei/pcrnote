@@ -71,6 +71,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['tsumugi', 'ツムギ', './img/arena/ツムギ.jpg', true],
     ['kanon', 'カノン', './img/arena/カノン.jpg', true],
     ['inori', 'イノリ', './img/arena/イノリ.jpg', true],
+    ['shinatsu', 'シナツ', './img/arena/シナツ.jpg', true],
     ['hiyori_princess', 'ヒヨリ(プリンセス)', './img/arena/ヒヨリ(プリンセス).jpg', true],
     ['hiyori', 'ヒヨリ', './img/arena/ヒヨリ.jpg', true],
     ['misogi', 'ミソギ', './img/arena/ミソギ.jpg', true],
