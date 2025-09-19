@@ -114,6 +114,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['sheffy_newyear', 'シェフィ(ニューイヤー)', './img/arena/シェフィ(ニューイヤー).jpg', true],
     ['shizuru', 'シズル', './img/arena/シズル.jpg', true],
     ['christina', 'クリスティーナ', './img/arena/クリスティーナ.jpg', true],
+    ['hiyori_sarasaria', 'ヒヨリ(サラサリア)', './img/arena/ヒヨリ(サラサリア).jpg', true],
     ['inori_phantomthief', 'イノリ(怪盗)', './img/arena/イノリ(怪盗).jpg', true],
     ['anna_pirate', 'アンナ(パイレーツ)', './img/arena/アンナ(パイレーツ).jpg', true],
     ['eriko_commander', 'エリコ(コマンダー)', './img/arena/エリコ(コマンダー).jpg', true],
