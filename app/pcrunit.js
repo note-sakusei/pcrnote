@@ -330,7 +330,8 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misaki_halloween', 'ミサキ(ハロウィン)', './img/arena/ミサキ(ハロウィン).jpg', true],
     ['kyouka_halloween', 'キョウカ(ハロウィン)', './img/arena/キョウカ(ハロウィン).jpg', true],
     ['tamaki_cafe', 'タマキ(カフェ)', './img/arena/タマキ(カフェ).jpg', true],
-    ['nebbia', 'ネビア', './img/arena/ネビア.jpg', true]
+    ['nebbia', 'ネビア', './img/arena/ネビア.jpg', true],
+    ['yukino', 'ユキノ', './img/arena/ユキノ.jpg', true]
   ]
 ];
 
