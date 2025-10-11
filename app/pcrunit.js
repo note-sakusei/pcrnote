@@ -80,6 +80,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['aira', 'アイラ', './img/arena/アイラ.jpg', true],
     ['tamaki', 'タマキ', './img/arena/タマキ.jpg', true],
     ['tamaki_workclothes', 'タマキ(作業服)', './img/arena/タマキ(作業服).jpg', true],
+    ['satsuki', 'サツキ', './img/arena/サツキ.jpg', true],
     ['tomo', 'トモ', './img/arena/トモ.jpg', true],
     ['muimi_liberator', 'ムイミ(リベレイター)', './img/arena/ムイミ(リベレイター).jpg', true],
     ['chieru', 'チエル', './img/arena/チエル.jpg', true],
