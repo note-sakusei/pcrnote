@@ -165,6 +165,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ilya', 'イリヤ', './img/arena/イリヤ.jpg', true],
     ['kaori_summer', 'カオリ(サマー)', './img/arena/カオリ(サマー).jpg', true],
     ['saren', 'サレン', './img/arena/サレン.jpg', true],
+    ['sakura', 'サクラ', './img/arena/サクラ.jpg', true],
     ['yori_christmas', 'ヨリ(クリスマス)', './img/arena/ヨリ(クリスマス).jpg', true],
     ['akari_christmas', 'アカリ(クリスマス)', './img/arena/アカリ(クリスマス).jpg', true],
     ['anna', 'アンナ', './img/arena/アンナ.jpg', true],
