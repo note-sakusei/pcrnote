@@ -142,6 +142,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['rei_halloween', 'レイ(ハロウィン)', './img/arena/レイ(ハロウィン).jpg', true],
     ['rei_princess', 'レイ(プリンセス)', './img/arena/レイ(プリンセス).jpg', true],
     ['shinobu_pirate', 'シノブ(パイレーツ)', './img/arena/シノブ(パイレーツ).jpg', true],
+    ['yui_christmas', 'ユイ(クリスマス)', './img/arena/ユイ(クリスマス).jpg', true],
     ['shizuru_valentine', 'シズル(バレンタイン)', './img/arena/シズル(バレンタイン).jpg', true],
     ['mahiru_ranger', 'マヒル(レンジャー)', './img/arena/マヒル(レンジャー).jpg', true],
     ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
@@ -376,6 +377,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['raiden', 'ライデン', './img/clanbattle/ライデン.jpg', true],
     ['seadrake', 'シードレイク', './img/clanbattle/シードレイク.jpg', true],
     ['skyvalkyrie', 'スカイワルキューレ', './img/clanbattle/スカイワルキューレ.jpg', true],
+    ['treantcastle', 'トレントキャッスル', './img/clanbattle/トレントキャッスル.jpg', true],
     ['venomsalamander', 'ベノムサラマンドラ', './img/clanbattle/ベノムサラマンドラ.jpg', true],
     ['wildclaw', 'ワイルドクロウ', './img/clanbattle/ワイルドクロウ.jpg', true],
     ['wraithlord', 'レイスロード', './img/clanbattle/レイスロード.jpg', true]
