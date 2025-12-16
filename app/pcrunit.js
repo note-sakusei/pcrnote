@@ -240,6 +240,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['maho_cinderella', 'マホ(シンデレラ)', './img/arena/マホ(シンデレラ).jpg', true],
     ['neneka_summer', 'ネネカ(サマー)', './img/arena/ネネカ(サマー).jpg', true],
     ['kaiserinsight', 'カイザーインサイト', './img/arena/カイザーインサイト.jpg', true],
+    ['misora_christmas', 'ミソラ(クリスマス)', './img/arena/ミソラ(クリスマス).jpg', true],
     ['neneka', 'ネネカ', './img/arena/ネネカ.jpg', true],
     ['aoi_hennyuusei', 'アオイ(編入生)', './img/arena/アオイ(編入生).jpg', true],
     ['ranpha_summer', 'ランファ(サマー)', './img/arena/ランファ(サマー).jpg', true],
