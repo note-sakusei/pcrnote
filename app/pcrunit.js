@@ -282,6 +282,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['aoi_camp', 'アオイ(キャンプ)', './img/arena/アオイ(キャンプ).jpg', true],
     ['arachne', 'アラクネ', './img/arena/アラクネ.jpg', true],
     ['hatsune_and_shiori', 'ハツネ＆シオリ', './img/arena/ハツネ＆シオリ.jpg', true],
+    ['kokkoro_littleguidance', 'コッコロ(嚮導幼君)', './img/arena/コッコロ(嚮導幼君).jpg', true],
     ['misato', 'ミサト', './img/arena/ミサト.jpg', true],
     ['kasumi_summer', 'カスミ(サマー)', './img/arena/カスミ(サマー).jpg', true],
     ['kasumi_newyear', 'カスミ(ニューイヤー)', './img/arena/カスミ(ニューイヤー).jpg', true],
