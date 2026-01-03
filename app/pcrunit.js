@@ -27,6 +27,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['rem_summer', 'レム(サマー)', './img/arena/レム(サマー).jpg', true],
     ['saren_christmas', 'サレン(クリスマス)', './img/arena/サレン(クリスマス).jpg', true],
     ['yamato', 'ヤマト', './img/arena/ヤマト.jpg', true],
+    ['shizuru_newyear', 'シズル(ニューイヤー)', './img/arena/シズル(ニューイヤー).jpg', true],
     ['tsumugi_halloween', 'ツムギ(ハロウィン)', './img/arena/ツムギ(ハロウィン).jpg', true],
     ['rei_newyear', 'レイ(ニューイヤー)', './img/arena/レイ(ニューイヤー).jpg', true],
     ['rin_deremas', 'リン(デレマス)', './img/arena/リン(デレマス).jpg', true],
