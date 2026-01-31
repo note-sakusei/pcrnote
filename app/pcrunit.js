@@ -32,6 +32,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['rei_newyear', 'レイ(ニューイヤー)', './img/arena/レイ(ニューイヤー).jpg', true],
     ['rin_deremas', 'リン(デレマス)', './img/arena/リン(デレマス).jpg', true],
     ['violet', 'ヴァイオレット', './img/arena/ヴァイオレット.jpg', true],
+    ['violet_isanami', 'ヴァイオレット(イサナミ)', './img/arena/ヴァイオレット(イサナミ).jpg', true],
     ['pecorine', 'ペコリーヌ', './img/arena/ペコリーヌ.jpg', true],
     ['pecorine_princess', 'ペコリーヌ(プリンセス)', './img/arena/ペコリーヌ(プリンセス).jpg', true],
     ['kaori_halloween', 'カオリ(ハロウィン)', './img/arena/カオリ(ハロウィン).jpg', true],
