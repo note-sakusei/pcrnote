@@ -277,6 +277,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['emilia', 'エミリア', './img/arena/エミリア.jpg', true],
     ['emilia_summer', 'エミリア(サマー)', './img/arena/エミリア(サマー).jpg', true],
     ['homare', 'ホマレ', './img/arena/ホマレ.jpg', true],
+    ['lyrael_perfect', 'ライラエル(パルフェクト)', './img/arena/ライラエル(パルフェクト).jpg', true],
     ['kasumi', 'カスミ', './img/arena/カスミ.jpg', true],
     ['kasumi_magical', 'カスミ(マジカル)', './img/arena/カスミ(マジカル).jpg', true],
     ['rino_wonder', 'リノ(ワンダー)', './img/arena/リノ(ワンダー).jpg', true],
