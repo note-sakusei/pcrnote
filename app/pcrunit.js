@@ -188,6 +188,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
     ['kokkoro', 'コッコロ', './img/arena/コッコロ.jpg', true],
     ['iroha', 'イロハ', './img/arena/イロハ.jpg', true],
+    ['nephinera_kimenbusshin', 'ネフィ＝ネラ(鬼面仏心)', './img/arena/ネフィ＝ネラ(鬼面仏心).jpg', true],
     ['ayumi_wonder', 'アユミ(ワンダー)', './img/arena/アユミ(ワンダー).jpg', true],
     ['ayumi', 'アユミ', './img/arena/アユミ.jpg', true],
     ['ninon_halloween', 'ニノン(ハロウィン)', './img/arena/ニノン(ハロウィン).jpg', true],
