@@ -225,6 +225,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['hatsune_summer', 'ハツネ(サマー)', './img/arena/ハツネ(サマー).jpg', true],
     ['ilya_gishouzoku', 'イリヤ(儀装束)', './img/arena/イリヤ(儀装束).jpg', true],
     ['akari', 'アカリ', './img/arena/アカリ.jpg', true],
+    ['shiori_winter', 'シオリ(ウィンター)', './img/arena/シオリ(ウィンター).jpg', true],
     ['yori', 'ヨリ', './img/arena/ヨリ.jpg', true],
     ['anne_and_grea', 'アン＆グレア', './img/arena/アン＆グレア.jpg', true],
     ['yui_gishouzoku', 'ユイ(儀装束)', './img/arena/ユイ(儀装束).jpg', true],
