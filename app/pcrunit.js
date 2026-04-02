@@ -169,6 +169,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ilya_newyear', 'イリヤ(ニューイヤー)', './img/arena/イリヤ(ニューイヤー).jpg', true],
     ['ilya', 'イリヤ', './img/arena/イリヤ.jpg', true],
     ['kaori_summer', 'カオリ(サマー)', './img/arena/カオリ(サマー).jpg', true],
+    ['grace_bunny', 'グレイス(バニー)', './img/arena/グレイス(バニー).jpg', true],
     ['saren', 'サレン', './img/arena/サレン.jpg', true],
     ['sakura', 'サクラ', './img/arena/サクラ.jpg', true],
     ['yori_christmas', 'ヨリ(クリスマス)', './img/arena/ヨリ(クリスマス).jpg', true],
