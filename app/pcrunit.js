@@ -186,6 +186,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['nanaka_summer', 'ナナカ(サマー)', './img/arena/ナナカ(サマー).jpg', true],
     ['precia_fallen', 'プレシア(フォールン)', './img/arena/プレシア(フォールン).jpg', true],
     ['tsumugi_geogehenna', 'ツムギ(ジオ・ゲヘナ)', './img/arena/ツムギ(ジオ・ゲヘナ).jpg', true],
+    ['miho_girlsundpanzer', 'ミホ(ガルパン)', './img/arena/ミホ(ガルパン).jpg', true],
     ['houou', 'ホウオウ', './img/arena/ホウオウ.jpg', true],
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
     ['kokkoro', 'コッコロ', './img/arena/コッコロ.jpg', true],
@@ -259,6 +260,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misato_summer', 'ミサト(サマー)', './img/arena/ミサト(サマー).jpg', true],
     ['misato_newyear', 'ミサト(ニューイヤー)', './img/arena/ミサト(ニューイヤー).jpg', true],
     ['rino', 'リノ', './img/arena/リノ.jpg', true],
+    ['maho_girlsundpanzer', 'マホ(ガルパン)', './img/arena/マホ(ガルパン).jpg', true],
     ['maho_dreampark', 'マホ(ドリームパーク)', './img/arena/マホ(ドリームパーク).jpg', true],
     ['suzuna', 'スズナ', './img/arena/スズナ.jpg', true],
     ['suzuna_summer', 'スズナ(サマー)', './img/arena/スズナ(サマー).jpg', true],
@@ -363,6 +365,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['frosthound', 'フロストハウンド', './img/clanbattle/フロストハウンド.jpg', true],
     ['goblingreat', 'ゴブリングレート', './img/clanbattle/ゴブリングレート.jpg', true],
     ['greatergolem', 'グレーターゴーレム', './img/clanbattle/グレーターゴーレム.jpg', true],
+    ['livingmail', 'リビングメイル', './img/clanbattle/リビングメイル.jpg', true],
     ['madamelectra', 'マダムエレクトラ', './img/clanbattle/マダムエレクトラ.jpg', true],
     ['wyvern', 'ワイバーン', './img/clanbattle/ワイバーン.jpg', true]
   ],
@@ -393,6 +396,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['treantcastle', 'トレントキャッスル', './img/clanbattle/トレントキャッスル.jpg', true],
     ['venomsalamander', 'ベノムサラマンドラ', './img/clanbattle/ベノムサラマンドラ.jpg', true],
     ['wildclaw', 'ワイルドクロウ', './img/clanbattle/ワイルドクロウ.jpg', true],
+    ['wraithcollector', 'レイスコレクター', './img/clanbattle/レイスコレクター.jpg', true],
     ['wraithlord', 'レイスロード', './img/clanbattle/レイスロード.jpg', true]
   ],
   // 4番目
