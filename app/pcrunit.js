@@ -130,6 +130,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
   [
     ['miyako_christmas', 'ミヤコ(クリスマス)', './img/arena/ミヤコ(クリスマス).jpg', true],
     ['saren_sarasaria', 'サレン(サラサリア)', './img/arena/サレン(サラサリア).jpg', true],
+    ['erika_girlsundpanzer', 'エリカ(ガルパン)', './img/arena/エリカ(ガルパン).jpg', true],
     ['nea', 'ネア', './img/arena/ネア.jpg', true],
     ['tsumugi_summer', 'ツムギ(サマー)', './img/arena/ツムギ(サマー).jpg', true],
     ['mimi', 'ミミ', './img/arena/ミミ.jpg', true],
