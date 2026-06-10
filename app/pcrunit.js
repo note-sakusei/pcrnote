@@ -193,6 +193,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['houou', 'ホウオウ', './img/arena/ホウオウ.jpg', true],
     ['mihuyu_summer', 'ミフユ(サマー)', './img/arena/ミフユ(サマー).jpg', true],
     ['kokkoro', 'コッコロ', './img/arena/コッコロ.jpg', true],
+    ['precia_valkyria', 'プレシア(ヴァルキュリア)', './img/arena/プレシア(ヴァルキュリア).jpg', true],
     ['iroha', 'イロハ', './img/arena/イロハ.jpg', true],
     ['nephinera_kimenbusshin', 'ネフィ＝ネラ(鬼面仏心)', './img/arena/ネフィ＝ネラ(鬼面仏心).jpg', true],
     ['ayumi_wonder', 'アユミ(ワンダー)', './img/arena/アユミ(ワンダー).jpg', true],
