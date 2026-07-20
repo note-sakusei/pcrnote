@@ -295,6 +295,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['kasumi_magical', 'カスミ(マジカル)', './img/arena/カスミ(マジカル).jpg', true],
     ['rino_wonder', 'リノ(ワンダー)', './img/arena/リノ(ワンダー).jpg', true],
     ['misora', 'ミソラ', './img/arena/ミソラ.jpg', true],
+    ['creditta_summer', 'クレジッタ(サマー)', './img/arena/クレジッタ(サマー).jpg', true],
     ['kurumi_stage', 'クルミ(ステージ)', './img/arena/クルミ(ステージ).jpg', true],
     ['aoi_camp', 'アオイ(キャンプ)', './img/arena/アオイ(キャンプ).jpg', true],
     ['arachne', 'アラクネ', './img/arena/アラクネ.jpg', true],
