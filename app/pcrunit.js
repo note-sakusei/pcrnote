@@ -144,6 +144,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['pecorine_christmas', 'ペコリーヌ(クリスマス)', './img/arena/ペコリーヌ(クリスマス).jpg', true],
     ['croce', 'クローチェ', './img/arena/クローチェ.jpg', true],
     ['rei_halloween', 'レイ(ハロウィン)', './img/arena/レイ(ハロウィン).jpg', true],
+    ['fubuki_summer', 'フブキ(サマー)', './img/arena/フブキ(サマー).jpg', true],
     ['rei_princess', 'レイ(プリンセス)', './img/arena/レイ(プリンセス).jpg', true],
     ['shinobu_pirate', 'シノブ(パイレーツ)', './img/arena/シノブ(パイレーツ).jpg', true],
     ['yui_christmas', 'ユイ(クリスマス)', './img/arena/ユイ(クリスマス).jpg', true],
