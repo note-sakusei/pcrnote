@@ -239,6 +239,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['anne_and_grea', 'アン＆グレア', './img/arena/アン＆グレア.jpg', true],
     ['yui_gishouzoku', 'ユイ(儀装束)', './img/arena/ユイ(儀装束).jpg', true],
     ['karin_alchemist', 'カリン(アルケミスト)', './img/arena/カリン(アルケミスト).jpg', true],
+    ['vampy_summer', 'ヴァンピィ(サマー)', './img/arena/ヴァンピィ(サマー).jpg', true],
     ['rin_halloween', 'リン(ハロウィン)', './img/arena/リン(ハロウィン).jpg', true],
     ['saren_summer', 'サレン(サマー)', './img/arena/サレン(サマー).jpg', true],
     ['karyl_overlord', 'キャル(オーバーロード)', './img/arena/キャル(オーバーロード).jpg', true],
