@@ -312,6 +312,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['misaki_stage', 'ミサキ(ステージ)', './img/arena/ミサキ(ステージ).jpg', true],
     ['ameth_summer', 'アメス(サマー)', './img/arena/アメス(サマー).jpg', true],
     ['yui_newyear', 'ユイ(ニューイヤー)', './img/arena/ユイ(ニューイヤー).jpg', true],
+    ['tear', 'ティア', './img/arena/ティア.jpg', true],
     ['ameth', 'アメス', './img/arena/アメス.jpg', true],
     ['fio', 'フィオ', './img/arena/フィオ.jpg', true],
     ['karyl_princess', 'キャル(プリンセス)', './img/arena/キャル(プリンセス).jpg', true],
