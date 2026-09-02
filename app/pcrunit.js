@@ -152,6 +152,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['sheffy_wahredrache', 'シェフィ(ヴァードラッヘ)', './img/arena/シェフィ(ヴァードラッヘ).jpg', true],
     ['mahiru_ranger', 'マヒル(レンジャー)', './img/arena/マヒル(レンジャー).jpg', true],
     ['mahiru', 'マヒル', './img/arena/マヒル.jpg', true],
+    ['wurm_wurmdrache', 'ヴルム(ヴァルムドラッヘ)', './img/arena/ヴルム(ヴァルムドラッヘ).jpg', true],
     ['mahiru_christmas', 'マヒル(クリスマス)', './img/arena/マヒル(クリスマス).jpg', true],
     ['riri_summer', 'リリ(サマー)', './img/arena/リリ(サマー).jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
@@ -385,6 +386,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['demicalid', 'デミ・カリド', './img/clanbattle/デミ・カリド.jpg', true],
     ['goblinrider', 'ゴブリンライダー', './img/clanbattle/ゴブリンライダー.jpg', true],
     ['landsloth', 'ランドスロース', './img/clanbattle/ランドスロース.jpg', true],
+    ['mistseeker', 'ミストシーカー', './img/clanbattle/ミストシーカー.jpg', true],
     ['rairai', 'ライライ', './img/clanbattle/ライライ.jpg', true],
     ['toughgeist', 'タフガイスト', './img/clanbattle/タフガイスト.jpg', true],
     ['wildgriffin', 'ワイルドグリフォン', './img/clanbattle/ワイルドグリフォン.jpg', true]
@@ -392,6 +394,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   // 3番目
   [
     ['basilisk', 'バジリスク', './img/clanbattle/バジリスク.jpg', true],
+    ['biodozer', 'バイオドーザー', './img/clanbattle/バイオドーザー.jpg', true],
     ['burnsaurus', 'バーンサウルス', './img/clanbattle/バーンサウルス.jpg', true],
     ['dragator', 'ドロゲーター', './img/clanbattle/ドロゲーター.jpg', true],
     ['iwanozuchi', 'イワノヅチ', './img/clanbattle/イワノヅチ.jpg', true],
