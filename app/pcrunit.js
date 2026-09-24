@@ -155,6 +155,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['wurm_wurmdrache', 'ヴルム(ヴァルムドラッヘ)', './img/arena/ヴルム(ヴァルムドラッヘ).jpg', true],
     ['mahiru_christmas', 'マヒル(クリスマス)', './img/arena/マヒル(クリスマス).jpg', true],
     ['riri_summer', 'リリ(サマー)', './img/arena/リリ(サマー).jpg', true],
+    ['croce_submarine', 'クローチェ(サブマリン)', './img/arena/クローチェ(サブマリン).jpg', true],
     ['tomo_magical', 'トモ(マジカル)', './img/arena/トモ(マジカル).jpg', true],
     ['yukari', 'ユカリ', './img/arena/ユカリ.jpg', true],
     ['quria_fallen', 'クリア(フォールン)', './img/arena/クリア(フォールン).jpg', true],
