@@ -345,6 +345,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['ranpha_gishouzoku', 'ランファ(儀装束)', './img/arena/ランファ(儀装束).jpg', true],
     ['karyl_summer', 'キャル(サマー)', './img/arena/キャル(サマー).jpg', true],
     ['liza', 'リーザ', './img/arena/リーザ.jpg', true],
+    ['aglaea', 'アグライア', './img/arena/アグライア.jpg', true],
     ['ranpha', 'ランファ', './img/arena/ランファ.jpg', true],
     ['aoi', 'アオイ', './img/arena/アオイ.jpg', true],
     ['eris_summer', 'エリス(サマー)', './img/arena/エリス(サマー).jpg', true],
