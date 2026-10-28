@@ -394,6 +394,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
     ['mistseeker', 'ミストシーカー', './img/clanbattle/ミストシーカー.jpg', true],
     ['rairai', 'ライライ', './img/clanbattle/ライライ.jpg', true],
     ['toughgeist', 'タフガイスト', './img/clanbattle/タフガイスト.jpg', true],
+    ['turbofang', 'ターボファング', './img/clanbattle/ターボファング.jpg', true],
     ['wildgriffin', 'ワイルドグリフォン', './img/clanbattle/ワイルドグリフォン.jpg', true]
   ],
   // 3番目
@@ -421,6 +422,7 @@ pcrunit.NPC_UNIT_INFO_LIST = [
   ],
   // 4番目
   [
+    ['archdeam', 'アーク・デアム', './img/clanbattle/アーク・デアム.jpg', true],
     ['basiliskarose', 'バジリスク・アロス', './img/clanbattle/バジリスク・アロス.jpg', true],
     ['cyclops', 'サイクロプス', './img/clanbattle/サイクロプス.jpg', true],
     ['darkgargoyle', 'ダークガーゴイル', './img/clanbattle/ダークガーゴイル.jpg', true],
