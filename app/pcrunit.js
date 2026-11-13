@@ -310,6 +310,7 @@ pcrunit.PC_UNIT_INFO_LIST = [
     ['hatsune_and_shiori', 'ハツネ＆シオリ', './img/arena/ハツネ＆シオリ.jpg', true],
     ['kokkoro_littleguidance', 'コッコロ(嚮導幼君)', './img/arena/コッコロ(嚮導幼君).jpg', true],
     ['misato', 'ミサト', './img/arena/ミサト.jpg', true],
+    ['luckylilac', 'ラッキーライラック', './img/arena/ラッキーライラック.jpg', true],
     ['kasumi_summer', 'カスミ(サマー)', './img/arena/カスミ(サマー).jpg', true],
     ['kasumi_newyear', 'カスミ(ニューイヤー)', './img/arena/カスミ(ニューイヤー).jpg', true],
     ['nanaka', 'ナナカ', './img/arena/ナナカ.jpg', true],
